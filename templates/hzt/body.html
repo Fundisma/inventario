@@ -3,19 +3,19 @@
     <body class="hold-transition layout-top-nav">
     <div class="wrapper">
         <!-- Header -->
-        {% include 'header.html' %}
+        {% include 'hzt/header.html' %}
         <!-- Content -->
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container">
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> Bienvenido <small>Example 3.0</small></h1>
+                            <h1 class="m-0 text-dark"> Bienvenido <small>{{ request.user.get_full_name }}</small></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{ listado_url }}">{{entidad}}</a></li>
+                                <li class="breadcrumb-item"><a href="{{ list_url }}">{{ entity }}</a></li>
                             </ol>
                         </div>
                     </div>
@@ -32,10 +32,23 @@
         <!-- Footer -->
         {% include 'footer.html' %}
     </div>
-    
+    <!-- Block javascript -->
     {% block javascript %}
-        
-    {% endblock  %}
-        
+
+    {% endblock %}
+    <script>
+        {% if messages %}
+            var html = '<p>';
+            {% for message in messages %}
+                html += '{{ message }}<br>';
+            {% endfor %}
+            html += '</p>';
+            Swal.fire({
+                title: 'Error!',
+                html: html,
+                icon: 'error'
+            });
+        {% endif %}
+    </script>
     </body>
 {% endblock %}
