@@ -61,4 +61,5 @@ class BeneficiarioView(TemplateView):
         context['list_url'] = reverse_lazy('base:beneficiario')
         context['entity'] = 'Beneficiario'
         context['form'] = BeneficiarioForm()
+        context['entidad'] = 'Beneficiario'
         return context

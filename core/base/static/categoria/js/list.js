@@ -24,8 +24,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/base/categoria/edit/'+row.id+' " class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>';
-                    buttons += '<a href="/base/categoria/delete/'+row.id+' " class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>';
+                    var buttons = '<a href="/base/usuario/edit/'+row.id+' " class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>';
+                    buttons += '<a href="/base/usuario/delete/'+row.id+' " class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },

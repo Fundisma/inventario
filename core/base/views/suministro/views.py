@@ -42,7 +42,7 @@ class SuministroListView(ListView):
         context['title'] = 'Listado de Suministros'
         context['create_url'] = reverse_lazy('base:suministro_create')
         context['list_url'] = reverse_lazy('base:suministro_listado')
-        context['entity'] = 'Suministro'
+        context['entidad'] = 'Suministro'
         return context
 
 
