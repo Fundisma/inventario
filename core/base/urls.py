@@ -1,4 +1,5 @@
 from django.urls import path
+from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
 from core.base.views.productos.views import *
 from core.base.views.beneficiario.views import *
@@ -8,6 +9,14 @@ from core.base.views.suministro.views import *
 app_name = 'base'
 
 urlpatterns = [
+    #Autor
+    path('autor/listado/', AutorView.as_view(), name='autor_listado'), 
+    # path ('autor/listado/',AutorListView.as_view(), name='autor_listado'),
+    # path ('autor/add/',AutorCreateView.as_view(), name='autor_create'),
+    # path ('autor/edit/<int:pk>/',AutorUpdateView.as_view(), name='autor_editar'),
+    # path ('autor/delete/<int:pk>/',AutorDeleteView.as_view(), name='autor_eliminar'),
+    # path ('autor/form/',AutorFormView.as_view(), name='autor_form'),
+
     #categoria
     path ('categoria/listado/',CategoriaListView.as_view(), name='categoria_listado'),
     path ('categoria/add/',CategoriaCreateView.as_view(), name='categoria_create'),

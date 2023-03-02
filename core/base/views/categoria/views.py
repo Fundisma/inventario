@@ -72,7 +72,7 @@ class CategoriaCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Creación una Categoria '
-        context['entidad'] = 'Categorias'
+        context['entidad'] = 'Categoria'
         context['listado_url'] = reverse_lazy('base:categoria_listado')
         context['action'] = 'add'
         return context
