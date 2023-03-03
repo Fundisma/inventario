@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.principal.views import IndexView
+from core.login.views import *
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', include('core.base.urls')),
     path('', IndexView.as_view()),
+    path('login/', include('core.login.urls')),
 
 ]
 

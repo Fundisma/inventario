@@ -2,34 +2,29 @@ from django.forms import *
 from core.base.models import Categoria, Productos, Beneficiario, Suministro
 from datetime import datetime
 
-
 class CategoriaForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #for form in self.visible_fields():
-         #   form.field.widget.attrs['class'] = 'form-control'
-          #  form.field.widget.attrs['autocomplete'] = 'off'
-        self.fields['nombre'].widget.attrs['autofocus'] = True
-
+        self.fields['nombre'].widget.attrs['autofocus'] = True 
 
     class Meta:
-        model=Categoria
+        model = Categoria
         fields = '__all__'
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
+                    'placeholder': 'Ingrese nombre de la categoria',
                 }
             ),
-            'descripcion': Textarea(
+            'descripcion': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
-                    'rows': 3,
-                    'cols': 3,
+                    'placeholder': 'Ingrese sus descripción',
                 }
             ),
             
         }
+        exclude = ['user_updated', 'user_creation']
+
     def save(self, commit=True):
         data = {}
         form = super()
@@ -41,13 +36,6 @@ class CategoriaForm(ModelForm):
         except Exception as e:
             data['error'] = str(e)
         return data
-
-    #def clean(self):
-     #   cleaned = super().clean()
-      #  if len(cleaned['nombre']) <= 50:
-       #     raise forms.ValidationError('Validación mm')
-        #    #self.add_error('nombre', 'le faltan caracteres')
-       # return cleaned
 
 class ProductosForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -86,7 +74,7 @@ class ProductosForm(ModelForm):
 class BeneficiarioForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['nombres'].widget.attrs['autofocus'] = True
+        self.fields['nombres'].widget.attrs['autofocus'] = True 
 
     class Meta:
         model = Beneficiario

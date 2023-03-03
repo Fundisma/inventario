@@ -2,7 +2,7 @@ var tblBeneficiario;
 var modal_title;
 
 function getData() {
-    tblBeneficiario = $('#data').DataTable({
+    tblBeneficiario = $('#data').DataTable({ 
         responsive: true,
         autoWidth: false,
         destroy: true,

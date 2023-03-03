@@ -10,12 +10,14 @@ from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from core.base.models import DetalleSuministro, Suministro, Productos
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 class SuministroListView(ListView):
     model = Suministro
     template_name = 'suministro/listado.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -52,6 +54,7 @@ class SuministroCreateView(CreateView):
     template_name = 'suministro/create.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -105,6 +108,7 @@ class SuministroUpdateView(UpdateView):
     success_url = reverse_lazy('base:suministro_listado')
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -167,7 +171,9 @@ class SuministroDeleteView(DeleteView):
     model = Suministro
     template_name = 'suministro/delete.html'
     success_url = reverse_lazy('base:suministro_listado')
-
+    
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)

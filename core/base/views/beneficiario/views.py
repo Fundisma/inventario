@@ -3,17 +3,19 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 
 from core.base.forms import BeneficiarioForm
 from core.base.models import Beneficiario
 
 
 
-class BeneficiarioView(TemplateView):
+class BeneficiarioView(TemplateView): 
     model = Beneficiario
     template_name = 'beneficiario/listado.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 

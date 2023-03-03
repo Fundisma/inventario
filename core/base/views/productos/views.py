@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -14,6 +16,7 @@ class ProductosListView(ListView):
     template_name = 'productos/listado.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -45,6 +48,9 @@ class ProductosCreateView(CreateView):
     template_name = 'productos/create.html'
     success_url = reverse_lazy('base:productos_listado')
     url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -76,6 +82,9 @@ class ProductosUpdateView(UpdateView):
     template_name = 'productos/create.html'
     success_url = reverse_lazy('base:productos_listado')
     url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -108,7 +117,8 @@ class ProductosDeleteView(DeleteView):
     success_url = reverse_lazy('base:productos_listado')
     url_redirect = success_url
 
-
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
