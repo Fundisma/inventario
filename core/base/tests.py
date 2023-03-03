@@ -16,3 +16,10 @@ for i in range(1, 6000):
         nombre = ''.join(random.choice(letters, k=5))
     Categoria(nombre=nombre).save()
     print('Guardado Registro {}'.format(i))
+
+for i in range(1, 6000):
+    nombres = ''.join(random.choice(letters, k=5))
+    while Autor.objects.filter(nombres=nombres).exists():
+        nombres = ''.join(random.choice(letters, k=5))
+    Autor(nombres=nombres).save()
+    print('Guardado Registro {}'.format(i))
