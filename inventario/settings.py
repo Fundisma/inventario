@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #Apps
     'core.base',
     'core.principal',
+    'core.login',
     
 ]
 
@@ -134,5 +135,9 @@ STATIC_ROOT= "/static"
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 MEDIA_URL = '/media/'
+
+
+LOGIN_REDIRECT_URL = '/base/admin/'
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'

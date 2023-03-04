@@ -22,7 +22,7 @@ function getData() {
             {"data": "cedula"},
             {"data": "cumpleaños"},
             {"data": "direccion"},
-            {"data": "sexo"},
+            {"data": "gender.name"},
             {"data": "id"},
         ],
         columnDefs: [

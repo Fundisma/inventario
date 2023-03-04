@@ -19,12 +19,14 @@ from core.principal.views import IndexView
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from core.login.views import LoginFormView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', include('core.base.urls')),
-    path('', IndexView.as_view()),
+    path('', IndexView.as_view(), name='index'),
+    path('login/', include('core.login.urls')),
+
 
 ]
 

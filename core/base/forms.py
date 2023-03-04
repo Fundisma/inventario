@@ -60,30 +60,26 @@ class AutorForm(ModelForm):
 class CategoriaForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #for form in self.visible_fields():
-         #   form.field.widget.attrs['class'] = 'form-control'
-          #  form.field.widget.attrs['autocomplete'] = 'off'
         self.fields['nombre'].widget.attrs['autofocus'] = True
 
-
     class Meta:
-        model=Categoria
+        model = Categoria
         fields = '__all__'
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
+                    'placeholder': 'Ingrese sus nombres',
                 }
             ),
-            'descripcion': Textarea(
+            'descripcion': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
-                    'rows': 3,
-                    'cols': 3,
+                    'placeholder': 'Ingrese su descripción',
                 }
             ),
             
         }
+        exclude = ['user_updated', 'user_creation']
+
     def save(self, commit=True):
         data = {}
         form = super()

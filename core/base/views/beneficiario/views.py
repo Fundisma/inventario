@@ -8,12 +8,14 @@ from core.base.forms import BeneficiarioForm
 from core.base.models import Beneficiario
 
 
+from django.contrib.auth.decorators import login_required
 
 class BeneficiarioView(TemplateView):
     model = Beneficiario
     template_name = 'beneficiario/listado.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 

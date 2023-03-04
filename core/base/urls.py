@@ -4,7 +4,7 @@ from core.base.views.categoria.views import *
 from core.base.views.productos.views import *
 from core.base.views.beneficiario.views import *
 from core.base.views.suministro.views import *
-
+from core.base.views.admin.views import *
 
 app_name = 'base'
 
@@ -18,11 +18,7 @@ urlpatterns = [
     # path ('autor/form/',AutorFormView.as_view(), name='autor_form'),
 
     #categoria
-    path ('categoria/listado/',CategoriaListView.as_view(), name='categoria_listado'),
-    path ('categoria/add/',CategoriaCreateView.as_view(), name='categoria_create'),
-    path ('categoria/edit/<int:pk>/',CategoriaUpdateView.as_view(), name='categoria_editar'),
-    path ('categoria/delete/<int:pk>/',CategoriaDeleteView.as_view(), name='categoria_eliminar'),
-    path ('categoria/form/',CategoriaFormView.as_view(), name='categoria_form'),
+    path ('categoria/',CategoriaView.as_view(), name='categoria_listado'),
 
     #productos
     path('productos/listado/', ProductosListView.as_view(), name='productos_listado'),
@@ -32,6 +28,7 @@ urlpatterns = [
 
     #Beneficiarios
     path('beneficiario/', BeneficiarioView.as_view(), name='beneficiario_listado'), 
+    path('admin/', AdminView.as_view(), name='admin'), 
 
     #Suministro
     path('suministro/listado/', SuministroListView.as_view(), name='suministro_listado'),

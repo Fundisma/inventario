@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 
 class AutorView(TemplateView):
@@ -13,6 +14,7 @@ class AutorView(TemplateView):
     template_name = 'autor/listado.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 

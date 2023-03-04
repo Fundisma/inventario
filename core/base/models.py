@@ -41,7 +41,7 @@ class Productos(models.Model):
     
     def get_imagen(self):
         if self.imagen:
-            return  '{}{}'.format(STATIC_URL, self.imagen)
+            return  '{}{}'.format(MEDIA_URL, self.imagen)
         return '{}{}'.format(STATIC_URL, 'img/empty.png')
 
 
@@ -57,13 +57,14 @@ class Beneficiario(models.Model):
     cedula = models.CharField(max_length=10, unique=True, verbose_name='Cedula')
     cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
-    sexo = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
+    gender = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Genero')
     
     def __str__(self):
         return self.nombres
     
     def toJSON(self):
         item = model_to_dict(self)
+        item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
         item['cumpleaños'] = self.cumpleaños.strftime('%Y-%m-%d')
         return item
 
