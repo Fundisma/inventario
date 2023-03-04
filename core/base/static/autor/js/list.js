@@ -19,8 +19,9 @@ function getData() {
                     { "data": "nombres"},
                     { "data": "apellidos"},
                     { "data": "nacionalidad"},
-                    { "data": "descripciones"},
                     { "data": "descripcion"},
+                    {"data": "id"},
+                    
                 ],
                 columnDefs: [
                     {
@@ -65,7 +66,7 @@ modal_title = $('.modal-title');
             $('input[name="nombres"]').val(data.nombres);
             $('input[name="apellidos"]').val(data.apellidos);
             $('input[name="nacionalidad"]').val(data.nacionalidad);
-            $('input[name="descripciones"]').val(data.descripcion);
+            $('textarea[name="descripcion"]').val(data.descripcion);
             $('#myModalAut').modal('show');
         })
         .on('click', 'a[rel="delete"]', function () {

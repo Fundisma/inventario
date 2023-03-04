@@ -19,10 +19,14 @@ function getData() {
             {"data": "id"},
             {"data": "nombres"},
             {"data": "apellidos"},
-            {"data": "cedula"},
+            {"data": "tipoDocumento"},
+            {"data": "documento"},
             {"data": "cumpleaños"},
+            {"data": "telefono"},
+            {"data": "zona"},
             {"data": "direccion"},
-            {"data": "gender.name"},
+            {"data": "barrio"},
+            {"data": "gender"},
             {"data": "id"},
         ],
         columnDefs: [
@@ -68,10 +72,14 @@ $(function () {
             $('input[name="id"]').val(data.id);
             $('input[name="nombres"]').val(data.nombres);
             $('input[name="apellidos"]').val(data.apellidos);
-            $('input[name="cedula"]').val(data.cedula);
-            $('input[name="cumpleaños"]').val(data.cumpleaños);
+            $('select[name="tipoDocumento"]').val(data.tipoDocumento);
+            $('[name="documento"]').val(data.documento);
+            $('date[name="cumpleaños"]').val(data.cumpleaños);
+            $('[name="telefono"]').val(data.telefono);
+            $('select[name="zona"]').val(data.zona);
             $('input[name="direccion"]').val(data.direccion);
-            $('input[name="sexo"]').val(data.sexo);
+            $('input[name="barrio"]').val(data.barrio);
+            $('select[name="gender"]').val(data.gender);
             $('#myModalBen').modal('show');
         })
         .on('click', 'a[rel="delete"]', function () {

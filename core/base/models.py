@@ -54,17 +54,32 @@ class Productos(models.Model):
 class Beneficiario(models.Model):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
-    cedula = models.CharField(max_length=10, unique=True, verbose_name='Cedula')
+    class TipoDocumento(models.TextChoices):
+        RC='Registro Civil', ('Registro Civil')
+        TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
+        CC='Cédula de Ciudadanía', ('Cédula de Ciudadanía')
+        CE='Cédula de Extrajería', ('Cédula de Extrajería')
+        CR='Contraseña Registraduría', ('Contraseña Registraduria')
+    tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
+    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
     cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
+    telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
+    class Zona(models.TextChoices):
+        URBANA='Urbana',('Urbana')
+        RURAL='Rural',('Rural')
+    zona=models.CharField(max_length=25, choices=Zona.choices, default=Zona.URBANA, verbose_name="Zona")
     direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
-    gender = models.CharField(max_length=10, choices=gender_choices, default='male', verbose_name='Genero')
+    barrio = models.CharField(max_length=150, verbose_name='Barrio',null=True,blank=True)
+    class Gender(models.TextChoices):
+        FEMENINO='Femenino',('Femenino')
+        MASCULINO='Masculino',('Masculino')
+    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Genero")
     
     def __str__(self):
         return self.nombres
     
     def toJSON(self):
         item = model_to_dict(self)
-        item['gender'] = {'id': self.gender, 'name': self.get_gender_display()}
         item['cumpleaños'] = self.cumpleaños.strftime('%Y-%m-%d')
         return item
 
@@ -123,7 +138,7 @@ class Autor(models.Model):
     nombres = models.CharField(max_length = 45, blank = False, null = False)
     apellidos = models.CharField(max_length = 45, blank = False, null = False)
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
-    descripciones = models.TextField( blank = False, null = False)
+    descripcion = models.TextField( blank = False, null = False)
     fecha_creacion = models.DateField('Fecha de creación', auto_now = True, auto_now_add = False)       
 
     class Meta:
@@ -137,3 +152,23 @@ class Autor(models.Model):
         
     def __str__(self):
         return self.nombres
+    
+
+class Libro(models.Model):
+    titulo = models.CharField(max_length = 45, blank = False, null = False)
+    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    f_publicacion = models.DateField(max_length = 50, blank = False, null = False)
+    fecha_creacion = models.DateField('Fecha de creación', auto_now = True, auto_now_add = False)       
+
+    class Meta:
+        verbose_name = 'Libro'
+        verbose_name_plural = 'Libros'
+        ordering = ['titulo']
+    
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['autor'] = self.autor.toJSON()
+        return item
+        
+    def __str__(self):
+        return self.titulo

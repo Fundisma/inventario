@@ -1,4 +1,5 @@
 from django.urls import path
+from core.base.views.libro.views import *
 from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
 from core.base.views.productos.views import *
@@ -9,6 +10,9 @@ from core.base.views.admin.views import *
 app_name = 'base'
 
 urlpatterns = [
+    #Libro
+    path('libro/listado/', LibroView.as_view(), name='libro_listado'), 
+
     #Autor
     path('autor/listado/', AutorView.as_view(), name='autor_listado'), 
     # path ('autor/listado/',AutorListView.as_view(), name='autor_listado'),

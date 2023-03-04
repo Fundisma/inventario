@@ -59,7 +59,7 @@ $(function () {
             $('input[name="action"]').val('edit');
             $('input[name="id"]').val(data.id);
             $('input[name="nombre"]').val(data.nombre);
-            $('input[name="descripcion"]').val(data.descripcion);
+            $('textarea[name="descripcion"]').val(data.descripcion);
             $('#myModalBen').modal('show');
         })
         .on('click', 'a[rel="delete"]', function () {
