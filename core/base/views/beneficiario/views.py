@@ -32,19 +32,27 @@ class BeneficiarioView(TemplateView):
                 ben = Beneficiario()
                 ben.nombres = request.POST['nombres']
                 ben.apellidos = request.POST['apellidos']
-                ben.cedula = request.POST['cedula']
+                ben.tipoDocumento = request.POST['tipoDocumento']
+                ben.documento = request.POST['documento']
                 ben.cumpleaños = request.POST['cumpleaños']
+                ben.telefono = request.POST['telefono']
+                ben.zona = request.POST['zona']
                 ben.direccion = request.POST['direccion']
-                ben.sexo = request.POST['sexo']
+                ben.barrio = request.POST['barrio']
+                ben.gender = request.POST['gender']
                 ben.save()
             elif action == 'edit':
                 ben = Beneficiario.objects.get(pk=request.POST['id'])
                 ben.nombres = request.POST['nombres']
                 ben.apellidos = request.POST['apellidos']
-                ben.cedula = request.POST['cedula']
+                ben.tipoDocumento = request.POST['tipoDocumento']
+                ben.documento = request.POST['documento']
                 ben.cumpleaños = request.POST['cumpleaños']
+                ben.telefono = request.POST['telefono']
+                ben.zona = request.POST['zona']
                 ben.direccion = request.POST['direccion']
-                ben.sexo = request.POST['sexo']
+                ben.barrio = request.POST['barrio']
+                ben.gender = request.POST['gender']
                 ben.save()
             elif action == 'delete':
                 ben = Beneficiario.objects.get(pk=request.POST['id'])

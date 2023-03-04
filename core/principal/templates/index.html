@@ -102,13 +102,13 @@
           <li><a href="contact.html">Contactanos</a></li>
           <li>
             {% if request.user.is_authenticated %}
-              <a href="{% url 'base:admin' %}">
-                  <i class="bx bx-user"></i> Bienvenido {{ request.user.username }}
-              </a>
+              
+              <a href="{% url 'base:admin' %}" id="btn-get-started" class="btn-get-started "><i class="bx bx-user"></i>  {{ request.user.username }}</a>
+            
             {% else %}
-              <a href="{% url 'login' %}">
-                  <i class="bx bx-door-open"></i> Login
-              </a>
+            
+            <a href="{% url 'login' %}" id="btn-get-started" class="btn-get-started "><i class="bx bx-door-open"></i>Login</a>
+            
             {% endif %}
           </li>
 

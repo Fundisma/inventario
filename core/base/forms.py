@@ -1,6 +1,50 @@
 from django.forms import *
-from core.base.models import Categoria, Productos, Beneficiario, Suministro, Autor
+from core.base.models import Categoria, Productos, Beneficiario, Suministro, Autor, Libro
 from datetime import datetime
+
+class LibroForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        #for form in self.visible_fields():
+         #   form.field.widget.attrs['class'] = 'form-control'
+          #  form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['titulo'].widget.attrs['autofocus'] = True
+
+
+    class Meta:
+        model=Libro
+        fields = '__all__'
+        widgets = {
+            'titulo': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese el Titulo',
+                }
+            ),
+            'autor': Select(
+                attrs={
+                    'class': 'select2', 
+                    'style': 'width: 100%'
+                }
+            ),
+            'f_publicacion': SelectDateWidget(
+                attrs={
+                    'placeholder': '',
+                }
+            ),
+            
+        }
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
 
 class AutorForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -30,7 +74,7 @@ class AutorForm(ModelForm):
                     'placeholder': 'Ingrese la nacionalidad',
                 }
             ),
-            'descripciones': Textarea(
+            'descripcion': Textarea(
                 attrs={
                     'placeholder': 'Ingrese una breve descripción.',
                 }
@@ -71,7 +115,7 @@ class CategoriaForm(ModelForm):
                     'placeholder': 'Ingrese sus nombres',
                 }
             ),
-            'descripcion': TextInput(
+            'descripcion': Textarea(
                 attrs={
                     'placeholder': 'Ingrese su descripción',
                 }
@@ -152,9 +196,14 @@ class BeneficiarioForm(ModelForm):
                     'placeholder': 'Ingrese sus apellidos',
                 }
             ),
-            'cedula': TextInput(
+            'tipoDocumento': Select(
                 attrs={
-                    'placeholder': 'Ingrese su cédula',
+                    'placeholder': '',
+                }
+            ),
+            'documento': NumberInput(
+                attrs={
+                    'placeholder': 'Ingrese su numero de documento',
                 }
             ),
             'cumpleaños': DateInput(format='%Y-%m-%d',
@@ -162,12 +211,31 @@ class BeneficiarioForm(ModelForm):
                     'value': datetime.now().strftime('%Y-%m-%d'),
                 }
             ), 
+            'telefono': NumberInput(
+                attrs={
+                    'placeholder': 'Ingrese el número de teléfono',
+                }
+            ),
+            'zona': Select(
+                attrs={
+                    'placeholder': 'Ingrese la zona',
+                }
+            ),
             'direccion': TextInput(
                 attrs={
                     'placeholder': 'Ingrese su dirección',
                 }
             ),
-            'sexo': Select()
+            'barrio': TextInput(
+                attrs={
+                    'placeholder': 'barrio',
+                }
+            ),
+            
+            'gender': Select(
+            attrs={
+                    }
+            ),
         }
         exclude = ['user_updated', 'user_creation']
 
