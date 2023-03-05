@@ -16,7 +16,7 @@ function getData() {
             dataSrc: ""
         },
         columns: [
-            {"data": "id"},
+            {"data": "position"},
             {"data": "nombre"},
             {"data": "descripcion"},
             {"data": "id"},
@@ -61,6 +61,7 @@ $(function () {
             $('input[name="nombre"]').val(data.nombre);
             $('textarea[name="descripcion"]').val(data.descripcion);
             $('#myModalBen').modal('show');
+            
         })
         .on('click', 'a[rel="delete"]', function () {
             var tr = tblCategoria.cell($(this).closest('td, li')).index();
@@ -70,6 +71,14 @@ $(function () {
             parameters.append('id', data.id);
             submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de eliminar el siguiente registro?', parameters, function () {
                 tblCategoria.ajax.reload();
+                Swal.fire({
+                    title: 'Alerta',
+                    text: 'Registro eliminado correctamente',
+                    icon: 'success',
+                    timer: 2000,
+                    
+                }) 
+                
             });
         
         });
@@ -78,7 +87,7 @@ $(function () {
 
     });
 
-
+    
     $('form').on('submit', function (e) { 
         e.preventDefault();
         //var parameters = $(this).serializeArray();
@@ -86,6 +95,13 @@ $(function () {
         submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
             $('#myModalBen').modal('hide'); 
             tblCategoria.ajax.reload();
+            Swal.fire({
+                title: 'Alerta',
+                text: 'Registro creado correctamente',
+                icon: 'success',
+                timer: 2000,
+                
+            })    
             //getData();
         });
     });

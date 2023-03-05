@@ -24,8 +24,12 @@ class CategoriaView(TemplateView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
+                position = 1
                 for i in Categoria.objects.all():
-                    data.append(i.toJSON())
+                    item = i.toJSON()
+                    item['position']  = position
+                    data.append(item)
+                    position += 1
                 
             elif action == 'add':
                 ben = Categoria()

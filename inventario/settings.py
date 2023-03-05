@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'core.base',
     'core.principal',
     'core.login',
+    'core.user',
+
     
 ]
 
@@ -141,3 +143,5 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/base/admin/'
 LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
+
+AUTH_USER_MODEL = 'user.User'

@@ -90,6 +90,13 @@ $(function () {
             parameters.append('id', data.id);
             submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de eliminar el siguiente registro?', parameters, function () {
                 tblBeneficiario.ajax.reload();
+                Swal.fire({
+                    title: 'Alerta',
+                    text: 'Registro eliminado correctamente',
+                    icon: 'success',
+                    timer: 2000,
+                    
+                }) 
             });
         
         });
@@ -106,6 +113,13 @@ $(function () {
         submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
             $('#myModalBen').modal('hide'); 
             tblBeneficiario.ajax.reload();
+            Swal.fire({
+                title: 'Alerta',
+                text: 'Registro creado correctamente',
+                icon: 'success',
+                timer: 2000,
+                
+            }) 
             //getData();
         });
     });
