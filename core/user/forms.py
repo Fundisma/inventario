@@ -10,7 +10,7 @@ class UserForm(ModelForm):
 
     class Meta:
         model = User
-        fields = 'first_name', 'last_name', 'email', 'username', 'password', 'image'
+        fields = 'first_name', 'last_name', 'tipoDocumento', 'documento', 'email', 'username', 'password', 'image'
         widgets = {
             'first_name': TextInput(
                 attrs={
@@ -20,6 +20,16 @@ class UserForm(ModelForm):
             'last_name': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus apellidos',
+                }
+            ),
+            'tipoDocumento': Select(
+                attrs={
+                    'placeholder': '',
+                }
+            ),
+            'documento': NumberInput(
+                attrs={
+                    'placeholder': 'Ingrese su numero de documento',
                 }
             ),
             'email': TextInput(

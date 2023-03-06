@@ -8,7 +8,7 @@ var suministro = {
     },
     calculate_invoice: function(){
         var subtotal = 0.00;
-        $.each(this.items.producto, function (pos, dict){
+        $.each(this.items.producto, function (pos, dict) {
             dict.pos = pos;
             dict.subtotal = dict.cantidad * parseFloat(dict.pvp);
             subtotal += dict.subtotal;
@@ -42,6 +42,7 @@ var suministro = {
 
             ],
             columnDefs: [
+                
                 {
                     targets: [0],
                     class: 'text-center',

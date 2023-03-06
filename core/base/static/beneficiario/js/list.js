@@ -16,7 +16,7 @@ function getData() {
             dataSrc: ""
         },
         columns: [
-            {"data": "id"},
+            {"data": "position"},
             {"data": "nombres"},
             {"data": "apellidos"},
             {"data": "tipoDocumento"},

@@ -24,8 +24,12 @@ class UserListView(LoginRequiredMixin, ListView):
             action = request.POST['action']
             if action == 'searchdata':
                 data = []
+                position = 1
                 for i in User.objects.all():
-                    data.append(i.toJSON())
+                    item = i.toJSON()
+                    item['position']  = position
+                    data.append(item)
+                    position += 1 
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:

@@ -13,7 +13,7 @@ $(function () {
             dataSrc: ""
         },
         columns: [
-            {"data": "id"},
+            {"data": "position"},
             {"data": "nombre"},
             {"data": "categoria.nombre"},
             {"data": "imagen"},

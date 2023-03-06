@@ -54,6 +54,12 @@ $(function () {
         ],
         columnDefs: [
             {
+                targets: [0],
+                class: 'text-center',
+                orderable: false,
+                
+            },
+            {
                 targets: [-2],
                 class: 'text-center',
                 orderable: false,
@@ -135,4 +141,5 @@ $(function () {
                 tr.addClass('shown');
             }
         });
+        
 }); 

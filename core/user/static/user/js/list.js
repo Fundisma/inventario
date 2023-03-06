@@ -13,9 +13,11 @@ $(function () {
             dataSrc: ""
         },
         columns: [
-            {"data": "id"},
+            {"data": "position"},
             {"data": "first_name"},
             {"data": "last_name"},
+            {"data": "tipoDocumento"},
+            {"data": "documento"},
             {"data": "username"},
             {"data": "date_joined"},
             {"data": "image"},
@@ -27,7 +29,7 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '<img src="'+row.image+'" class="img-fluid mx-auto d-block" style="width: 50px; height: 40px;">';
+                    return '<img src="'+row.image+'" class="img-fluid mx-auto d-block" style="width: 45px; height: 40px;">';
                 }
             },
             {

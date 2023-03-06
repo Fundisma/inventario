@@ -29,7 +29,7 @@ class CategoriaView(TemplateView):
                     item = i.toJSON()
                     item['position']  = position
                     data.append(item)
-                    position += 1
+                    position += 1 
                 
             elif action == 'add':
                 ben = Categoria()

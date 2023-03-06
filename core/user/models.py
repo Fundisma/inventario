@@ -7,6 +7,15 @@ from inventario.settings import MEDIA_URL, STATIC_URL
 
 class User(AbstractUser):
     image = models.ImageField(upload_to='users/%Y/%m/%d', null=True, blank=True)
+    class TipoDocumento(models.TextChoices):
+        RC='Registro Civil', ('Registro Civil')
+        TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
+        CC='Cédula de Ciudadanía', ('Cédula de Ciudadanía')
+        CE='Cédula de Extrajería', ('Cédula de Extrajería')
+        CR='Contraseña Registraduría', ('Contraseña Registraduria')
+    tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
+    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
+
 
     def get_image(self):
         if self.image:
