@@ -135,7 +135,7 @@ class SuministroUpdateView(UpdateView):
                     sum.detallesuministro_set.all().delete()
                     for i in suministro['producto']:
                         det = DetalleSuministro()
-                        det.suministro_id = suministro.id
+                        det.suministro_id = sum.id
                         det.producto_id = i['id']
                         det.cantidad = int(i['cantidad'])
                         det.precio = float(i['pvp'])

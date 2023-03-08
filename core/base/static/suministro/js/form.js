@@ -184,5 +184,5 @@ $(function(){
         });
     });
     suministro.list();
-
+    
 });
