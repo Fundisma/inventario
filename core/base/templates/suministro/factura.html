@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding-top: 4px;
+    }
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <img src="{{ icon }}" class="img-invoice">
+    <p class="head">
+        {{ comp.nombre|upper }}<br>
+        {{ comp.dirección|upper }}
+    </p>
+    <p>
+        <b>SUMINISTRO:</b> {{ suministro.id }}<br>
+        <b>FECHA DE SUMINISTRO:</b> {{ suministro.fecha_registro }}<br>
+        <b>BENEFICIARIO:</b> {{ suministro.beneficiario.nombres|upper }} {{ suministro.beneficiario.apellidos|upper }}<br>
+        <b>Nro DOCUMENTO:</b> {{ suministro.beneficiario.documento }}<br>
+        <b>TELÉFONO:</b> {{ suministro.beneficiario.telefono|upper }}<br>
+        <b>DIRECCIÓN:</b> {{ suministro.beneficiario.direccion|upper }}<br>
+        <b>BARRIO:</b> {{ suministro.beneficiario.barrio|upper }}<br>
+    </p>
+    <table id="invoice">
+        <thead>
+            <tr>
+                <th style="width: 20%;">CATEGORIA</th>
+                <th style="width: 40%;">PRODUCTO</th>
+                <th style="width: 10%;">CANTIDAD</th>
+                <th style="width: 15%;">P.UNITARIO</th>
+                <th style="width: 15%;">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in suministro.detallesuministro_set.all %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td>{{ d.producto.categoria.nombre }}</td>
+                <td>{{ d.producto.nombre }}</td>
+                <td class="text-center">{{ d.cantidad }}</td>
+                <td class="text-center">${{ d.precio }}</td>
+                <td style="text-align: right;">${{ d.subtotal }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="border-top: 1px solid black; padding-top: 4px;">
+                <td colspan="4"><b>TOTAL BENEFICIO</b></td>
+                <td style="text-align: right">{{ suministro.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="margin-top: 200px;">
+        <thead>
+            <tr>
+                <th>****FELICIDADES POR SER BENEFICIARIO DE NUESTRAS AYUDAS****</th>
+            </tr>
+            <tr>
+                <th>TRABAJAMOS POR LAS COMUNIDADES, CONTRIBUYENDO</th>
+            </tr>
+            <tr>
+                <th>A MEJORAR SU CALIDAD DE VIDA Y A PROPORCIONAR</th>
+            </tr>
+            <tr>
+                <th>UN MEJOR FUTURO PARA TODOS </th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>

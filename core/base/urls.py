@@ -39,6 +39,6 @@ urlpatterns = [
     path('suministro/add/', SuministroCreateView.as_view(), name='suministro_create'),
     path('suministro/delete/<int:pk>/', SuministroDeleteView.as_view(), name='suministro_delete'),
     path ('suministro/edit/<int:pk>/',SuministroUpdateView.as_view(), name='suministro_edit'),
-
+    path('suministro/pdf/<int:pk>/',SuministroPdfView.as_view(), name='suministro_pdf'),
     
 ]
