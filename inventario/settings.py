@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core.principal',
     'core.login',
     'core.user',
+    'core.reporte',
 
     
 ]

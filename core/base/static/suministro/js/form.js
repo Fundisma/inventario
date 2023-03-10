@@ -22,9 +22,9 @@ var suministro = {
     },
     add: function(item){
         this.items.producto.push(item);
-        this.list();
+        this.listado();
     },
-    list: function (){
+    listado: function (){
         this.calculate_invoice();
 
         tblProducto = $('#tblProducto').DataTable(  { 
@@ -141,7 +141,7 @@ $(function(){
         if (suministro.items.producto.length === 0) return false;
         alert_action('Notificación', '¿Estas seguro de eliminar todos los items de tu detalle?', function () {
             suministro.items.producto = [];
-            suministro.list();
+            suministro.listado();
         });
 
     });
@@ -152,7 +152,7 @@ $(function(){
             var tr = tblProducto.cell($(this).closest('td, li')).index();
             alert_action('Notificación', '¿Estas seguro de eliminar el producto de tu detalle?', function () {
                 suministro.items.producto.splice(tr.row, 1);
-                suministro.list();
+                suministro.listado();
             });
         })
 
@@ -183,6 +183,6 @@ $(function(){
             location.href = '/base/suministro/listado/';
         });
     });
-    suministro.list();
+    suministro.listado();
     
 });

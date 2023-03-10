@@ -48,7 +48,7 @@ class SuministroListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Suministros'
         context['create_url'] = reverse_lazy('base:suministro_create')
-        context['list_url'] = reverse_lazy('base:suministro_listado')
+        context['listado_url'] = reverse_lazy('base:suministro_listado')
         context['entidad'] = 'Suministro'
         return context
 
@@ -57,7 +57,9 @@ class SuministroCreateView(CreateView):
     model = Suministro
     form_class = SuministroForm
     template_name = 'suministro/create.html'
-
+    success_url = reverse_lazy('base:suministro_listado')
+    url_redirect = success_url
+    
     @method_decorator(csrf_exempt)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -101,8 +103,8 @@ class SuministroCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Creación de un Suministro'
-        context['entity'] = 'Suministro'
-        context['list_url'] = self.success_url
+        context['entidad'] = 'Suministro'
+        context['listado_url'] = self.success_url
         context['action'] = 'add'
         return context
     
@@ -111,7 +113,8 @@ class SuministroUpdateView(UpdateView):
     form_class = SuministroForm
     template_name = 'suministro/create.html'
     success_url = reverse_lazy('base:suministro_listado')
-
+    url_redirect = success_url
+    
     @method_decorator(csrf_exempt)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -165,7 +168,7 @@ class SuministroUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Edición de un Suministro'
-        context['entity'] = 'Suministro'
+        context['entidad'] = 'Suministro'
         context['listado_url'] = self.success_url
         context['action'] = 'edit'
         context['det'] = json.dumps(self.get_details_producto())
@@ -176,7 +179,7 @@ class SuministroDeleteView(DeleteView):
     model = Suministro
     template_name = 'suministro/delete.html'
     success_url = reverse_lazy('base:suministro_listado')
- 
+    url_redirect = success_url
     @method_decorator(csrf_exempt)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -194,7 +197,7 @@ class SuministroDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Eliminación de una Suministro'
-        context['entity'] = 'Suministro'
+        context['entidad'] = 'Suministro'
         context['listado_url'] = self.success_url
         return context
 
