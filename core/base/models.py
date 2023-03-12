@@ -139,36 +139,41 @@ class Autor(models.Model):
     apellidos = models.CharField(max_length = 45, blank = False, null = False)
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
     descripcion = models.TextField( blank = False, null = False)
-    fecha_creacion = models.DateField('Fecha de creación', auto_now = True, auto_now_add = False)       
+    fecha_creacion = models.DateField(default=datetime.now)     
 
-    class Meta:
-        verbose_name = 'Autor'
-        verbose_name_plural = 'Autores'
-        ordering = ['nombres']
-    
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
-        
     def __str__(self):
         return self.nombres
     
-
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['fecha_creacion'] = self.fecha_creacion.strftime('%Y-%m-%d')
+        return item
+    class Meta:
+        verbose_name = 'Autor'
+        verbose_name_plural = 'Autores'
+        ordering = ['id']
+    
+    
+    
 class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
-    f_publicacion = models.DateField(max_length = 50, blank = False, null = False)
-    fecha_creacion = models.DateField('Fecha de creación', auto_now = True, auto_now_add = False)       
+    f_publicacion = models.DateField(default=datetime.now)
 
-    class Meta:
-        verbose_name = 'Libro'
-        verbose_name_plural = 'Libros'
-        ordering = ['titulo']
+    def __str__(self):
+        return self.titulo
     
     def toJSON(self):
         item = model_to_dict(self)
         item['autor'] = self.autor.toJSON()
+        item['f_publicacion'] = self.f_publicacion.strftime('%Y-%m-%d')
+
         return item
         
-    def __str__(self):
-        return self.titulo
+    class Meta:
+        verbose_name = 'Libro'
+        verbose_name_plural = 'Libros'
+        ordering = ['id']
+    
+    
+    

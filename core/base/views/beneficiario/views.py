@@ -1,18 +1,18 @@
-from django.http import JsonResponse
-from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from core.base.forms import BeneficiarioForm
 from core.base.models import Beneficiario
-
+from core.base.forms import BeneficiarioForm
+from django.urls import reverse_lazy
+from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import  csrf_exempt
 
 from django.contrib.auth.decorators import login_required
 
-class BeneficiarioView(TemplateView):
+
+class BeneficiarioListView(ListView):
     model = Beneficiario
-    template_name = 'beneficiario/listado.html'
+    template_name = 'Beneficiario/listado.html'
 
     @method_decorator(csrf_exempt)
     @method_decorator(login_required)
@@ -31,39 +31,7 @@ class BeneficiarioView(TemplateView):
                     item['position']  = position
                     data.append(item)
                     position += 1 
-                
-            elif action == 'add':
-                ben = Beneficiario()
-                ben.nombres = request.POST['nombres']
-                ben.apellidos = request.POST['apellidos']
-                ben.tipoDocumento = request.POST['tipoDocumento']
-                ben.documento = request.POST['documento']
-                ben.cumpleaños = request.POST['cumpleaños']
-                ben.telefono = request.POST['telefono']
-                ben.zona = request.POST['zona']
-                ben.direccion = request.POST['direccion']
-                ben.barrio = request.POST['barrio']
-                ben.gender = request.POST['gender']
-                ben.save()
-            elif action == 'edit':
-                ben = Beneficiario.objects.get(pk=request.POST['id'])
-                ben.nombres = request.POST['nombres']
-                ben.apellidos = request.POST['apellidos']
-                ben.tipoDocumento = request.POST['tipoDocumento']
-                ben.documento = request.POST['documento']
-                ben.cumpleaños = request.POST['cumpleaños']
-                ben.telefono = request.POST['telefono']
-                ben.zona = request.POST['zona']
-                ben.direccion = request.POST['direccion']
-                ben.barrio = request.POST['barrio']
-                ben.gender = request.POST['gender']
-                ben.save()
-            elif action == 'delete':
-                ben = Beneficiario.objects.get(pk=request.POST['id'])
-                ben.delete()
-
-
-            else:
+            else: 
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
@@ -71,9 +39,105 @@ class BeneficiarioView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Beneficiario'
-        context['list_url'] = reverse_lazy('base:beneficiario')
-        context['entity'] = 'Beneficiario'
-        context['form'] = BeneficiarioForm()
-        context['entidad'] = 'Beneficiario'
+        context['title'] = 'Listado de Categorías '
+        context['create_url'] = reverse_lazy('base:beneficiario_create')
+        context['listado_url'] = reverse_lazy('base:beneficiario_listado')
+        context['entidad'] = 'Beneficiarios'
         return context
+
+class BeneficiarioCreateView(CreateView):
+    model = Beneficiario
+    form_class = BeneficiarioForm
+    template_name = 'beneficiario/create.html'
+    success_url = reverse_lazy('base:beneficiario_listado')
+    url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action'] 
+            if action == 'add':
+                form = self.get_form()
+                data = form.save()
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
+
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Creación de Beneficiarios'
+        context['entidad'] = 'Beneficiarios'
+        context['listado_url'] = self.success_url
+        context['action'] = 'add'
+        return context
+
+class BeneficiarioUpdateView(UpdateView):
+    model = Beneficiario
+    form_class = BeneficiarioForm
+    template_name = 'beneficiario/create.html'
+    success_url = reverse_lazy('base:beneficiario_listado')
+    url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action'] 
+            if action == 'edit':
+                form = self.get_form()
+                data = form.save()
+            
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
+
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['title'] = 'Edición de Beneficiarios '
+            context['entidad'] = 'Beneficiarios'
+            context['listado_url'] = self.success_url
+            context['action'] = 'edit'
+            return context
+
+class BeneficiarioDeleteView(DeleteView):
+    model = Beneficiario
+    template_name = 'beneficiario/delete.html'
+    success_url = reverse_lazy('base:beneficiario_listado')
+    url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+        
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try: 
+            self.object.delete()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)
+
+            
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['title'] = 'Eliminación de Beneficiarios '
+            context['entidad'] = 'Beneficiarios'
+            context['listado_url'] = self.success_url
+            return context
