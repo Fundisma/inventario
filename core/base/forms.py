@@ -1,23 +1,19 @@
 from django.forms import *
-from core.base.models import Categoria, Productos, Beneficiario, Suministro, Autor, Libro
+from core.base.models import Categoria, Productos, Beneficiario, Suministro, Libro, Autor
 from datetime import datetime
 
 class LibroForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #for form in self.visible_fields():
-         #   form.field.widget.attrs['class'] = 'form-control'
-          #  form.field.widget.attrs['autocomplete'] = 'off'
         self.fields['titulo'].widget.attrs['autofocus'] = True
 
-
     class Meta:
-        model=Libro
+        model = Libro
         fields = '__all__'
         widgets = {
             'titulo': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese el Titulo',
+                    'placeholder': 'Ingrese un titulo',
                 }
             ),
             'autor': Select(
@@ -26,13 +22,19 @@ class LibroForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            'f_publicacion': SelectDateWidget(
+            'f_suministro': DateInput(
+                format='%Y-%m-%d',
                 attrs={
-                    'placeholder': '',
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha_registro',
+                    'data-target': '#fecha_registro',
+                    'data-toggle': 'datetimepicker',
                 }
             ),
-            
         }
+
     def save(self, commit=True):
         data = {}
         form = super()
@@ -44,7 +46,6 @@ class LibroForm(ModelForm):
         except Exception as e:
             data['error'] = str(e)
         return data
-
 
 class AutorForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -77,6 +78,17 @@ class AutorForm(ModelForm):
             'descripcion': Textarea(
                 attrs={
                     'placeholder': 'Ingrese una breve descripción.',
+                }
+            ),
+            'fecha_creacion': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha_registro',
+                    'data-target': '#fecha_registro',
+                    'data-toggle': 'datetimepicker',
                 }
             ),
             
@@ -163,6 +175,7 @@ class ProductosForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
+            
         }
 
     def save(self, commit=True):

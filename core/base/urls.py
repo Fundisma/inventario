@@ -11,18 +11,22 @@ app_name = 'base'
 
 urlpatterns = [
     #Libro
-    path('libro/listado/', LibroView.as_view(), name='libro_listado'), 
+    path('libro/listado/',  LibroListView.as_view(), name='libro_listado'),
+    path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
+    path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
+    path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
 
     #Autor
-    path('autor/listado/', AutorView.as_view(), name='autor_listado'), 
-    # path ('autor/listado/',AutorListView.as_view(), name='autor_listado'),
-    # path ('autor/add/',AutorCreateView.as_view(), name='autor_create'),
-    # path ('autor/edit/<int:pk>/',AutorUpdateView.as_view(), name='autor_editar'),
-    # path ('autor/delete/<int:pk>/',AutorDeleteView.as_view(), name='autor_eliminar'),
-    # path ('autor/form/',AutorFormView.as_view(), name='autor_form'),
+    path('autor/listado/',  AutorListView.as_view(), name='autor_listado'),
+    path('autor/add/', AutorCreateView.as_view(), name='autor_create'),
+    path('autor/edit/<int:pk>/', AutorUpdateView.as_view(), name='autor_editar'),
+    path('autor/delete/<int:pk>/', AutorDeleteView.as_view(), name='autor_eliminar'),
 
     #categoria
-    path ('categoria/',CategoriaView.as_view(), name='categoria_listado'),
+    path('categoria/listado/',  CategoriaListView.as_view(), name='categoria_listado'),
+    path('categoria/add/', CategoriaCreateView.as_view(), name='categoria_create'),
+    path('categoria/edit/<int:pk>/', CategoriaUpdateView.as_view(), name='categoria_editar'),
+    path('categoria/delete/<int:pk>/', CategoriaDeleteView.as_view(), name='categoria_eliminar'),
 
     #productos
     path('productos/listado/', ProductosListView.as_view(), name='productos_listado'),
@@ -31,7 +35,12 @@ urlpatterns = [
     path('productos/delete/<int:pk>/', ProductosDeleteView.as_view(), name='productos_eliminar'),
 
     #Beneficiarios
-    path('beneficiario/', BeneficiarioView.as_view(), name='beneficiario_listado'), 
+    path('beneficiario/listado/', BeneficiarioListView.as_view(), name='beneficiario_listado'),
+    path('beneficiario/add/', BeneficiarioCreateView.as_view(), name='beneficiario_create'),
+    path('beneficiario/edit/<int:pk>/', BeneficiarioUpdateView.as_view(), name='beneficiario_editar'),
+    path('beneficiario/delete/<int:pk>/', BeneficiarioDeleteView.as_view(), name='beneficiario_eliminar'),
+
+    #inicio admin
     path('admin/', AdminView.as_view(), name='admin'), 
 
     #Suministro
