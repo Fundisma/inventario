@@ -12,7 +12,7 @@ class UserForm(ModelForm):
         model = User
         fields = 'first_name', 'last_name', 'tipoDocumento', 'documento', 'email', 'username', 'password', 'image'
         widgets = {
-            'first_name': TextInput(
+            'first_name': TextInput( 
                 attrs={
                     'placeholder': 'Ingrese sus nombres',
                 }

@@ -135,8 +135,7 @@ class DetalleSuministro(models.Model):
         ordering = ['id']
 
 class Autor(models.Model):
-    nombres = models.CharField(max_length = 45, blank = False, null = False)
-    apellidos = models.CharField(max_length = 45, blank = False, null = False)
+    nombres = models.CharField('Nombres y Apellidos',max_length = 45, blank = False, null = False)
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
     descripcion = models.TextField( blank = False, null = False)
     fecha_creacion = models.DateField(default=datetime.now)     
@@ -159,6 +158,11 @@ class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     f_publicacion = models.DateField(default=datetime.now)
+    descripcion = models.TextField('Descripción',null=True, blank=True)
+    cantidad = models.PositiveIntegerField('Cantidad o Stock',default = 1)
+    imagen = models.ImageField(upload_to='libros/',max_length=255, null=True, blank=True, verbose_name='Imagen')
+    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+
 
     def __str__(self):
         return self.titulo
@@ -167,9 +171,13 @@ class Libro(models.Model):
         item = model_to_dict(self)
         item['autor'] = self.autor.toJSON()
         item['f_publicacion'] = self.f_publicacion.strftime('%Y-%m-%d')
-
+        item['imagen'] = self.get_imagen()
         return item
-        
+    
+    def get_imagen(self):
+        if self.imagen:
+            return  '{}{}'.format(MEDIA_URL, self.imagen)
+        return '{}{}'.format(STATIC_URL, 'img/empty.png')
     class Meta:
         verbose_name = 'Libro'
         verbose_name_plural = 'Libros'

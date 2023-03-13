@@ -15,7 +15,6 @@ $(function () {
         columns: [
             {"data": "position"},
             {"data": "nombres"},
-            {"data": "apellidos"},
             {"data": "nacionalidad"},
             {"data": "descripcion"},
             {"data": "fecha_creacion"},
