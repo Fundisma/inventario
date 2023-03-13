@@ -33,6 +33,16 @@ class LibroForm(ModelForm):
                     'data-toggle': 'datetimepicker',
                 }
             ),
+            'descripcion': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un titulo',
+                }
+            ),
+            'cantidad': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un titulo',
+                }
+            ),
         }
 
     def save(self, commit=True):
@@ -62,12 +72,7 @@ class AutorForm(ModelForm):
         widgets = {
             'nombres': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese los nombres',
-                }
-            ),
-            'apellidos': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese los apellidos',
+                    'placeholder': 'Ingrese los nombres y apellidos',
                 }
             ),
             'nacionalidad': TextInput(

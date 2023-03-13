@@ -17,9 +17,20 @@ $(function () {
             {"data": "titulo"},
             {"data": "autor.nombres"},
             {"data": "f_publicacion"},
+            {"data": "descripcion"},
+            {"data": "cantidad"},
+            {"data": "imagen"},
             {"data": "id"},
         ],
         columnDefs: [
+            {
+                targets: [-2],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
+                }
+            },
             {
                 targets: [-1],
                 class: 'text-center',
