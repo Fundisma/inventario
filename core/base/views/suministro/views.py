@@ -74,7 +74,9 @@ class SuministroCreateView(CreateView):
                 producto = Productos.objects.filter(nombre__icontains=request.POST['term'])[0:10]
                 for i in producto:
                     item = i.toJSON()
-                    item['value'] = i.nombre
+                    #item['value'] = i.nombre
+                    item['text'] = i.nombre
+
                     data.append(item)
             elif action  == 'add':
                 with transaction.atomic():

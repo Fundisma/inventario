@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Coalesce
 from django.db.models import Sum
+from django.db.models import DecimalField
 
 
 class ReporteSuministroView(TemplateView):
@@ -41,6 +42,18 @@ class ReporteSuministroView(TemplateView):
                         s.fecha_registro.strftime('%Y-%m-%d'),
                         format(s.total, '.2f'),
                     ])
+                total = search.aggregate(r=Coalesce(Sum('total'),0,output_field=DecimalField())).get('r')
+                data.append([
+                    '---',
+                    '---',
+                    '---',
+                    '---',
+                    '---',
+                    '---',
+                    '---',
+                    '---',
+                    format(total, '.2f'),
+                ])
             else: 
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
