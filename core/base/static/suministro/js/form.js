@@ -88,7 +88,30 @@ var suministro = {
         });
     }
 };
+function formatRepo(repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
 
+    var option = $(
+        '<div class="wrapper container">' +
+        '<div class="row">' +
+        '<div class="col-lg-1">' +
+        '<img src="' + repo.imagen + '" class="img-fluid img-thumbnail d-block mx-auto rounded">' +
+        '</div>' +
+        '<div class="col-lg-11 text-left shadow-sm">' +
+        //'<br>' +
+        '<p style="margin-bottom: 0;">' +
+        '<b>Nombre:</b> ' + repo.nombre + '<br>' +
+        '<b>Categoría:</b> ' + repo.categoria.nombre + '<br>' +
+        '<b>PVP:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
+        '</p>' +
+        '</div>' +
+        '</div>' +
+        '</div>');
+
+    return option;
+}
 
 $(function(){
     $('.select2').select2({
@@ -103,7 +126,7 @@ $(function(){
         minDate: moment().format("YYYY-MM-DD")
     });
     //busquesda de productos
-    $('input[name="search"]').autocomplete({
+    /*$('input[name="search"]').autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: window.location.pathname,
@@ -134,7 +157,7 @@ $(function(){
         }
 
 
-    });
+    });*/
 
     //eliminar todo registro
     $('.btnRemoveAll').on('click', function () {
@@ -180,9 +203,49 @@ $(function(){
         parameters.append('action', $('input[name="action"]').val());
         parameters.append('suministro', JSON.stringify(suministro.items));
         submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
-            location.href = '/base/suministro/listado/';
+            Swal.fire({
+                title: 'Alerta',
+                text: 'Registro creado correctamente',
+                icon: 'success',
+                timer: 2000,
+                onClose: () => {
+                    location.href = '/base/suministro/listado/';
+                }
+            })    
         });
     });
+    $('select[name="search"]').select2({
+        theme: "bootstrap4",
+        language: 'es',
+        allowClear: true,
+        ajax: {
+            delay: 250,
+            type: 'POST',
+            url: window.location.pathname,
+            data: function (params) {
+                var queryParameters = {
+                    term: params.term,
+                    action: 'search_producto'
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+        },
+        placeholder: 'Ingrese una descripción',
+        minimumInputLength: 1,
+        templateResult: formatRepo,
+    }).on('select2:select', function (e) {
+        var data = e.params.data;
+        data.cantidad = 1;
+        data.subtotal = 0.00;
+        suministro.add(data);
+        $(this).val('').trigger('change.select2');
+    });
+
     suministro.listado();
     
 });
