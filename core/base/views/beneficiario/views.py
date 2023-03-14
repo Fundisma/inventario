@@ -39,7 +39,7 @@ class BeneficiarioListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Categorías '
+        context['title'] = 'Listado de Beneficiarios'
         context['create_url'] = reverse_lazy('base:beneficiario_create')
         context['listado_url'] = reverse_lazy('base:beneficiario_listado')
         context['entidad'] = 'Beneficiarios'
