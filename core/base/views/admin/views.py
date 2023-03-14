@@ -4,9 +4,17 @@ from django.db.models import DecimalField
 from django.views.generic import TemplateView
 from datetime import datetime
 from core.base.models import Suministro
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import  csrf_exempt
+from django.contrib.auth.decorators import login_required
 class AdminView(TemplateView):
     template_name = 'admin.html'
+    
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
     def get_graph_sales_year_month(self):
         data = []
