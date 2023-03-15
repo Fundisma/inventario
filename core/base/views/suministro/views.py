@@ -71,12 +71,14 @@ class SuministroCreateView(CreateView):
             action = request.POST['action']
             if action == 'search_producto':
                 data = []
-                producto = Productos.objects.filter(nombre__icontains=request.POST['term'])[0:10]
-                for i in producto:
+                ids_exclude = json.loads(request.POST['ids'])
+                term = request.POST['term'].strip()
+                producto = Productos.objects.filter(stock__gt=0)
+                if len(term):
+                    producto = producto.filter(nombre__icontains=term)
+                for i in producto.exclude(id__in=ids_exclude)[0:10]:
                     item = i.toJSON()
-                    #item['value'] = i.nombre
                     item['text'] = i.nombre
-
                     data.append(item)
             elif action  == 'add':
                 with transaction.atomic():
@@ -87,7 +89,7 @@ class SuministroCreateView(CreateView):
                     sum.subtotal = float(suministro['subtotal'])
                     sum.total = float(suministro['total'])
                     sum.save()
-                      
+                    
                     for i in suministro['producto']:
                         det = DetalleSuministro()
                         det.suministro_id = sum.id
@@ -96,6 +98,8 @@ class SuministroCreateView(CreateView):
                         det.precio = float(i['pvp'])
                         det.subtotal = float(i['subtotal'])
                         det.save()
+                        det.producto.stock -= det.cantidad
+                        det.producto.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:
@@ -128,10 +132,14 @@ class SuministroUpdateView(UpdateView):
             action = request.POST['action']
             if action == 'search_producto':
                 data = []
-                producto = Productos.objects.filter(nombre__icontains=request.POST['term'])[0:10]
-                for i in producto:
+                ids_exclude = json.loads(request.POST['ids'])
+                term = request.POST['term'].strip()
+                producto = Productos.objects.filter(stock__gt=0)
+                if len(term):
+                    producto = producto.filter(nombre__icontains=term)
+                for i in producto.exclude(id__in=ids_exclude)[0:10]:
                     item = i.toJSON()
-                    item['value'] = i.nombre
+                    item['text'] = i.nombre
                     data.append(item)
             elif action  == 'edit':
                 with transaction.atomic():
@@ -151,6 +159,8 @@ class SuministroUpdateView(UpdateView):
                         det.precio = float(i['pvp'])
                         det.subtotal = float(i['subtotal'])
                         det.save()
+                        det.producto.stock -= det.cantidad
+                        det.producto.save()
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:

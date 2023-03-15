@@ -6,6 +6,13 @@ var suministro = {
         total: 0.00,
         producto:[]
     },
+    get_ids: function () {
+        var ids = [];
+        $.each(this.items.producto, function (key, value) {
+            ids.push(value.id);
+        });
+        return ids;
+    },
     calculate_invoice: function(){
         var subtotal = 0.00;
         $.each(this.items.producto, function (pos, dict) {
@@ -34,8 +41,8 @@ var suministro = {
             data: this.items.producto, 
             columns: [
                 { "data": "id"},
-                { "data": "nombre"},
-                { "data": "categoria.nombre"},
+                { "data": "full_name"},
+                { "data": "stock"},
                 { "data": "pvp"},
                 { "data": "cantidad"},
                 { "data": "subtotal"},
@@ -49,6 +56,17 @@ var suministro = {
                     orderable: false,
                     render: function (data, type, row) {
                         return '<a rel="remove" class="btn btn-danger btn-xs btn-flat" style="color: white;"><i class="fas fa-trash-alt"></i></a>';
+                    }
+                },
+                {
+                    targets: [-4],
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        if(data > 0){
+                            return '<span class="badge badge-success">'+data+'</span>'
+                        }
+                        return '<span class="badge badge-danger">'+data+'</span>'
                     }
                 },
                 {
@@ -79,13 +97,16 @@ var suministro = {
             rowCallback(row, data, displayNum, displayIndex, dataIndex) {
                 $(row).find('input[name="cantidad"]').TouchSpin({
                     min: 1,
-                    max: 1000000000,
+                    max: data.stock,
                     step: 1 
                 });
             },
             initComplete: function(settings, json) {
             }
         });
+        console.clear();
+        console.log(this.items);
+        console.log(this.get_ids());
     }
 };
 function formatRepo(repo) {
@@ -102,8 +123,8 @@ function formatRepo(repo) {
         '<div class="col-lg-11 text-left shadow-sm">' +
         //'<br>' +
         '<p style="margin-bottom: 0;">' +
-        '<b>Nombre:</b> ' + repo.nombre + '<br>' +
-        '<b>Categoría:</b> ' + repo.categoria.nombre + '<br>' +
+        '<b>Nombre:</b> ' + repo.full_name + '<br>' +
+        '<b>Stock:</b> ' + repo.stock + '<br>' +
         '<b>PVP:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
         '</p>' +
         '</div>' +
@@ -225,7 +246,8 @@ $(function(){
             data: function (params) {
                 var queryParameters = {
                     term: params.term,
-                    action: 'search_producto'
+                    action: 'search_producto',
+                    ids: JSON.stringify(suministro.get_ids()),
                 }
                 return queryParameters;
             },
