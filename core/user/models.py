@@ -14,8 +14,8 @@ class User(AbstractUser):
         CE='Cédula de Extrajería', ('Cédula de Extrajería')
         CR='Contraseña Registraduría', ('Contraseña Registraduria')
     tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
-    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
-
+    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True)
+    token = models.UUIDField(primary_key=False, editable=False,null=True,blank=True )
 
     def get_image(self):
         if self.image:
