@@ -152,3 +152,12 @@ AUTH_USER_MODEL = 'user.User'
 
 #Email
 
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'kevscaicedo@misena.edu.co'
+
+EMAIL_HOST_PASSWORD = 'Kevinsalazar1014'
+
+DOMAIN = ''
