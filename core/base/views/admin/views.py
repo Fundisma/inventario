@@ -7,6 +7,8 @@ from core.base.models import Suministro
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
+
+
 class AdminView(TemplateView):
     template_name = 'admin.html'
     

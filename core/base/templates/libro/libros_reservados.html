@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'fullcalendar/lib/main.css' %}">
+<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
+<script src="{% static 'libro/js/reservas.js' %}"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+
+
+{% endblock  %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h2><strong class="card-title">Libros Reservados</strong></h2> 
+            </div>
+        </div>
+
+    </div>
+    <div id="calendar" class="card" style="padding: 30px;"></div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var calendarUI = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarUI,{
+            headerToolbar: {
+                end: 'prev,next today',
+                
+            },
+            events: [
+                {% for reserva in object_list %}
+                    {
+                        title: "Libro  {{ reserva.libro.titulo }}  Reservado por {{reserva.user}} ",
+                        start: '{{ reserva.fecha_creacion | date:"Y-m-d" }}',
+                        end: '{{ reserva.fecha_vencimiento | date:"Y-m-d" }}',
+                    },
+                {% endfor %}
+            ]
+        });
+        calendar.render();
+        calendar.setOption('locale','es');
+        
+    });
+    
+</script>
+{% endblock %}

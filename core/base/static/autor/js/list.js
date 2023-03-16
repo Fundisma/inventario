@@ -17,7 +17,6 @@ $(function () {
             {"data": "nombres"},
             {"data": "nacionalidad"},
             {"data": "descripcion"},
-            {"data": "fecha_creacion"},
             {"data": "id"},
         ],
         columnDefs: [

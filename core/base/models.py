@@ -1,9 +1,12 @@
+from datetime import timedelta
 from django.db import models
 from datetime import datetime
 from core.base.choices import gender_choices
+from core.user.models import User
 from django.forms import model_to_dict
 from inventario.settings import MEDIA_URL, STATIC_URL
 from core.base.choices import gender_choices
+from django.db.models.signals import post_save,pre_save
 
 
 class Categoria(models.Model):
@@ -141,13 +144,13 @@ class DetalleSuministro(models.Model):
         verbose_name_plural = 'Detalle de Suministros'
         ordering = ['id']
 
+
 class Autor(models.Model):
     nombres = models.CharField('Nombres y Apellidos',max_length = 45, blank = False, null = False)
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
     descripcion = models.TextField( blank = False, null = False)
-    fecha_creacion = models.DateField(default=datetime.now)     
-
-    def __str__(self):
+    fecha_creacion = models.DateField(default=datetime.now)
+    def __str__(self):  
         return self.nombres
     
     def toJSON(self):
@@ -165,12 +168,15 @@ class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     f_publicacion = models.DateField(default=datetime.now)
+    genero = models.CharField(max_length = 45, blank = True, null = True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
     cantidad = models.PositiveIntegerField('Cantidad o Stock',default = 1)
     imagen = models.ImageField(upload_to='libros/',max_length=255, null=True, blank=True, verbose_name='Imagen')
     estado = models.BooleanField(default = True, verbose_name = 'Estado')
 
-
+    def natural_key(self):
+        return self.titulo
+    
     def __str__(self):
         return self.titulo
     
@@ -190,5 +196,51 @@ class Libro(models.Model):
         verbose_name_plural = 'Libros'
         ordering = ['id']
     
+
+
+class Reserva(models.Model):
     
+    id = models.AutoField(primary_key = True)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cantidad_dias = models.SmallIntegerField('Cantidad de Dias a Reservar',default = 15)    
+    fecha_creacion = models.DateField('Fecha de creación', auto_now = False, auto_now_add = True)
+    fecha_vencimiento = models.DateField('Fecha de vencimiento de la reserva', auto_now=False, auto_now_add=False, null = True, blank = True)
+    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+
+    class Meta:
+        """Meta definition for Reserva."""
+
+        verbose_name = 'Reserva'
+        verbose_name_plural = 'Reservas'
+
+    def __str__(self):
+        """Unicode representation of Reserva."""
+        return f'Reserva de Libro {self.libro} por {self.user}'
+    
+
+def reducir_cantidad_libro(sender,instance,**kwargs):
+    libro = instance.libro
+    if libro.cantidad > 0:
+        libro.cantidad = libro.cantidad - 1
+        libro.save()
+
+def validar_creacion_reserva(sender,instance,**kwargs):
+    libro = instance.libro
+    if libro.cantidad < 1:
+        raise Exception("No puede realizar esta reserva")
+
+def agregar_fecha_vencimiento_reserva(sender,instance,**kwargs):
+    if instance.fecha_vencimiento is None or instance.fecha_vencimiento == '':
+        instance.fecha_vencimiento = instance.fecha_creacion + timedelta(days = instance.cantidad_dias)
+        instance.save()
+    
+
+post_save.connect(reducir_cantidad_libro,sender = Reserva)
+#pre_save.connect(validar_creacion_reserva,sender = Reserva)
+post_save.connect(agregar_fecha_vencimiento_reserva,sender = Reserva)
+
+
+
+
     
