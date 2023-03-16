@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <script src="{% static 'lib/highcharts-8.1.2/highcharts.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header">
+        <div class="row" style="margin: 30px;">
+            <div class="col-md-12 text-center ">
+                <strong class="card-title">
+                    <h4>Listado de Libros Disponibles</h4>
+                </strong>
+                
+                <div class="contain"> 
+                    <div class="row">
+                        <div class="col-md-12 search">
+                            <form method="get">
+                                <div id="custom-search-input">
+                                    <div class="input-group col-md-12">
+                                        <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar}}">
+                                        <span class="input-group-list">
+                                            <i class="icon icon-search"></i>
+                                            <button type="submit" class="btn btn-primary">Buscar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                {% for libro in object_list %}
+                <div class="col-md-4">
+                    <a href="{% url 'base:detalle_libro' libro.id %}">
+                        <div class="card">
+                            <img class="card-img-top img-fluid d-block mx-auto" style="width: 365px; height: 340px;" 
+                            src="{{ libro.imagen.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title mb-3">{{ libro.titulo }}</h4>
+                                <p class="card-text" style="color:black;"><strong>Autor:</strong>&nbsp{{ libro.autor }}<br><strong>Genero</strong>&nbsp{{ libro.genero }}</p>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <button type="button" class="btn btn-outline-primary"style="color:white;" disabled><a href="?page=1" >&laquo; Primera</a></button>
+                <button type="button" class="btn btn-outline-success" disabled><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></button>
+
+                
+                
+                {% endif %}
+
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                <button type="button" class="btn btn-outline-primary" disabled><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></button>
+                <button type="button" class="btn btn-outline-success" disabled><a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></button>
+                
+                
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,24 @@
 from django.forms import *
-from core.base.models import Categoria, Productos, Beneficiario, Suministro, Libro, Autor
+from core.base.models import Categoria, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
+from django.core.exceptions import ValidationError
 from datetime import datetime
+
+
+class ReservaForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        #self.fields['libro'].queryset = Libro.objects.filter(estado = True,cantidad__gte = 1)
+
+    class Meta:
+        model = Reserva
+        fields = '__all__'
+    
+    def clean_libro(self):
+        libro = self.cleaned_data['libro']
+        if libro.cantidad < 1:
+            raise ValidationError('No se puede reservar este libro, deben existir unidades disponibles.')
+
+        return libro
 
 class LibroForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -9,11 +27,11 @@ class LibroForm(ModelForm):
 
     class Meta:
         model = Libro
-        fields = '__all__'
+        fields =('titulo','autor','f_publicacion','genero','descripcion','imagen','cantidad')
         widgets = {
             'titulo': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un titulo',
+                    'placeholder': 'Ingrese el titulo del Libro',
                 }
             ),
             'autor': Select(
@@ -33,16 +51,12 @@ class LibroForm(ModelForm):
                     'data-toggle': 'datetimepicker',
                 }
             ),
-            'descripcion': TextInput(
+            'genero': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un titulo',
+                    'placeholder': 'Ingrese el Genero del Libro',
                 }
             ),
-            'cantidad': TextInput(
-                attrs={
-                    'placeholder': 'Ingrese un titulo',
-                }
-            ),
+            
         }
 
     def save(self, commit=True):
@@ -68,7 +82,7 @@ class AutorForm(ModelForm):
 
     class Meta:
         model=Autor
-        fields = '__all__'
+        fields = ('nombres', 'nacionalidad', 'descripcion')
         widgets = {
             'nombres': TextInput(
                 attrs={
@@ -85,18 +99,6 @@ class AutorForm(ModelForm):
                     'placeholder': 'Ingrese una breve descripción.',
                 }
             ),
-            'fecha_creacion': DateInput(
-                format='%Y-%m-%d',
-                attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
-                    'autocomplete': 'off',
-                    'class': 'form-control datetimepicker-input',
-                    'id': 'fecha_registro',
-                    'data-target': '#fecha_registro',
-                    'data-toggle': 'datetimepicker',
-                }
-            ),
-            
         }
     def save(self, commit=True):
         data = {}
@@ -116,7 +118,6 @@ class AutorForm(ModelForm):
        #     raise forms.ValidationError('Validación mm')
         #    #self.add_error('nombre', 'le faltan caracteres')
        # return cleaned
-
 
 class CategoriaForm(ModelForm):
     def __init__(self, *args, **kwargs):

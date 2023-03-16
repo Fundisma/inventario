@@ -1,9 +1,13 @@
 from django.contrib import admin
+from core.base.forms import ReservaForm
 from core.base.models import*
 
+class ReservaAdmin(admin.ModelAdmin):
+    form = ReservaForm
 # Register your models here.
 admin.site.register(Libro)
 admin.site.register(Autor)
+admin.site.register(Reserva,ReservaAdmin)
 admin.site.register(Categoria)
 admin.site.register(Productos) 
 admin.site.register(Beneficiario) 

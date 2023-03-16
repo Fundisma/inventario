@@ -15,6 +15,14 @@ urlpatterns = [
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
     path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
+    path('reservas/', Reservas.as_view(), name='reservas'),
+    path('reservas-vencidas/', ReservasVencidas.as_view(), name='reservas_vencidas'),
+    path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
+    path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
+    path('listado-reservas-vencidas/',ListadoReservasVencidas.as_view(), name = 'listado_reservas_vencidas'),
+    path('detalle-libro/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
+    path('reservar-libro/',  RegistrarReserva.as_view(), name='reservar_libro'),
+    path('libros-reservados/', listadoLibrosReservados.as_view(), name='libros_reservados'),
 
     #Autor
     path('autor/listado/',  AutorListView.as_view(), name='autor_listado'),
