@@ -46,8 +46,8 @@ class LibroForm(ModelForm):
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'autocomplete': 'off',
                     'class': 'form-control datetimepicker-input',
-                    'id': 'fecha_registro',
-                    'data-target': '#fecha_registro',
+                    'id': 'f_suministro',
+                    'data-target': '#f_suministro',
                     'data-toggle': 'datetimepicker',
                 }
             ),
@@ -225,11 +225,17 @@ class BeneficiarioForm(ModelForm):
                     'placeholder': 'Ingrese su numero de documento',
                 }
             ),
-            'cumpleaños': DateInput(format='%Y-%m-%d',
+             'cumpleaños': DateInput(
+                format='%Y-%m-%d',
                 attrs={
                     'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'cumpleaños',
+                    'data-target': '#cumpleaños',
+                    'data-toggle': 'datetimepicker',
                 }
-            ), 
+            ),
             'telefono': NumberInput(
                 attrs={
                     'placeholder': 'Ingrese el número de teléfono',

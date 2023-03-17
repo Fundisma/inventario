@@ -167,7 +167,7 @@ class Autor(models.Model):
 class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
-    f_publicacion = models.DateField(default=datetime.now)
+    f_publicacion = models.DateField(default=datetime.now, verbose_name='Fecha de Publicacion')
     genero = models.CharField(max_length = 45, blank = True, null = True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
     cantidad = models.PositiveIntegerField('Cantidad o Stock',default = 1)

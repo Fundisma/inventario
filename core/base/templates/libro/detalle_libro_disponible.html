@@ -67,8 +67,6 @@
             'libro':"{{ object.id }}",
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
         }
-        
-
         $.ajax({
             data:data,
             url:"{% url 'base:reservar_libro' %}",

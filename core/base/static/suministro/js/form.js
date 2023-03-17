@@ -136,7 +136,7 @@ function formatRepo(repo) {
 
 $(function(){
     $('.select2').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap4", 
         language: 'es'
     });
 

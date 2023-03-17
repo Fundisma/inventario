@@ -12,7 +12,7 @@ function listadoLibros() {
                 let fila = '<tr>';
                 fila += '<td>' + (i + 1) + '</td>';
                 fila += '<td>' + response[i]["fields"]['titulo'] + '</td>';
-                fila += '<td>' + response[i]["fields"]['fecha_publicacion'] + '</td>';
+                fila += '<td>' + response[i]["fields"]['f_publicacion'] + '</td>';
                 if (response[i]["fields"]['autor_id'] == ''){
                     fila += '<td>Desconocido</td>';
                 }else{

@@ -58,3 +58,10 @@ $(function () {
         }
     });
 });
+$(function(){
+    $('#f_suministro').datetimepicker({
+        format: 'YYYY-MM-DD',
+        date: moment().format("YYYY-MM-DD"),
+        locale: 'es',
+    });
+});
