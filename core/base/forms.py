@@ -1,5 +1,5 @@
 from django.forms import *
-from core.base.models import Categoria, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
+from core.base.models import Categoria, Eventos, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
 from django.core.exceptions import ValidationError
 from datetime import datetime
 
@@ -19,6 +19,56 @@ class ReservaForm(ModelForm):
             raise ValidationError('No se puede reservar este libro, deben existir unidades disponibles.')
 
         return libro
+
+class EventosForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Eventos
+        fields ='__all__'
+        widgets = {
+            'nombre': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese el nombre del Evento',
+                }
+            ),
+            'tipoEvento': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese el tipo de Evento',
+                }
+            ),
+             'fecha': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha',
+                    'data-target': '#fecha',
+                    'data-toggle': 'datetimepicker',
+                }
+             ),
+            'descripcion': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la descripción del evento del Evento',
+                }
+            ),
+            
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
 
 class LibroForm(ModelForm):
     def __init__(self, *args, **kwargs):

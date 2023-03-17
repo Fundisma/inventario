@@ -1,4 +1,5 @@
 from django.urls import path
+from core.base.views.eventos.views import *
 from core.base.views.libro.views import *
 from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
@@ -10,6 +11,12 @@ from core.base.views.admin.views import *
 app_name = 'base'
 
 urlpatterns = [
+    #Eventos
+    path('eventos/listado/',  EventosListView.as_view(), name='eventos_listado'),
+    path('eventos/add/', EventosCreateView.as_view(), name='eventos_create'),
+    path('eventos/edit/<int:pk>/', EventosUpdateView.as_view(), name='eventos_editar'),
+    path('eventos/delete/<int:pk>/', EventosDeleteView.as_view(), name='eventos_eliminar'),
+    
     #Libro
     path('libro/listado/',  LibroListView.as_view(), name='libro_listado'),
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),

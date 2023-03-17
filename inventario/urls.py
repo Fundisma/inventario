@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.principal.views import IndexView
+from core.principal.views import  IndexView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,6 +24,7 @@ from core.login.views import LoginFormView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', include('core.base.urls')),
+    path('principal/', include('core.principal.urls')),
     path('', IndexView.as_view(), name='index'),
     path('login/', include('core.login.urls')),
     path('user/', include('core.user.urls')),

@@ -56,6 +56,7 @@ class Productos(models.Model):
         ordering = ['id']
 
 
+
 class Beneficiario(models.Model):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
@@ -191,12 +192,37 @@ class Libro(models.Model):
         if self.imagen:
             return  '{}{}'.format(MEDIA_URL, self.imagen)
         return '{}{}'.format(STATIC_URL, 'img/empty.png')
+    
     class Meta:
         verbose_name = 'Libro'
         verbose_name_plural = 'Libros'
         ordering = ['id']
     
 
+class Eventos(models.Model):
+    nombre =models.CharField(max_length = 50, blank = False, null = False)
+    tipoEvento =models.CharField(max_length = 50, blank = False, null = False)
+    fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
+    descripcion = models.TextField('Descripción',null=True, blank=True)
+    imagen = models.ImageField(upload_to='Eventos/',max_length=255, null=True, blank=True, verbose_name='Imagen')
+
+
+    def natural_key(self):
+        return self.nombre
+    
+    def __str__(self):
+        return self.nombre
+    
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['fecha'] = self.fecha.strftime('%Y-%m-%d')
+        item['imagen'] = self.get_imagen()
+        return item
+    
+    def get_imagen(self):
+        if self.imagen:
+            return  '{}{}'.format(MEDIA_URL, self.imagen)
+        return '{}{}'.format(STATIC_URL, 'img/empty.png')
 
 class Reserva(models.Model):
     
