@@ -1,13 +1,13 @@
 import json
 from django.db import transaction
-
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 
 from core.base.forms import SuministroForm
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, View
 
-from core.base.models import DetalleSuministro, Suministro, Productos
+from core.base.models import Beneficiario, DetalleSuministro, Suministro, Productos
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -100,6 +100,14 @@ class SuministroCreateView(CreateView):
                         det.save()
                         det.producto.stock -= det.cantidad
                         det.producto.save()
+            elif action == 'search_beneficiario':
+                data = []
+                term = request.POST['term']
+                beneficiario = Beneficiario.objects.filter(Q(nombres__icontains=term) | Q(apellidos__icontains=term) | Q(documento__icontains=term))[0:10]
+                for i in beneficiario:
+                    item = i.toJSON()
+                    item['text'] = i.get_full_name()
+                    data.append(item)
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:

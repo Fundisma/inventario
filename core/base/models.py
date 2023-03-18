@@ -27,10 +27,10 @@ class Categoria(models.Model):
 
 class Productos(models.Model): 
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
-    stock = models.IntegerField(default=0, verbose_name='Stock')
-    pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0)
+    stock = models.IntegerField(default=0, verbose_name='Cantidad o Stock')
+    pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio")
 
     def __str__(self):
         return self.nombre
@@ -83,6 +83,9 @@ class Beneficiario(models.Model):
     def __str__(self):
         return self.nombres
     
+    def get_full_name(self):
+        return '{} {} / {}'.format(self.nombres, self.apellidos, self.documento)
+
     def toJSON(self):
         item = model_to_dict(self)
         item['cumpleaños'] = self.cumpleaños.strftime('%Y-%m-%d')
@@ -148,7 +151,7 @@ class DetalleSuministro(models.Model):
 class Autor(models.Model):
     nombres = models.CharField('Nombres y Apellidos',max_length = 45, blank = False, null = False)
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
-    descripcion = models.TextField( blank = False, null = False)
+    descripcion = models.TextField( blank = False, null = False, verbose_name="Descripción")
     fecha_creacion = models.DateField(default=datetime.now)
     def __str__(self):  
         return self.nombres
@@ -167,7 +170,7 @@ class Autor(models.Model):
 class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
-    f_publicacion = models.DateField(default=datetime.now, verbose_name='Fecha de Publicacion')
+    f_publicacion = models.DateField(default=datetime.now, verbose_name='Fecha de Publicación')
     genero = models.CharField(max_length = 45, blank = True, null = True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
     cantidad = models.PositiveIntegerField('Cantidad o Stock',default = 1)

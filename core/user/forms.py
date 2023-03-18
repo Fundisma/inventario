@@ -34,17 +34,17 @@ class UserForm(ModelForm):
             ),
             'email': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese su email',
+                    'placeholder': 'Ingrese su correo electrónico',
                 }
             ),
             'username': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese su username',
+                    'placeholder': 'Ingrese su nombre de usuario',
                 }
             ),
             'password': PasswordInput(render_value=True,
                 attrs={
-                    'placeholder': 'Ingrese su password',
+                    'placeholder': 'Ingrese su contraseña',
                 }
             ),
         }
