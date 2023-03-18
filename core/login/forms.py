@@ -5,7 +5,7 @@ from core.user.models import User
 
 class ResetPasswordForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Ingrese un username',
+        'placeholder': 'Ingrese un nombre de usuario',
         'class': 'form-control',
         'autocomplete': 'off'
     }))

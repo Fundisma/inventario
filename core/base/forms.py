@@ -40,14 +40,14 @@ class LibroForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            'f_suministro': DateInput(
+            'f_publicacion': DateInput(
                 format='%Y-%m-%d',
                 attrs={
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'autocomplete': 'off',
                     'class': 'form-control datetimepicker-input',
-                    'id': 'f_suministro',
-                    'data-target': '#f_suministro',
+                    'id': 'f_publicacion',
+                    'data-target': '#f_publicacion',
                     'data-toggle': 'datetimepicker',
                 }
             ),
@@ -281,6 +281,7 @@ class BeneficiarioForm(ModelForm):
 class SuministroForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['beneficiario'].queryset = Beneficiario.objects.none()
         
     class Meta:
         model = Suministro
@@ -289,7 +290,7 @@ class SuministroForm(ModelForm):
             'beneficiario': Select(attrs={
                 'class': 'form-control select2',
                 'style': 'width: 100%'
-            }),
+            }), 
             'fecha_registro': DateInput(
                 format='%Y-%m-%d',
                 attrs={

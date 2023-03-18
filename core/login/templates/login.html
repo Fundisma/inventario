@@ -3,7 +3,7 @@
 {% block content %}
     <div class="login-box">
         <div class="login-logo">
-            <a href="{% url 'index' %}"><b>Ha</b>des</a>
+            <a href="{% url 'index' %}"><b>Biblioteca</b>Municipal</a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -12,7 +12,7 @@
                     <input type="hidden" name="next" value="{{ next }}">
                     {% csrf_token %}
                     <div class="input-group mb-3">
-                        {{ form.username|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su username' }}
+                        {{ form.username|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su nombre de usuario' }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        {{ form.password|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su password' }}
+                        {{ form.password|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su contraseña' }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <p class="text-center mt-2" style="font-size: 13px;">
-                        Si no recuerdas tu contraseña puedes resetearla dando click <a href="{% url 'reset_password' %}">aqui </a>
+                        Si no recuerdas tu contraseña puedes restablecerla dando click <a href="{% url 'reset_password' %}">Aquí </a>
                     </p>
                 </form>
             </div>

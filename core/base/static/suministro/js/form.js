@@ -124,8 +124,8 @@ function formatRepo(repo) {
         //'<br>' +
         '<p style="margin-bottom: 0;">' +
         '<b>Nombre:</b> ' + repo.full_name + '<br>' +
-        '<b>Stock:</b> ' + repo.stock + '<br>' +
-        '<b>PVP:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
+        '<b>Cantidad o Stock:</b> ' + repo.stock + '<br>' +
+        '<b>Precio:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -146,6 +146,33 @@ $(function(){
         locale: 'es',
         minDate: moment().format("YYYY-MM-DD")
     });
+
+    //busqueda de beneficiario
+    $('select[name="beneficiario"]').select2({
+        theme: "bootstrap4",
+        language: 'es',
+        allowClear: true,
+        ajax: {
+            delay: 250,
+            type: 'POST',
+            url: window.location.pathname,
+            data: function (params) {
+                var queryParameters = {
+                    term: params.term,
+                    action: 'search_beneficiario'
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+        },
+        placeholder: 'Ingrese una descripción',
+        minimumInputLength: 1,
+    });
+
     //busquesda de productos
     /*$('input[name="search"]').autocomplete({
         source: function (request, response) {

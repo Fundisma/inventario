@@ -6,7 +6,7 @@ from inventario.settings import MEDIA_URL, STATIC_URL
 
 
 class User(AbstractUser):
-    image = models.ImageField(upload_to='users/%Y/%m/%d', null=True, blank=True)
+    image = models.ImageField(upload_to='users/%Y/%m/%d', null=True, blank=True,verbose_name="Imagen" )
     class TipoDocumento(models.TextChoices):
         RC='Registro Civil', ('Registro Civil')
         TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
