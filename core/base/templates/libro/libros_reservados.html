@@ -17,7 +17,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-md-8">
-                <h2><strong class="card-title">Libros Reservados</strong></h2> 
+                <h2><strong class="card-title">Eventos</strong></h2> 
             </div>
         </div>
 
@@ -33,11 +33,10 @@
                 
             },
             events: [
-                {% for reserva in object_list %}
+                {% for eventos in object_list %}
                     {
-                        title: "Libro  {{ reserva.libro.titulo }}  Reservado por {{reserva.user}} ",
-                        start: '{{ reserva.fecha_creacion | date:"Y-m-d" }}',
-                        end: '{{ reserva.fecha_vencimiento | date:"Y-m-d" }}',
+                        title: "{{ eventos.nombre }} ",
+                        start: '{{ eventos.fecha | date:"Y-m-d" }}',y  
                     },
                 {% endfor %}
             ]

@@ -200,6 +200,7 @@ class Libro(models.Model):
     
 
 class Eventos(models.Model):
+    id = models.AutoField(primary_key = True)
     nombre =models.CharField(max_length = 50, blank = False, null = False)
     tipoEvento =models.CharField(max_length = 50, blank = False, null = False)
     fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
