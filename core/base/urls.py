@@ -1,4 +1,6 @@
 from django.urls import path
+from core.base.views.reserva.views import *
+from core.base.views.eventos.views import *
 from core.base.views.libro.views import *
 from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
@@ -10,19 +12,27 @@ from core.base.views.admin.views import *
 app_name = 'base'
 
 urlpatterns = [
+    #Reserva
+    path('reserva/listado/',  ReservaListView.as_view(), name='reserva_listado'),
+    path('reserva/add/', ReservaCreateView.as_view(), name='reserva_create'),
+    path('reserva/edit/<int:pk>/', ReservaUpdateView.as_view(), name='reserva_editar'),
+    path('reserva/delete/<int:pk>/', ReservaDeleteView.as_view(), name='reserva_eliminar'),
+
+    #Eventos
+    path('eventos/listado/',  EventosListView.as_view(), name='eventos_listado'),
+    path('calendar/',  CalendarView.as_view(), name='calendar'),
+    path('eventos/add/', EventosCreateView.as_view(), name='eventos_create'),
+    path('eventos/edit/<int:pk>/', EventosUpdateView.as_view(), name='eventos_editar'),
+    path('eventos/delete/<int:pk>/', EventosDeleteView.as_view(), name='eventos_eliminar'),
+    
     #Libro
     path('libro/listado/',  LibroListView.as_view(), name='libro_listado'),
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
     path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
-    path('reservas/', Reservas.as_view(), name='reservas'),
-    path('reservas-vencidas/', ReservasVencidas.as_view(), name='reservas_vencidas'),
     path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
     path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
-    path('listado-reservas-vencidas/',ListadoReservasVencidas.as_view(), name = 'listado_reservas_vencidas'),
     path('detalle-libro/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
-    path('reservar-libro/',  RegistrarReserva.as_view(), name='reservar_libro'),
-    path('libros-reservados/', listadoLibrosReservados.as_view(), name='libros_reservados'),
 
     #Autor
     path('autor/listado/',  AutorListView.as_view(), name='autor_listado'),

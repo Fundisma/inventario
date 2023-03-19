@@ -29,7 +29,7 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
-    stock = models.IntegerField(default=0, verbose_name='Cantidad o Stock')
+    stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock')
     pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio")
 
     def __str__(self):
@@ -165,7 +165,33 @@ class Autor(models.Model):
         verbose_name_plural = 'Autores'
         ordering = ['id']
     
+
+class Eventos(models.Model):
+    id = models.AutoField(primary_key = True)
+    nombre =models.CharField(max_length = 50, blank = False, null = False)
+    tipoEvento =models.CharField(max_length = 50, blank = False, null = False)
+    fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
+    descripcion = models.TextField('Ubicación',null=True, blank=True)
+    imagen = models.ImageField(upload_to='Eventos/',max_length=255, null=True, blank=True, verbose_name='Imagen')
+
+
+    def natural_key(self):
+        return self.nombre
     
+    def __str__(self):
+        return self.nombre
+    
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['fecha'] = self.fecha.strftime('%Y-%m-%d')
+        item['imagen'] = self.get_imagen()
+        return item
+    
+    def get_imagen(self):
+        if self.imagen:
+            return  '{}{}'.format(MEDIA_URL, self.imagen)
+        return '{}{}'.format(STATIC_URL, 'img/empty.png')
+
     
 class Libro(models.Model):
     titulo = models.CharField(max_length = 45, blank = False, null = False)
@@ -204,23 +230,17 @@ class Libro(models.Model):
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cantidad_dias = models.SmallIntegerField('Cantidad de Dias a Reservar',default = 15)    
-    fecha_creacion = models.DateField('Fecha de creación', auto_now = False, auto_now_add = True)
-    fecha_vencimiento = models.DateField('Fecha de vencimiento de la reserva', auto_now=False, auto_now_add=False, null = True, blank = True)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=True)
+    beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE, null=True, blank=True)
+    fecha = models.DateField(default=datetime.now, verbose_name='Fecha')
     estado = models.BooleanField(default = True, verbose_name = 'Estado')
 
-    class Meta:
-        """Meta definition for Reserva."""
-
-        verbose_name = 'Reserva'
-        verbose_name_plural = 'Reservas'
-
-    def __str__(self):
-        """Unicode representation of Reserva."""
-        return f'Reserva de Libro {self.libro} por {self.user}'
-    
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['libro'] = self.libro.toJSON()
+        item['beneficiario'] = self.beneficiario.toJSON()
+        item['fecha'] = self.fecha.strftime('%Y-%m-%d')
+        return item
 
 def reducir_cantidad_libro(sender,instance,**kwargs):
     libro = instance.libro
@@ -232,16 +252,11 @@ def validar_creacion_reserva(sender,instance,**kwargs):
     libro = instance.libro
     if libro.cantidad < 1:
         raise Exception("No puede realizar esta reserva")
-
-def agregar_fecha_vencimiento_reserva(sender,instance,**kwargs):
-    if instance.fecha_vencimiento is None or instance.fecha_vencimiento == '':
-        instance.fecha_vencimiento = instance.fecha_creacion + timedelta(days = instance.cantidad_dias)
-        instance.save()
     
 
 post_save.connect(reducir_cantidad_libro,sender = Reserva)
 #pre_save.connect(validar_creacion_reserva,sender = Reserva)
-post_save.connect(agregar_fecha_vencimiento_reserva,sender = Reserva)
+
 
 
 

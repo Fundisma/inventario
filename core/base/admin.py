@@ -7,6 +7,7 @@ class ReservaAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Libro)
 admin.site.register(Autor)
+admin.site.register(Eventos)
 admin.site.register(Reserva,ReservaAdmin)
 admin.site.register(Categoria)
 admin.site.register(Productos) 
