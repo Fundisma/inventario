@@ -163,42 +163,9 @@ class ListadoLibrosDisponibles(ListView):
             return context
     
 
-class listadoLibrosReservados(ListView):
-    model = Reserva
-    template_name = 'libro/libros_reservados.html'
 
-    def get_queryset(self):
-        queryset = self.model.objects.filter(estado = True,user = self.request.user)
-        return queryset
 
-class ListadoReservasVencidas(TemplateView):
-    template_name = 'libro/reservas_vencidas.html'
 
-class ReservasVencidas(ListView):
-    model = Reserva
-
-    def get_queryset(self):
-        return self.model.objects.filter(estado = False,user= self.request.user)
-
-    def get(self, request, *args, **kwargs):
-
-        if request.is_ajax():
-            return HttpResponse(serialize('json', self.get_queryset(),use_natural_foreign_keys = True), 'application/json')
-        else:
-            return redirect('base:libros_reservados')
-        
-
-class Reservas(ListView):
-    model = Reserva
-
-    def get_queryset(self):
-        return self.model.objects.filter(estado = True,user = self.request.user)
-
-    def get(self, request, *args, **kwargs):
-        if request.is_ajax():
-            return HttpResponse(serialize('json', self.get_queryset(),use_natural_foreign_keys = True), 'application/json')
-        else:
-            return redirect('base:libros_reservados')
     
 
 class DetalleLibroDisponible(DeleteView):

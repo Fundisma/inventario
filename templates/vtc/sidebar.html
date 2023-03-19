@@ -34,6 +34,23 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header"><h5>Biblioteca</h5></li>
                 <li class="nav-item">
+                    <a href="{% url 'base:eventos_listado' %}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar"></i>
+                        <p>
+                            Eventos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'base:calendar' %}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-day"></i>
+                        <p>
+                            Calendario
+                        </p>
+                    </a>
+                </li> 
+                
+                <li class="nav-item">
                     <a href="{% url 'base:autor_listado' %}" class="nav-link">
                         <i class="nav-icon fas fa-pen-fancy"></i>
                         <p>
@@ -52,21 +69,20 @@
                 
                 <li class="nav-item">
                     <a href="{% url 'base:libros_disponibles' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-book-open"></i>
                         <p>
                             Libros Disponibles
                         </p>
                     </a>
                 </li>
                  <li class="nav-item">
-                    <a href="{% url 'base:libros_reservados' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                    <a href="{% url 'base:reserva_listado' %}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                             Libros Reservados
                         </p>
                     </a>
                 </li> 
-                
                 
             </ul>
         </nav>
