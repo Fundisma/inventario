@@ -29,6 +29,10 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
+    class Tipo(models.TextChoices):
+        DONACION='Donación', ('Donación')
+        PRESTAMO='Prestamo', ('Prestamo')
+    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.DONACION, verbose_name="Tipo de Producto")
     stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock')
     pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio")
 
@@ -69,6 +73,11 @@ class Beneficiario(models.Model):
     documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
     cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
+    class Tipo(models.TextChoices):
+        FUNCIONARIO='Funcionario', ('Funcionario')
+        LECTOR='Beneficiario', ('Beneficiario')
+    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.FUNCIONARIO, verbose_name="Tipo")
+    
     class Zona(models.TextChoices):
         URBANA='Urbana',('Urbana')
         RURAL='Rural',('Rural')
@@ -153,6 +162,8 @@ class Autor(models.Model):
     nacionalidad = models.CharField(max_length = 50, blank = False, null = False)
     descripcion = models.TextField( blank = False, null = False, verbose_name="Descripción")
     fecha_creacion = models.DateField(default=datetime.now)
+    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+
     def __str__(self):  
         return self.nombres
     
@@ -173,6 +184,7 @@ class Eventos(models.Model):
     fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
     descripcion = models.TextField('Ubicación',null=True, blank=True)
     imagen = models.ImageField(upload_to='Eventos/',max_length=255, null=True, blank=True, verbose_name='Imagen')
+    estado = models.BooleanField(default = True, verbose_name = 'Estado')
 
 
     def natural_key(self):
@@ -232,15 +244,21 @@ class Reserva(models.Model):
     id = models.AutoField(primary_key = True)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=True)
     beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE, null=True, blank=True)
-    fecha = models.DateField(default=datetime.now, verbose_name='Fecha')
+    fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha')
+    fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha')
     estado = models.BooleanField(default = True, verbose_name = 'Estado')
+
 
     def toJSON(self):
         item = model_to_dict(self)
+        item['full_nombre'] = '{} / {}'.format(self.beneficiario.nombres, self.beneficiario.apellidos, self.beneficiario.documento )
         item['libro'] = self.libro.toJSON()
         item['beneficiario'] = self.beneficiario.toJSON()
-        item['fecha'] = self.fecha.strftime('%Y-%m-%d')
+        item['fecha9'] = self.fecha9.strftime('%Y-%m-%d')
+        item['fecha8'] = self.fecha8.strftime('%Y-%m-%d')
+
         return item
+    
 
 def reducir_cantidad_libro(sender,instance,**kwargs):
     libro = instance.libro

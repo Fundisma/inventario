@@ -1,0 +1,70 @@
+
+{% extends "partials/bodys.html" %}
+
+{% load static %}
+{% block contenido %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'index' %}">Inicio</a></li>
+          <li>Biblioteca</li>
+        </ol>
+        <h2>Biblioteca Municipal</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        {% comment %} <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".{{libro.genero.}}">App</li>
+              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
+        </div> {% endcomment %}
+        <div class="container-sm"><h4><u>Hechale un vistazo a nuestra Biblioteca</u></h4>
+          <p>Si quieres explorar nuevos mundos, historias, personajes únete a la magia de las bibliotecas. Para viajar no necesariamente requieres de un avión con un buen libro ya tienes, y si ese libro lo lees en una biblioteca pues viajas en primera clase. </p>
+        </div>
+        
+        
+        <br>
+        <div class="row portfolio-container">
+
+          
+            {% for libro in object_list %}
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ libro.imagen.url }}" class="img-fluid" style="width: 365px; height: 340px;"  alt="">
+              <div class="portfolio-info">
+                <span><h4>Detalles</h4></span>
+                <div class="portfolio-links">
+                  <a href="" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class=""></i></a>
+                  <a href="{% url 'principal:detalleLibro' libro.id  %}" title="More Details"><i class="bx bx-book-open"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+
+
+
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+  {% endblock contenido %}

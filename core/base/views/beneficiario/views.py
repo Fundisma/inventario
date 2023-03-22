@@ -39,10 +39,10 @@ class BeneficiarioListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Beneficiarios'
+        context['title'] = 'Listado de Usuarios'
         context['create_url'] = reverse_lazy('base:beneficiario_create')
         context['listado_url'] = reverse_lazy('base:beneficiario_listado')
-        context['entidad'] = 'Beneficiarios'
+        context['entidad'] = 'Usuarios'
         return context
 
 class BeneficiarioCreateView(CreateView):
@@ -73,8 +73,8 @@ class BeneficiarioCreateView(CreateView):
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de Beneficiarios'
-        context['entidad'] = 'Beneficiarios'
+        context['title'] = 'Creación de Usuarios'
+        context['entidad'] = 'Usuarios'
         context['listado_url'] = self.success_url
         context['action'] = 'add'
         return context
@@ -108,8 +108,8 @@ class BeneficiarioUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            context['title'] = 'Edición de Beneficiarios '
-            context['entidad'] = 'Beneficiarios'
+            context['title'] = 'Edición de Usuarios '
+            context['entidad'] = 'Usuarios'
             context['listado_url'] = self.success_url
             context['action'] = 'edit'
             return context
@@ -137,7 +137,7 @@ class BeneficiarioDeleteView(DeleteView):
             
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            context['title'] = 'Eliminación de Beneficiarios '
-            context['entidad'] = 'Beneficiarios'
+            context['title'] = 'Eliminación de Usuarios'
+            context['entidad'] = 'Usuarios'
             context['listado_url'] = self.success_url
             return context

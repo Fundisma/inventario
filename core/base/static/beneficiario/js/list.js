@@ -18,6 +18,7 @@ $(function () {
             {"data": "apellidos"},
             {"data": "tipoDocumento"},
             {"data": "documento"},
+            {"data": "tipo"},
             {"data": "cumpleaños"},
             {"data": "telefono"},
             {"data": "zona"},

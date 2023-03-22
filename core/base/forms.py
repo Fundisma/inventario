@@ -11,26 +11,39 @@ class ReservaForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('libro','beneficiario','fecha')
+        fields = ('libro','beneficiario','fecha9','fecha8')
         widgets = {
             'libro': Select(
                 attrs={
-                    'placeholder': 'Ingrese el titulo del Libro',
+                    'class': 'select2', 
+                    'style': 'width: 100%'
                 }
             ),
             'beneficiario': Select(
                 attrs={
-                    'placeholder': 'Ingrese el nombre del Evento',
+                    'class': 'select2', 
+                    'style': 'width: 100%'
                 }
             ),
-            'fecha': DateInput(
+            'fecha9': DateInput(
                 format='%Y-%m-%d',
                 attrs={
                     'value': datetime.now().strftime('%Y-%m-%d'),
                     'autocomplete': 'off',
                     'class': 'form-control datetimepicker-input',
-                    'id': 'fecha',
-                    'data-target': '#fecha',
+                    'id': 'fecha9',
+                    'data-target': '#fecha9',
+                    'data-toggle': 'datetimepicker',
+                }
+            ),
+             'fecha8': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha8',
+                    'data-target': '#fecha8',
                     'data-toggle': 'datetimepicker',
                 }
             ),
@@ -266,6 +279,11 @@ class ProductosForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
+            'tipo': Select(
+                attrs={
+                    'placeholder': 'Selecciona el tipo de beneficio',
+                }
+            ),
             
         }
 
@@ -324,6 +342,11 @@ class BeneficiarioForm(ModelForm):
             'telefono': NumberInput(
                 attrs={
                     'placeholder': 'Ingrese el número de teléfono',
+                }
+            ),
+            'tipo': Select(
+                attrs={
+                    'placeholder': 'Selecciona el tipo de beneficio',
                 }
             ),
             'zona': Select(

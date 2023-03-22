@@ -46,7 +46,7 @@ class SuministroListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Suministros'
+        context['title'] = 'Registro de Donaciones y Prestamos'
         context['create_url'] = reverse_lazy('base:suministro_create')
         context['listado_url'] = reverse_lazy('base:suministro_listado')
         context['entidad'] = 'Suministro'
@@ -116,8 +116,8 @@ class SuministroCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de un Suministro'
-        context['entidad'] = 'Suministro'
+        context['title'] = 'Creación de un Servicio'
+        context['entidad'] = 'Servicio'
         context['listado_url'] = self.success_url
         context['action'] = 'add'
         return context
@@ -169,6 +169,14 @@ class SuministroUpdateView(UpdateView):
                         det.save()
                         det.producto.stock -= det.cantidad
                         det.producto.save()
+            elif action == 'edit':
+                data = []
+                term = request.POST['term']
+                beneficiario = Beneficiario.objects.filter(Q(nombres__icontains=term) | Q(apellidos__icontains=term) | Q(documento__icontains=term))[0:10]
+                for i in beneficiario:
+                    item = i.toJSON()
+                    item['text'] = i.get_full_name()
+                    data.append(item)
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Exception as e:
@@ -187,8 +195,8 @@ class SuministroUpdateView(UpdateView):
         return data
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición de un Suministro'
-        context['entidad'] = 'Suministro'
+        context['title'] = 'Edición de un Servicio'
+        context['entidad'] = 'Servicio'
         context['listado_url'] = self.success_url
         context['action'] = 'edit'
         context['det'] = json.dumps(self.get_details_producto())
@@ -216,8 +224,8 @@ class SuministroDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de una Suministro'
-        context['entidad'] = 'Suministro'
+        context['title'] = 'Eliminación de una Servicio'
+        context['entidad'] = 'Servicio'
         context['listado_url'] = self.success_url
         return context
 

@@ -16,45 +16,142 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-8">
-                <h2><strong class="card-title">Eventos</strong></h2> 
+            <div class="col-md-12">
+                <h2><strong class="card-title pt-3"> &nbsp &nbsp &nbsp &nbsp&nbspEventos</strong></h2> 
+                
+                <div class=" text-right">               
+                    <a href="{% url 'base:eventos_create' %}" class="btn btn-primary  ">
+                        <i class="fas fa-plus"></i> &nbsp Agregar &nbsp
+                    </a> &nbsp &nbsp&nbsp&nbsp&nbsp
+                
+            </div>
             </div>
         </div>
 
     </div>
     <div id="calendar" class="card" style="padding: 30px;"></div>
-</div>
-<script>
+</div> <script>
     document.addEventListener('DOMContentLoaded', function(){
         var calendarUI = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarUI,{
+            
             headerToolbar: {
-                end: 'prev,next today',
-                
+                left: 'prev,next, today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             },
+            navLinks: true, // can click day/week names to navigate views
+      editable: false,
+      selectable: true,
+      nowIndicator: true,
+      dayMaxEvents: true, 
             events: [
                 {% for eventos in object_list %}
                     {
-                        title: "{{ eventos.nombre }}",
-                        start: '{{ eventos.fecha | date:"Y-m-d" }}',
+                        
+                        title: "{{ eventos.nombre }} _ {{ eventos.tipoEvento }}",
+                        start: '{{ eventos.fecha | date:"Y-m-d H:i:s"}}',
                         end:"{{ eventos.tipoEvento }}",
-
+                        
                         
                     },
-                {% endfor %}
-                {% for eventos in object_list %}
+                   {% endfor %}
+                {% for reserva in object_list %}
                     {
-                        title: "{{ eventos.tipoEvento }}",
-                        start: '{{ eventos.fecha | date:"Y-m-d" }}',
+                        title: "{{ reserva.libro.titulo}}",
+                        start: '{{ reerva.fecha | date:"Y-m-d" }}',
                         
                     },
                 {% endfor %}
+                {
+          title: 'Año Nuevo',
+          start: '2023-01-01'
+          
+        },
+        {
+          title: 'Día de los Reyes Magos',
+          start: '2023-01-09',
+          
+        },
+        {
+          title: 'Día de San José',
+          start: '2023-03-20'
+        },
+        {
+          title: 'Domingo de Ramos',
+          start: '2023-04-02'
+        },
+        {
+          title: 'Jueves Santo',
+          start: '2023-04-06'
+        },
+        {
+          title: 'Viernes Santo',
+          start: '2023-04-07'
+        },
+        {
+          title: 'Domingo de Resurrección',
+          start: '2023-04-09'
+        },
+        {
+          title: 'Día del Trabajo',
+          start: '2023-05-01'
+        },
+        {
+          title: 'Día de la Ascensión',
+          start: '2023-05-22'
+        },
+        {
+          title: 'Corpus Christi',
+          start: '2023-06-12'
+        },
+        {
+          title: 'Sagrado Corazón',
+          start: '2023-06-19'
+        },
+        {
+          title: 'San Pedro y San Pablo',
+          start: '2023-07-03'
+        },
+        {
+          title: 'Día de la Independencia',
+          start: '2023-07-20'
+        },
+        {
+          title: 'Batalla de Boyacá',
+          start: '2023-08-07'
+        },
+        {
+          title: 'La asunción de la Virgen',
+          start: '2023-08-21'
+        },
+        {
+          title: 'Día de la Raza',
+          start: '2023-10-16'
+        },
+        {
+          title: 'Todos los Santos',
+          start: '2023-11-06'
+        },
+        {
+          title: 'Independencia de Cartagena',
+          start: '2023-11-13'
+        },
+        {
+          title: 'Día de la Inmaculada Concepción',
+          start: '2023-12-08'
+        },
+        {
+          title: 'Navidad',
+          start: '2023-12-25'
+        },
             ]
+  
         });
         calendar.render();
         calendar.setOption('locale','es');
         
     });
-    
-</script>
+
+</script> 
 {% endblock %}

@@ -1,0 +1,64 @@
+{% extends "partials/bodys.html" %}
+
+{% load static %}
+{% block contenido %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'index' %}">Inicio</a></li>
+          <li>Biblioteca</li>
+        </ol>
+        <h2>Detalles del Libro</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+    
+      <div class="container">
+            {% csrf_token %}
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7 ">
+          
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide ">
+                  <img src="{{ object.imagen.url }}"style="width: 600px; height: 600px;  " alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-lg-5">
+         
+            <div class="portfolio-info">
+              <h3>{{ object.titulo }}</h3>
+              <ul>
+                <li><strong>Autor</strong>: {{ object.autor }}</li>
+                <li><strong>Genero</strong>: {{ object.genero}}</li>
+                <li><strong>Fecha de Publicación</strong>: {{ object.f_publicacion}}</li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Descripción</h2>
+              <p>
+               {{ object.descripcion}} </p>
+            </div>
+            <a href="{% url 'principal:biblioteca' %}" class="btn-get-started animate__animated animate__fadeInUp">Volver</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  {% endblock contenido %}

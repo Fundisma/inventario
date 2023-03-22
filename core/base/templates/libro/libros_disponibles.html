@@ -13,28 +13,35 @@
         <div class="row" style="margin: 30px;">
             <div class="col-md-12 text-center ">
                 <strong class="card-title">
-                    <h4>Listado de Libros Disponibles</h4>
-                </strong>
-                
-                <div class="contain"> 
-                    <div class="row">
-                        <div class="col-md-12 search">
-                            <form method="get">
-                                <div id="custom-search-input">
-                                    <div class="input-group col-md-12">
-                                        <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar}}">
-                                        <span class="input-group-list">
-                                            <i class="icon icon-search"></i>
-                                            <button type="submit" class="btn btn-primary">Buscar</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                    <h4>Libros Disponibles </h4>
+                </strong>        
             </div>
+            <!-- <div class="container">
+      <div class="row">
+        <div class="col-md-12 search">
+          <form method="get">
+              <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                  <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
+                  <span class="input-group-list">
+                    <i class="icon icon-search"></i>
+                    <button type="submit" class="boton btn-primary ">Buscar</button>
+                  </span>
+                </div>
+              </div>
+          </form>
         </div>
+      </div>
+    </div> -->
+            <div class="col-md-6 "></div>
+                <div class="col-md-6 search ">
+                    <form class="d-flex" method="get" action="{%  url 'base:search' %}">
+                        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value = "{{ request.GET.buscar }}" name="buscar">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+        </div>
+        
 
         <div class="container">
             <div class="row">
@@ -61,17 +68,12 @@
                 {% if page_obj.has_previous %}
                 <button type="button" class="btn btn-outline-primary"style="color:white;" disabled><a href="?page=1" >&laquo; Primera</a></button>
                 <button type="button" class="btn btn-outline-success" disabled><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></button>
-
-                
-                
                 {% endif %}
-
                 <span class="current">
                     Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
                 </span>
-
                 {% if page_obj.has_next %}
-                <button type="button" class="btn btn-outline-primary" disabled><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></button>
+                <button type="button" class="btn btn-outline-primary btn-link" disabled><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></button>
                 <button type="button" class="btn btn-outline-success" disabled><a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></button>
                 
                 
@@ -80,5 +82,7 @@
         </div>
     </div>
 </div>
-
+<script>
+    
+</script>
 {% endblock %}

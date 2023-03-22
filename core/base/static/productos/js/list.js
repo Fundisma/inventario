@@ -16,6 +16,8 @@ $(function () {
             {"data": "position"},
             {"data": "nombre"},
             {"data": "categoria.nombre"},
+            {"data": "tipo"},
+
             {"data": "imagen"},
             {"data": "stock"},
             {"data": "pvp"},
