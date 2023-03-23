@@ -16,7 +16,8 @@ $(function () {
             {"data": "position"},
             {"data": "libro.titulo"},
             {"data": "beneficiario.nombres"},
-            {"data": "fecha"},
+            {"data": "fecha9"},
+            {"data": "fecha8"},
             {"data": "id"},
         ],
         columnDefs: [

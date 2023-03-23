@@ -1,3 +1,4 @@
+
 from django.urls import path
 from core.base.views.reserva.views import *
 from core.base.views.eventos.views import *
@@ -26,11 +27,11 @@ urlpatterns = [
     path('eventos/delete/<int:pk>/', EventosDeleteView.as_view(), name='eventos_eliminar'),
     
     #Libro
+    path('search/',search,name="search"),
     path('libro/listado/',  LibroListView.as_view(), name='libro_listado'),
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
     path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
-    path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
     path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
     path('detalle-libro/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
 

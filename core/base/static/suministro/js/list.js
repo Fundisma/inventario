@@ -5,7 +5,6 @@ function format(d) {
     var html = '<table class="table">';
     html += '<thead class="thead-dark">';
     html += '<tr><th scope="col">Producto</th>';
-    html += '<th scope="col">Categoría</th>';
     html += '<th scope="col">Precio</th>';
     html += '<th scope="col">Cantidad</th>';
     html += '<th scope="col">Subtotal</th></tr>';
@@ -13,8 +12,7 @@ function format(d) {
     html += '<tbody>';
     $.each(d.det, function (key, value) {
         html+='<tr>'
-        html+='<td>'+value.producto.nombre+'</td>'
-        html+='<td>'+value.producto.categoria.nombre+'</td>'
+        html+='<td>'+value.producto.full_name+'</td>'
         html+='<td>'+value.precio+'</td>'
         html+='<td>'+value.cantidad+'</td>'
         html+='<td>'+value.subtotal+'</td>'
@@ -102,8 +100,7 @@ $(function () {
                     dataSrc: ""
                 },
                 columns: [
-                    {"data": "producto.nombre"},
-                    {"data": "producto.categoria.nombre"},
+                    {"data": "producto.full_name"},
                     {"data": "precio"},
                     {"data": "cantidad"},
                     {"data": "subtotal"},

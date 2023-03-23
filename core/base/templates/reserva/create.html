@@ -12,17 +12,25 @@
 
 
 {% block javascript %}
-     <script type="application/javascript">
+<script type="application/javascript">
         $(function () {
-            $('.select2').select2({
-                theme: "bootstrap4",
-                language: 'es'
-            });
-            $('#fecha').datetimepicker({
-                format: 'YYYY-MM-DD',
-                date: moment().format("YYYY-MM-DD"),
-                locale: 'es',
-            });
-        });
+        $('#fecha9').datetimepicker({
+                        format: 'YYYY-MM-DD',
+                        date: moment().format("YYYY-MM-DD"),
+                        locale: 'es',
+                    });
+                    $('#fecha8').datetimepicker({
+                        useCurrent: false,
+                        format: 'YYYY-MM-DD',
+                        date: moment().format("YYYY-MM-DD"),
+                        locale: 'es',
+                    });
+                    $("#fecha9").on("change.datetimepicker", function (e) {
+                        $('#fecha8').datetimepicker('minDate', e.date);
+                    });
+                    $("#fecha8").on("change.datetimepicker", function (e) {
+                        $('#fecha9').datetimepicker('maxDate', e.date);
+                    });
+                });
     </script>
 {% endblock %} 

@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator
 from core.user.models import User
 
 
@@ -152,6 +153,7 @@ class ListadoLibrosDisponibles(ListView):
     
     template_name = 'libro/libros_disponibles.html'
     
+
     def get_queryset(self):
         queryset = self.model.objects.filter(estado = True,cantidad__gte = 1)
         return queryset
@@ -161,12 +163,28 @@ class ListadoLibrosDisponibles(ListView):
             context['title'] = 'Libros Disponibles '
             context['entidad'] = 'Libros Disponibles'
             return context
-    
 
+# def search(request):
+#         queryset = request.GET.get("buscar")
+#         buscar = Libro.objects.filter(estado = True, cantidad__gte = 1)
+#         if queryset:
+#             buscar = Libro.objects.filter(
+#             Q(titulo__icontains = queryset)|
+#             Q(descripcion__icontains = queryset)
+#             ).distinct()
 
+#         paginator = Paginator(buscar,6)
+#         page = request.GET.get('page')
+#         buscar = paginator.get_page(page) 
+#         return render(request, 'libro/libros_disponibles.html',{'buscar':buscar})
 
+def search(request):
+    template_name = "libro/libros_disponibles.html"
+    buscar = request.GET["buscar"]
+    queryset = Libro.objects.filter(titulo__icontains=buscar)
+    context = {'queryset':queryset}
+    return render(request, template_name, context)
 
-    
 
 class DetalleLibroDisponible(DeleteView):
     model = Libro
@@ -176,6 +194,9 @@ class DetalleLibroDisponible(DeleteView):
         if self.get_object().cantidad > 0:
             return render(request,self.template_name,{'object':self.get_object()})
         return redirect('base:libros_disponibles')
+
+
+
 
 class RegistrarReserva(CreateView):
     model = Reserva

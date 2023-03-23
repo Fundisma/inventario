@@ -62,8 +62,8 @@ class ReporteSuministroView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Reporte de Suministros'
-        context['entidad'] = 'Reportes'
+        context['title'] = 'Reporte de Servicios'
+        context['entidad'] = 'Servicio'
         context['listado_url'] = reverse_lazy('suministro_reporte')
         context['form'] = ReporteForm()
         return context
