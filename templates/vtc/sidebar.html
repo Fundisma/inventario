@@ -1,10 +1,7 @@
 {% load static %}
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <a href="#" class="brand-link">
-        <img src="{% static 'img/logo.png' %}"
-             alt="AdminLTE Logo"
-             class="brand-image img-circle "
-             style="opacity: .8">
+        <img src="{% static 'img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle " style="opacity: .8">
         <span class="brand-text font-weight-light">Biblioteca Municipal</span>
     </a>
     <div class="sidebar">
@@ -16,130 +13,148 @@
                 <a href="#" class="d-block">{{ request.user.username }}</a>
             </div>
         </div>
-         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-header"><h5>Administración</h5></li>
-                <li class="nav-item">
-                    <a href="{% url 'user:user_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Listado de Usuarios
-                        </p>
-                    </a>
-                </li>
-                
-            </ul>
-        </nav>
-        
-         <nav class="mt-2">
-         
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
-                <li class="nav-header"><h5>Eventos</h5></li>
-                <li class="nav-item">
-                    <a href="{% url 'base:eventos_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-calendar"></i>
-                        <p>
-                            Listado 
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'base:calendar' %}" class="nav-link">
-                        <i class="nav-icon fas fa-calendar-day"></i>
-                        <p>
-                            Calendario
-                        </p>
-                    </a>
-                </li> 
-                
-                <li class="nav-header"><h5>Biblioteca</h5></li>
-                <li class="nav-item">
-                    <a href="{% url 'base:autor_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-pen-fancy"></i>
-                        <p>
-                            Autores
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'base:libro_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>
-                            Libros
-                        </p>
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="{% url 'base:libros_disponibles' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book-open"></i>
-                        <p>
-                            Libros Disponibles
-                        </p>
-                    </a>
-                </li>
-                 <li class="nav-item">
-                    <a href="{% url 'base:reserva_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-calendar-day"></i>
-                        <p>
-                            Libros Reservados
-                        </p>
-                    </a>
-                </li> 
-                
-                <li class="nav-header"><h5>Inventario</h5></li>
-                <li class="nav-item">
-                    <a href="{% url 'base:categoria_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Categorías
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'base:productos_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-boxes"></i>
-                        <p>
-                            Productos
-                        </p>
-                    </a>
-                </li>
-                
-            </ul>
-        </nav>
-            </ul>
-        </nav>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-header"><h5>Beneficiarios</h5></li>
-                
-                <li class="nav-item">
-                    <a href="{% url 'base:beneficiario_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-hand-holding-heart"></i>
-                        <p>
-                            Usuarios
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'base:suministro_listado' %}" class="nav-link">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>
-                            Registros
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'suministro_reporte' %}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-bar"></i>
-                        <p>
-                            Reporte Donaciones
-                        </p>
-                    </a>
-                </li>
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
+                                <p>
+                                    Administración
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <li class="nav-item">
+                                    <a href="{% url 'user:user_listado' %}" class="nav-link">
+                                        <i class="far fa-user nav-icon"></i>
+                                        <p>Listado de Usuarios</p>
+                                    </a>
+                                </li>
+                                </a>
+                        </li>
+                    </ul>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-icons"></i>
+                            <p>
+                                Eventos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a href="{% url 'base:eventos_listado' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-calendar"></i>
+                                    <p>Listado</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:calendar' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-calendar-day"></i>
+                                    <p>Calendario</p>
+                                </a>
+                            </li>
+                            </a>
+                    </li>
             </ul>
+            </li>
+            <li class="nav-item mt-2">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-swatchbook"></i>
+                    <p>
+                        Biblioteca
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{% url 'base:autor_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-pen-fancy"></i>
+                            <p>Autores</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:libro_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Libros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:libros_disponibles' %}" class="nav-link">
+                            <i class="nav-icon fas fa-book-open"></i>
+                            <p>Libros Disponibles</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:reserva_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-day"></i>
+                            <p>Libros Reservados</p>
+                        </a>
+                    </li>
+                    </a>
+            </li>
+            </ul>
+            </li>
+            <li class="nav-item mt-2">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Inventario
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{% url 'base:categoria_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>Categorías</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:productos_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>Productos</p>
+                        </a>
+                    </li>
+                    </a>
+            </li>
+            </ul>
+            </li>
+            <li class="nav-item mt-2">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-restroom"></i>
+                    <p>
+                        Beneficiarios
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{% url 'base:beneficiario_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-hand-holding-heart"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:suministro_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>Registros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'suministro_reporte' %}" class="nav-link">
+                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <p>Reporte Donaciones</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </nav>
-        
-        
+        </nav>
     </div>
 </aside>
+>
