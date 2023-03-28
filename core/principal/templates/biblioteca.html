@@ -4,53 +4,91 @@
 {% load static %}
 {% block contenido %}
 
-  <main id="main">
+<main id="main" data-aos="fade-in">
 
     <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumbs">
+      <div class="container">
+        <h2>Biblioteca</h2>
+        <p> Biblioteca Pública Douglas Hernán Bautista Tovar </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <section id="why-us" class="why-us">
       <div class="container">
 
-        <ol>
-          <li><a href="{% url 'index' %}">Inicio</a></li>
-          <li>Biblioteca</li>
-        </ol>
-        <h2>Biblioteca Municipal</h2>
+        <div class="section-title">
+          <h2>Biblioteca</h2>
+           </div>
+
+        <div class="row">
+
+          <div class="col-lg-4">
+            <div class="box">
+              <span>01</span>
+              <h4> Escoge</h4>
+              <p>Realiza una pequeña busqueda en la pagina y escoje el libro de tu preferencia.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>02</span>
+              <h4> Solicita</h4>
+              <p>Acercate a la biblioteca Municipal y solicita el prestado tu libro, recuerda llevar tu documento de identificación.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>03</span>
+              <h4> Disfruta</h4>
+              <p>Disfruta de la magia de la lectura, conoce nuevos mundos y aprende en grande.</p>
+            </div>
+          </div>
+
+        </div>
 
       </div>
-    </section><!-- End Breadcrumbs -->
+    </section><!-- End Whu Us Section -->
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+
+     <div class="container pt-5">
+      <div class="row">
+        <div class="col-md-12 search">
+          <form method="get">
+              <div id="custom-search-input">
+                <div class="input-group col-md-10" >
+                  <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
+                  <span class="input-group-list">
+                    
+                    <button type="submit" class="boton btn " style="background:#5fcfc6; color:white;"><i class="bi bi-search"></i>  Buscar</button>
+                  </span>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <section id="portfolio2" class="portfolio2">
       <div class="container">
 
-        {% comment %} <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".{{libro.genero.}}">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div> {% endcomment %}
-        <div class="container-sm"><h4><u>Échale un vistazo a nuestra Biblioteca</u></h4>
-          <p>Si quieres explorar nuevos mundos, historias, personajes únete a la magia de las bibliotecas. Para viajar no necesariamente requieres de un avión con un buen libro ya tienes, y si ese libro lo lees en una biblioteca pues viajas en primera clase. </p>
-        </div>
-        
+       
         
         <br>
-        <div class="row portfolio-container">
+        <div class="row portfolio2-container">
 
           
-            {% for libro in object_list %}
+            {% for libro in Libros %}
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{{ libro.imagen.url }}" class="img-fluid" style="width: 365px; height: 340px;"  alt="">
-              <div class="portfolio-info">
+          <div class="col-lg-4 col-md-6 portfolio2-item filter-app">
+            <div class="portfolio2-wrap">
+              <img src="{{ libro.imagen.url }}" class="img-fluid" style="width: 600px; height:450px;"  alt="">
+              <div class="portfolio2-info">
                 <span><h4>Detalles</h4></span>
-                <div class="portfolio-links">
-                  <a href="" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class=""></i></a>
+                <div class="portfolio2-links">
+                  <a href="" data-gallery="portfolio2Gallery" class="portfolio2-lightbox" title="Card 1"><i class=""></i></a>
                   <a href="{% url 'principal:detalleLibro' libro.id  %}" title="More Details"><i class="bx bx-book-open"></i></a>
                 </div>
               </div>
@@ -63,8 +101,28 @@
           
 
         </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
+        
+        <div class="row">
+     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+       <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-left">
+         {% if Libros.has_previous %}
+              <div class="clearfix">
+                <a href="?page={{ Libros.previous_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" style="background:#5fcfc6; color:white;"class="btn btn float-left more-btn"><i class="bx bx-chevron-left"></i>Anterior</a>
+              </div>
+         {% endif %}
+       </div>
+     </div>
+     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+       <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6  float-right">
+         {% if Libros.has_next %}
+              <div class="clearfix">
+                <a href="?page={{ Libros.next_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}"style="background:#5fcfc6; color:white;" class="btn btn float-right more-btn">Siguiente<i class="bx bx-chevron-right"></i></a>
+              </div>
+         {% endif %}
+       </div>
+     </div>
+   </div>
+       
+    </section><!-- End portfolio2 Section -->
+</main>
   {% endblock contenido %}

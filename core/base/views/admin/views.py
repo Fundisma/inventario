@@ -8,6 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
 
+class AyudaView(TemplateView):
+    template_name = 'ayuda.html'
 
 class AdminView(TemplateView):
     template_name = 'admin.html'

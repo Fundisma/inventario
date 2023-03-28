@@ -87,9 +87,9 @@ class EventosForm(ModelForm):
                 }
             ),
              'fecha': DateTimeInput(
-                format='%Y-%m-%d',
+                format='%Y-%m-%d %H:%M:%S',
                 attrs={
-                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'value': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                     'autocomplete': 'off',
                     'class': 'form-control datetimepicker-input',
                     'id': 'fecha',
@@ -97,7 +97,12 @@ class EventosForm(ModelForm):
                     'data-toggle': 'datetimepicker',
                 }
              ),
-            'descripcion': TextInput(
+            'descripcion': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese la descripción del Evento',
+                }
+            ),
+            'ubicacion': TextInput(
                 attrs={
                     'placeholder': 'Ingrese la ubicación del Evento',
                 }

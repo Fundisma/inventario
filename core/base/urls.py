@@ -13,6 +13,7 @@ from core.base.views.admin.views import *
 app_name = 'base'
 
 urlpatterns = [
+
     #Reserva
     path('reserva/listado/',  ReservaListView.as_view(), name='reserva_listado'),
     path('reserva/add/', ReservaCreateView.as_view(), name='reserva_create'),
@@ -27,7 +28,6 @@ urlpatterns = [
     path('eventos/delete/<int:pk>/', EventosDeleteView.as_view(), name='eventos_eliminar'),
     
     #Libro
-    path('search/',search,name="search"),
     path('libro/listado/',  LibroListView.as_view(), name='libro_listado'),
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
@@ -61,6 +61,7 @@ urlpatterns = [
 
     #inicio admin
     path('admin/', AdminView.as_view(), name='admin'), 
+    path('ayuda/',  AyudaView.as_view(), name='ayuda'),
 
     #Suministro
     path('suministro/listado/', SuministroListView.as_view(), name='suministro_listado'),

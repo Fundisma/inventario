@@ -3,23 +3,17 @@
 {% load static %}
 {% block contenido %}
 
-  <main id="main">
+ <main id="main" data-aos="fade-in">
 
     <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
+    <div class="breadcrumbs">
       <div class="container">
-
-        <ol>
-          <li><a href="{% url 'index' %}">Inicio</a></li>
-          <li>Biblioteca</li>
-        </ol>
-        <h2>Detalles del Libro</h2>
-
+        <h2>Biblioteca</h2>
+        <p> Biblioteca Pública Douglas Hernán Bautista Tovar </p>
       </div>
-    </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
+    </div><!-- End Breadcrumbs -->
+    <!-- ======= portfolio22 Details Section ======= -->
+    <section id="portfolio2-details" class="portfolio2-details">
     
       <div class="container">
             {% csrf_token %}
@@ -28,7 +22,7 @@
 
           <div class="col-lg-7 ">
           
-            <div class="portfolio-details-slider swiper">
+            <div class="portfolio2-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
                 <div class="swiper-slide ">
                   <img src="{{ object.imagen.url }}"style="width: 600px; height: 600px;  " alt="">
@@ -39,7 +33,7 @@
 
         <div class="col-lg-5">
          
-            <div class="portfolio-info">
+            <div class="portfolio2-info">
               <h3>{{ object.titulo }}</h3>
               <ul>
                 <li><strong>Autor</strong>: {{ object.autor }}</li>
@@ -47,17 +41,17 @@
                 <li><strong>Fecha de Publicación</strong>: {{ object.f_publicacion}}</li>
               </ul>
             </div>
-            <div class="portfolio-description">
+            <div class="portfolio2-description">
               <h2>Descripción</h2>
               <p>
                {{ object.descripcion}} </p>
             </div>
-            <a href="{% url 'principal:biblioteca' %}" class="btn-get-started animate__animated animate__fadeInUp">Volver</a>
+            <a href="{% url 'principal:libros' %}" class="btn-get-started animate__animated animate__fadeInUp">Volver</a>
           </div>
         </div>
 
       </div>
-    </section><!-- End Portfolio Details Section -->
+    </section><!-- End portfolio2 Details Section -->
 
   </main><!-- End #main -->
 
