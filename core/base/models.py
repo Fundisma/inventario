@@ -182,7 +182,8 @@ class Eventos(models.Model):
     nombre =models.CharField(max_length = 50, blank = False, null = False)
     tipoEvento =models.CharField(max_length = 50, blank = False, null = False)
     fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
-    descripcion = models.TextField('Ubicación',null=True, blank=True)
+    ubicacion = models.CharField('Ubicación',max_length = 50,null=True, blank=True)
+    descripcion = models.TextField('Descripción',null=True, blank=True)
     imagen = models.ImageField(upload_to='Eventos/',max_length=255, null=True, blank=True, verbose_name='Imagen')
     estado = models.BooleanField(default = True, verbose_name = 'Estado')
 

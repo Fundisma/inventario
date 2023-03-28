@@ -178,12 +178,7 @@ class ListadoLibrosDisponibles(ListView):
 #         buscar = paginator.get_page(page) 
 #         return render(request, 'libro/libros_disponibles.html',{'buscar':buscar})
 
-def search(request):
-    template_name = "libro/libros_disponibles.html"
-    buscar = request.GET["buscar"]
-    queryset = Libro.objects.filter(titulo__icontains=buscar)
-    context = {'queryset':queryset}
-    return render(request, template_name, context)
+
 
 
 class DetalleLibroDisponible(DeleteView):

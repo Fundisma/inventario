@@ -1,195 +1,364 @@
-
 {% extends "partials/bodys.html" %}
-
 {% load static %}
-
 {% block contenido %}
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container">
-      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-        <div class="carousel-inner" role="listbox">
-
-          <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(static/img/slide/slide-1.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Bienvenido a la<span> Biblioteca</span></h2>
-                <p class="animate__animated animate__fadeInUp"> “Siempre imaginé que el Paraíso sería algún tipo de biblioteca.”Jorge Luis Borges.</p>
-                
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(static/img/slide/slide-2.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated fanimate__adeInDown">Aprende y<span> Diviértete</span></h2>
-                <p class="animate__animated animate__fadeInUp">“En Egipto, a las bibliotecas se las llamaba el tesoro de los remedios del alma. En efecto, curábase en ellas de la ignorancia, la más peligrosa de las enfermedades y el origen de todas las demás”.Jacques BenigneBossuet</p>
-                
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(static/img/slide/slide-3.jpg)">
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Conoce nuestra<span> Historia</span></h2>
-                <p class="animate__animated animate__fadeInUp">"Los pueblos que olvidan su historia están condenados a repetirla"</p>
-                
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
-
-        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-      </div>
+<!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-content-center align-items-center">
+    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Aprende hoy,<br>Lidera mañana</h1>
+      <h2>Somos una Biblioteca dedicada al conocimiento.</h2>
+      
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= Featured Section ======= -->
-    <section id="featured" class="featured">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="icon-box">
-              <i class="bi bi-card-checklist"></i>
-              <h3><a href="">Lorem Ipsum</a></h3>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <i class="bi bi-bar-chart"></i>
-              <h3><a href="">Dolor Sitema</a></h3>
-              <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-            </div>
-          </div>
-          <div class="col-lg-4 mt-4 mt-lg-0">
-          
-            <div class="icon-box">
-              <i class="bi bi-binoculars"></i>
-              <h3><a href=""></a></h3>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-         
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Featured Section -->
-
     <!-- ======= About Section ======= -->
-
-    
     <section id="about" class="about">
-      <div class="container">
-      
-      
-        <div class="row">
-          <div class="col-lg-6">
-            <img src="" class="img-fluid" alt="">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row ">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="{% static 'img/libros/dsk-biblioteca1.jpg' %}" class="img-fluid" alt="">
           </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+          <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 content">
+            <h3>La Biblioteca</h3>
+            <p class="fst-italic  pt-3">
+              Uno de los motivos por los cuales utilizar las bibliotecas públicas, y que nos gustaría destacar, es que necesitan nuestro apoyo. El recorte de presupuestos y el cierre de bibliotecas es una tónica general en los últimos años. Bien es cierto que en esos mismos años las visitas han crecido muchísimo, al igual que el número de socios. Y es que las bibliotecas públicas siempre son necesarias y de utilidad.
             </p>
-           
-            <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
+            
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
+              La función que desempeñan las bibliotecas para garantizar el acceso a los conocimientos.
             </p>
+
           </div>
         </div>
-        
 
       </div>
     </section><!-- End About Section -->
 
-    <!-- ======= servicios Section ======= -->
-    <section id="servicios" class="servicios">
+    <!-- ======= Popular Courses Section ======= -->
+    <section id="popular-courses" class="courses">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Libros</h2>
+          <p>Libros Populares</p>
+        </div>
+
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <img src="{% static 'img/libros/grey.jpg' %}" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>El Retrato de Dorian Gray</h4>
+                </div>
+
+                <h3><a href="course-details.html">Novela de Oscar Wilde</a></h3>
+                <p>El libro narra la historia de un joven llamado Dorian Gray, poseedor de una belleza física extraordinaria.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                 
+                  <div class="trainer-rank d-flex align-items-center">
+                    <p>Ambientada en: Reino Unido</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <img src="{% static 'img/libros/soy2.webp' %}" style="width: 1000px; height: 448px;" alt="" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Soy Leyenda</h4>
+                </div>
+
+                <h3><a href="course-details.html">Novela de Richard Matheson
+</a></h3>
+                <p>Soy leyenda termina cuando el Teniente Coronel Robert Neville ha encontrado la cura para acabar con el horrible virus que ha transformado a los humanos en vampiros.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                 
+                  <div class="trainer-rank d-flex align-items-center">
+                    <p>Ambientada en: Los Angeles</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <img src="{% static 'img/libros/Cubierta-La-Voragine-2018-PLASTIFICADO-MATE-681x1024.jpg' %}"  style="width: 600px; height:450px;" alt="" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>La Vorágine</h4>
+                </div>
+
+                <h3><a href="course-details.html">Novela de José Eustasio Rivera
+</a></h3>
+                <p>¿Cuál es el tema principal de La vorágine?
+La vorágine es una novela insigne de la literatura colombiana e hispanoamericana que trata de manera singular el tema de la violencia.</p>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                 
+                  <div class="trainer-rank d-flex align-items-center">
+                    <p>Ambientada en: Yopal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+        </div>
+
+      </div>
+    </section><!-- End Popular Courses Section -->
+
+    {% comment %} <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
       <div class="container">
 
+        <div class="row counters">
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Students</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Courses</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Events</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Trainers</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section --> {% endcomment %}
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container" data-aos="fade-up">
+
         <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content">
+              <h3>Importancia de los Géneros Literarios</h3>
+              <p>
+                La literatura como una forma de arte es una de las más antiguas siendo que existe desde tiempos inmemoriales en los que los pueblos escribían sus historias y sus hazañas para la prosperidad.  </p>
+              <div class="text-center">
+                <a href="about.html" class="more-btn">Continuar Leyendo <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-receipt"></i>
+                    <h4>Género Lírico</h4>
+                    <p>Se usa para expresar sentimientos y para ello, emplea generalmente el verso.</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-cube-alt"></i>
+                    <h4>Género Narrativo</h4>
+                    <p>Se utiliza para presentar historias realizadas por personajes que pueden intervenir mediante el diálogo.</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-images"></i>
+                    <h4>Género Dramático</h4>
+                    <p>Es aquel destinado a ser presentado ante unos espectadores.</p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-lg-3 col-md-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #ffbb2c;"></i>
+              <h3><a href="">Novelas</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #5578ff;"></i>
+              <h3><a href="">Cuentos</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #e80368;"></i>
+              <h3><a href="">fabulas</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #e361ff;"></i>
+              <h3><a href="">Leyendas</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #47aeff;"></i>
+              <h3><a href="">Comedia</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+              <h3><a href="">Ensayos</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #11dbcf;"></i>
+              <h3><a href="">Biografias</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #4233ff;"></i>
+              <h3><a href="">Articulos Cientificos</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #b2904f;"></i>
+              <h3><a href="">Enciclopedias</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #b20969;"></i>
+              <h3><a href="">Drama</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #ff5828;"></i>
+              <h3><a href="">Oratorias</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #29cc61;"></i>
+              <h3><a href="">Sonetos</a></h3>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Features Section -->
+
+    <!-- ======= Trainers Section ======= -->
+    <section id="trainers" class="trainers">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Eventos</h2>
+          <p>Eventos del Mes</p>
+        </div>
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            <div class="member">
+              <img src="{% static 'img/libros/Conoce_a_los_Gillman.png' %}"  class="img-fluid" alt="">
+              <div class="member-content">
+                <h4>Cine</h4>
+                <span>krakens y sirenas</span>
+                <p>
+                 La película sigue a la dulce Ruby Gillian de 16 años, quien está desesperada por encajar en Oceanside High, pero pronto descubrirá que está destinada a sobresalir y a heredar el trono de su abuela, la Reina Guerrera de los Siete Mares.
+                </p>
+                
+              </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <img src="{% static 'img/libros/descarga12.jpg' %}" style="width: 500px; height:448px;" class="img-fluid" alt="">
+              <div class="member-content">
+                <h4>Arte</h4>
+                <span>Pintura en Lienzo</span>
+                <p>
+                  Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
+                </p>
+                
+              </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-slideshow"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <img src="{% static 'img\libros\el-juego-de-ajedrez-y-los-ninos-lg.jpg' %}" style="width: 500px; height:448px;"class="img-fluid" alt="">
+              <div class="member-content">
+                <h4>Ajedrez</h4>
+                <span>Juego de ajedrez</span>
+                <p>
+                ¿Cuál es la edad ideal para aprender ajedrez?
+La edad recomendada para empezar son los cinco años. Requiere constancia y práctica diaria, y poco a poco se consigue rapidez en los movimientos y fortaleza mental. Quienes lo practican dicen sentirse muy bien.
+                </p>
+                
+              </div>
             </div>
           </div>
 
         </div>
 
       </div>
-    </section><!-- End servicios Section -->
+    </section><!-- End Trainers Section -->
 
-    
+    <!-- ======= clients2 Section ======= -->
+    <section id="clients2" class="clients2">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Asociados</h2>
+          <p>Asociados Políticos</p>
+        </div>
+
+        <div class="clients2-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="{% static 'img/descarga (2).jpg' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/36926.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/36936.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/descarga.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/39850.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/coofisam.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/hobo.jpg' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'img/gobernacion.jpg' %}" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End clients2 Section -->
+
   </main><!-- End #main -->
- 
+
+
 {% endblock contenido %}

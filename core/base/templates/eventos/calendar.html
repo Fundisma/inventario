@@ -49,7 +49,7 @@
                 {% for eventos in object_list %}
                     {
                         
-                        title: "{{ eventos.nombre }} _ {{ eventos.tipoEvento }}",
+                        title: "{{ eventos.nombre }} _ {{ eventos.tipoEvento }} _ {{ eventos.ubicacion }}",
                         start: '{{ eventos.fecha | date:"Y-m-d H:i:s"}}',
                         end:"{{ eventos.tipoEvento }}",
                         

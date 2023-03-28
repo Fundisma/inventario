@@ -17,7 +17,7 @@ $(function () {
             {"data": "nombre"},
             {"data": "tipoEvento"},
             {"data": "fecha"},
-            {"data": "descripcion"},
+            {"data": "ubicacion"},
             {"data": "imagen"},
             {"data": "id"},
         ],
