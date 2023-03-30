@@ -1,21 +1,22 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.base.models import Categoria
 from core.base.forms import CategoriaForm
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 from django.contrib.auth.decorators import login_required
 
 
-class CategoriaListView(ListView):
+class CategoriaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Categoria
     template_name = 'categoria/listado.html'
-
+    permission_required = 'view_categoria'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -45,15 +46,15 @@ class CategoriaListView(ListView):
         context['entidad'] = 'Categorías'
         return context
 
-class CategoriaCreateView(CreateView):
+class CategoriaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
     model = Categoria
     form_class = CategoriaForm
     template_name = 'categoria/create.html'
     success_url = reverse_lazy('base:categoria_listado')
+    permission_required = 'add_categoria'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -79,15 +80,15 @@ class CategoriaCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class CategoriaUpdateView(UpdateView):
+class CategoriaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     model = Categoria
     form_class = CategoriaForm
     template_name = 'categoria/create.html'
     success_url = reverse_lazy('base:categoria_listado')
+    permission_required = 'change_categoria'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -114,14 +115,14 @@ class CategoriaUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class CategoriaDeleteView(DeleteView):
+class CategoriaDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Categoria
     template_name = 'categoria/delete.html'
     success_url = reverse_lazy('base:categoria_listado')
+    permission_required = 'delete_categoria'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)

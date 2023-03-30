@@ -8,14 +8,16 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 
-class AutorListView(ListView):
+class AutorListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Autor
     template_name = 'autor/listado.html'
+    permission_required = 'view_autor'
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -45,15 +47,15 @@ class AutorListView(ListView):
         context['entidad'] = 'Autor'
         return context
 
-class AutorCreateView(CreateView):
+class AutorCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
     model = Autor
     form_class = AutorForm
     template_name = 'autor/create.html'
     success_url = reverse_lazy('base:autor_listado')
+    permission_required = 'add_autor'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -79,15 +81,15 @@ class AutorCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class AutorUpdateView(UpdateView):
+class AutorUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     model = Autor
     form_class = AutorForm
     template_name = 'autor/create.html'
     success_url = reverse_lazy('base:autor_listado')
+    permission_required = 'change_autor'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -114,14 +116,14 @@ class AutorUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class AutorDeleteView(DeleteView):
+class AutorDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Autor
     template_name = 'autor/delete.html'
     success_url = reverse_lazy('base:autor_listado')
+    permission_required = 'delete_autor'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)

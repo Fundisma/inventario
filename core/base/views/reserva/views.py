@@ -6,14 +6,15 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 
-class ReservaListView(ListView):
+class ReservaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListView):
     model = Reserva
     template_name = 'reserva/listado.html'
-
+    permission_required = 'view_reserva'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -43,15 +44,15 @@ class ReservaListView(ListView):
         context['entidad'] = 'Reserva'
         return context
 
-class ReservaCreateView(CreateView):
+class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,CreateView):
     model = Reserva
     form_class = ReservaForm
     template_name = 'reserva/create.html'
     success_url = reverse_lazy('base:reserva_listado')
+    permission_required = 'add_reserva'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -77,15 +78,15 @@ class ReservaCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class ReservaUpdateView(UpdateView):
+class ReservaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,UpdateView):
     model = Reserva
     form_class = ReservaForm
     template_name = 'reserva/create.html'
     success_url = reverse_lazy('base:reserva_listado')
+    permission_required = 'change_reserva'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -112,14 +113,14 @@ class ReservaUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class ReservaDeleteView(DeleteView):
+class ReservaDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin,DeleteView):
     model = Reserva
     template_name = 'reserva/delete.html'
     success_url = reverse_lazy('base:reserva_listado')
+    permission_required = 'delete_reserva'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)

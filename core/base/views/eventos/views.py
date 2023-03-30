@@ -6,14 +6,15 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 
-class EventosListView(ListView):
+class EventosListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Eventos
     template_name = 'eventos/listado.html'
-
+    permission_required = 'view_eventos'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -44,12 +45,11 @@ class EventosListView(ListView):
         context['entidad'] = 'Eventos'
         return context
 
-class CalendarView(ListView):
+class CalendarView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Eventos
     template_name = 'eventos/calendar.html'
-
+    permission_required = 'view_eventos'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -79,15 +79,15 @@ class CalendarView(ListView):
         return context
     
 
-class EventosCreateView(CreateView):
+class EventosCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
     model = Eventos
     form_class = EventosForm
     template_name = 'eventos/create.html'
     success_url = reverse_lazy('base:eventos_listado')
+    permission_required = 'add_eventos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -113,15 +113,15 @@ class EventosCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class EventosUpdateView(UpdateView):
+class EventosUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     model = Eventos
     form_class = EventosForm
     template_name = 'eventos/create.html'
     success_url = reverse_lazy('base:eventos_listado')
+    permission_required = 'change_eventos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -148,10 +148,11 @@ class EventosUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class EventosDeleteView(DeleteView):
+class EventosDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Eventos
     template_name = 'eventos/delete.html'
     success_url = reverse_lazy('base:eventos_listado')
+    permission_required = 'delete_eventos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)

@@ -2,7 +2,6 @@ from datetime import timedelta
 from django.db import models
 from datetime import datetime
 from core.base.choices import gender_choices
-from core.user.models import User
 from django.forms import model_to_dict
 from inventario.settings import MEDIA_URL, STATIC_URL
 from core.base.choices import gender_choices

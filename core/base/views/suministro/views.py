@@ -3,6 +3,8 @@ from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 from core.base.forms import SuministroForm
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, View
@@ -17,12 +19,11 @@ from django.template import Context
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
-class SuministroListView(ListView):
+class SuministroListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListView):
     model = Suministro
     template_name = 'suministro/listado.html'
-    
+    permission_required = 'view_suministro'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -53,15 +54,15 @@ class SuministroListView(ListView):
         return context
 
 
-class SuministroCreateView(CreateView):
+class SuministroCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,CreateView):
     model = Suministro
     form_class = SuministroForm
     template_name = 'suministro/create.html'
     success_url = reverse_lazy('base:suministro_listado')
+    permission_required = 'add_suministro'
     url_redirect = success_url
     
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -122,15 +123,15 @@ class SuministroCreateView(CreateView):
         context['action'] = 'add'
         return context
     
-class SuministroUpdateView(UpdateView):
+class SuministroUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,UpdateView):
     model = Suministro
     form_class = SuministroForm
     template_name = 'suministro/create.html'
     success_url = reverse_lazy('base:suministro_listado')
+    permission_required = 'change_suministro'
     url_redirect = success_url
     
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -203,13 +204,13 @@ class SuministroUpdateView(UpdateView):
         return context
 
 
-class SuministroDeleteView(DeleteView):
+class SuministroDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin,DeleteView):
     model = Suministro
     template_name = 'suministro/delete.html'
     success_url = reverse_lazy('base:suministro_listado')
+    permission_required = 'delete_suministro'
     url_redirect = success_url
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)

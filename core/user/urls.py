@@ -15,6 +15,8 @@ urlpatterns = [
     path('delete/<int:pk>/', UserDeleteView.as_view(), name='user_delete'),
     path('profile/', UserProfileView.as_view(), name='user_profile'),
     path('password/', UserPasswordView.as_view(), name='user_password'),
+    path('change/group/<int:pk>/', UserChangeGroup.as_view(), name='user_change_group'),
+
 
 
 
