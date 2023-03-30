@@ -12,14 +12,15 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
 from core.user.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 
-class LibroListView(ListView):
+class LibroListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Libro
     template_name = 'libro/listado.html'
-
+    permission_required = 'view_libro'
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -49,15 +50,15 @@ class LibroListView(ListView):
         context['entidad'] = 'Libro'
         return context
 
-class LibroCreateView(CreateView):
+class LibroCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,CreateView):
     model = Libro
     form_class = LibroForm
     template_name = 'libro/create.html'
     success_url = reverse_lazy('base:libro_listado')
+    permission_required = 'add_libro'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -83,15 +84,15 @@ class LibroCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class LibroUpdateView(UpdateView):
+class LibroUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     model = Libro
     form_class = LibroForm
     template_name = 'libro/create.html'
     success_url = reverse_lazy('base:libro_listado')
+    permission_required = 'change_libro'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -118,14 +119,14 @@ class LibroUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class LibroDeleteView(DeleteView):
+class LibroDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Libro
     template_name = 'libro/delete.html'
     success_url = reverse_lazy('base:libro_listado')
+    permission_required = 'delete_libro'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -147,7 +148,7 @@ class LibroDeleteView(DeleteView):
             return context
 
 
-class ListadoLibrosDisponibles(ListView):
+class ListadoLibrosDisponibles( ListView):
     model = Libro
     paginate_by = 6
     

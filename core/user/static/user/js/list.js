@@ -21,15 +21,28 @@ $(function () {
             {"data": "username"},
             {"data": "date_joined"},
             {"data": "image"},
+            {"data": "groups"},
             {"data": "id"},
         ],
         columnDefs: [
+            {
+                targets: [-3],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    return '<img src="'+row.image+'" class="img-fluid mx-auto d-block" style="width: 45px; height: 40px;">';
+                }
+            },
             {
                 targets: [-2],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '<img src="'+row.image+'" class="img-fluid mx-auto d-block" style="width: 45px; height: 40px;">';
+                    var html = '';
+                    $.each(row.groups, function (key, value){
+                        html += '<span class="badge badge-success">' + value.name + '</span>';
+                    });
+                    return html;
                 }
             },
             {

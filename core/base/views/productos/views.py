@@ -8,14 +8,16 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from core.base.mixins import ValidatePermissionRequiredMixin
 
 
-class ProductosListView(ListView):
+class ProductosListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     model = Productos
     template_name = 'productos/listado.html'
+    permission_required = 'view_productos'
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -45,15 +47,15 @@ class ProductosListView(ListView):
         context['entidad'] = 'Productos'
         return context
 
-class ProductosCreateView(CreateView):
+class ProductosCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
     model = Productos
     form_class = ProductosForm
     template_name = 'productos/create.html'
     success_url = reverse_lazy('base:productos_listado')
+    permission_required = 'add_productos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -79,15 +81,15 @@ class ProductosCreateView(CreateView):
         context['action'] = 'add'
         return context
 
-class ProductosUpdateView(UpdateView):
+class ProductosUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     model = Productos
     form_class = ProductosForm
     template_name = 'productos/create.html'
     success_url = reverse_lazy('base:productos_listado')
+    permission_required = 'change_productos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -114,14 +116,14 @@ class ProductosUpdateView(UpdateView):
             context['action'] = 'edit'
             return context
 
-class ProductosDeleteView(DeleteView):
+class ProductosDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
     model = Productos
     template_name = 'productos/delete.html'
     success_url = reverse_lazy('base:productos_listado')
+    permission_required = 'delete_productos'
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -142,26 +144,3 @@ class ProductosDeleteView(DeleteView):
             context['listado_url'] = self.success_url
             return context
 
-#class ProductosFormView(FormView):
- #   form_class = ProductosForm
-  #  template_name = 'productos/create.html'
-   # success_url = reverse_lazy('base:productos_listado')
-
-    #def form_valid(self, form):
-     #   print(form)
-        
-      #  return super().form_valid(form)
-    
-   # def form_invalid(self, form):
-       # print(form.is_valid())
-      #  print(form.errors)
-
-     #   return super().form_invalid(form)
-
-    #def get_context_data(self, **kwargs):
-           # context = super().get_context_data(**kwargs)
-          #  context['title'] = 'Form │ Productos'
-         #   context['entidad'] = 'Productos'
-        #    context['listado_url'] = reverse_lazy('base:productos_listado')
-        #    context['action'] = 'add'
-            #return context
