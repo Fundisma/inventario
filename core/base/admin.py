@@ -5,6 +5,7 @@ from core.base.models import*
 class ReservaAdmin(admin.ModelAdmin):
     form = ReservaForm
 # Register your models here.
+admin.site.register(Lector)
 admin.site.register(Libro)
 admin.site.register(Autor)
 admin.site.register(Eventos)

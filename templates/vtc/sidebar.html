@@ -30,7 +30,7 @@
                                 <li class="nav-item">
                                     <a href="{% url 'user:user_listado' %}" class="nav-link">
                                         <i class="far fa-user nav-icon"></i>
-                                        <p>Listado de Usuarios</p>
+                                        <p>Usuarios</p>
                                     </a>
                                 </li>
                                 </a>
@@ -49,7 +49,7 @@
                             <li class="nav-item">
                                 <a href="{% url 'base:eventos_listado' %}" class="nav-link">
                                     <i class="nav-icon fas fa-calendar"></i>
-                                    <p>Listado de Eventos</p>
+                                    <p>Eventos</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -74,20 +74,26 @@
                     <li class="nav-item">
                         <a href="{% url 'base:autor_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-pen-fancy"></i>
-                            <p>Listado de Autores</p>
+                            <p>Autores</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'base:libro_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
-                            <p>Listado de Libros</p>
+                            <p>Libros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:lector_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Lectores</p>
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a href="{% url 'base:reserva_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-calendar-day"></i>
-                            <p>Libros Libros Reservados</p>
+                            <p>Reservas</p>
                         </a>
                     </li>
                     </a>
@@ -112,7 +118,7 @@
                     <li class="nav-item">
                         <a href="{% url 'base:productos_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-boxes"></i>
-                            <p>Listado de Productos</p>
+                            <p>Productos</p>
                         </a>
                     </li>
                     </a>
@@ -131,19 +137,19 @@
                     <li class="nav-item">
                         <a href="{% url 'base:beneficiario_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-hand-holding-heart"></i>
-                            <p>Listado de Usuarios</p>
+                            <p>Usuarios</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'base:suministro_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-list"></i>
-                            <p>Registros</p>
+                            <p>Registro de Suministros</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'suministro_reporte' %}" class="nav-link">
                             <i class="nav-icon fas fa-chart-bar"></i>
-                            <p>Reporte Donaciones</p>
+                            <p>Reporte de Donaciones</p>
                         </a>
                     </li>
                 </ul>

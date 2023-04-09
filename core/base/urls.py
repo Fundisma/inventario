@@ -6,6 +6,7 @@ from core.base.views.libro.views import *
 from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
 from core.base.views.productos.views import *
+from core.base.views.lector.views import *
 from core.base.views.beneficiario.views import *
 from core.base.views.suministro.views import *
 from core.base.views.admin.views import *
@@ -33,7 +34,7 @@ urlpatterns = [
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
     path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
     path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
-    path('detalle-libro/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
+    path('detalle-libro/pdf/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
 
     #Autor
     path('autor/listado/',  AutorListView.as_view(), name='autor_listado'),
@@ -70,4 +71,9 @@ urlpatterns = [
     path ('suministro/edit/<int:pk>/',SuministroUpdateView.as_view(), name='suministro_edit'),
     path('suministro/pdf/<int:pk>/',SuministroPdfView.as_view(), name='suministro_pdf'),
     
+    #Lector
+    path('Lector/listado/', LectorListView.as_view(), name='lector_listado'),
+    path('Lector/add/', LectorCreateView.as_view(), name='lector_create'),
+    path('Lector/edit/<int:pk>/', LectorUpdateView.as_view(), name='lector_editar'),
+    path('Lector/delete/<int:pk>/', LectorDeleteView.as_view(), name='lector_eliminar'),
 ]

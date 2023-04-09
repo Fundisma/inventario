@@ -1,0 +1,32 @@
+{% extends 'listado.html' %}
+{% load static %}
+
+{% block head_list %}
+    <script src="{% static 'lector/js/list.js' %}"></script>
+   
+{% endblock head_list %}
+
+{% block columnas %}
+    <tr>
+        <th scope="col" style="width: 15%;">Id</th>
+        <th scope="col" style="width: 15%;">Nombres</th>
+        <th scope="col" style="width: 15%;">Apellidos</th>
+        <th scope="col" style="width: 10%;">Tipo de Documento</th>
+        <th scope="col" style="width: 10%;">Número de Documento</th>
+        <th scope="col" style="width: 15%;">Fecha de Nacimiento</th>
+        <th scope="col" style="width: 10%;">Teléfono</th>
+        <th scope="col" style="width: 10%;">Zona</th>
+        <th scope="col" style="width: 15%;">Dirección</th>
+        <th scope="col" style="width: 10%;">Barrio</th>
+        <th scope="col" style="width: 15%;">Genero</th>
+        <th scope="col" style="width: 20%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block filas %}
+  
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

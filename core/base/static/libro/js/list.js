@@ -16,8 +16,7 @@ $(function () {
             {"data": "position"},
             {"data": "titulo"},
             {"data": "autor.nombres"},
-            {"data": "f_publicacion"},
-            {"data": "genero"},
+            
             {"data": "cantidad"},
             {"data": "imagen"},
             {"data": "id"},
@@ -48,7 +47,9 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     var buttons = '<a href="/base/libro/edit/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
-                    buttons += '<a href="/base/libro/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
+                    buttons += '<a href="/base/libro/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>' ;
+                    buttons += '<a href="/base/detalle-libro/pdf/' + row.id + '/" class="btn btn-info btn-xs btn-flat "> <i class="fas fa-eye"></i></a> ';
+
                     return buttons;
                 }
             },

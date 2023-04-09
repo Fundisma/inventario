@@ -73,9 +73,8 @@ class Beneficiario(models.Model):
     cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
     telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
     class Tipo(models.TextChoices):
-        FUNCIONARIO='Funcionario', ('Funcionario')
         LECTOR='Beneficiario', ('Beneficiario')
-    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.FUNCIONARIO, verbose_name="Tipo")
+    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.LECTOR, verbose_name="Tipo")
     
     class Zona(models.TextChoices):
         URBANA='Urbana',('Urbana')
@@ -239,24 +238,70 @@ class Libro(models.Model):
     
 
 
+class Lector(models.Model):
+    nombres = models.CharField(max_length=150, verbose_name='Nombres')
+    apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
+    class TipoDocumento(models.TextChoices):
+        RC='Registro Civil', ('Registro Civil')
+        TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
+        CC='Cédula de Ciudadanía', ('Cédula de Ciudadanía')
+        CE='Cédula de Extrajería', ('Cédula de Extrajería')
+        CR='Contraseña Registraduría', ('Contraseña Registraduria')
+    tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
+    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
+    cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
+    telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
+    class Zona(models.TextChoices):
+        URBANA='Urbana',('Urbana')
+        RURAL='Rural',('Rural')
+    zona=models.CharField(max_length=25, choices=Zona.choices, default=Zona.URBANA, verbose_name="Zona")
+    direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
+    barrio = models.CharField(max_length=150, verbose_name='Barrio',null=True,blank=True)
+    class Gender(models.TextChoices):
+        FEMENINO='Femenino',('Femenino')
+        MASCULINO='Masculino',('Masculino')
+    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Genero")
+    
+    def __str__(self):
+        return self.nombres
+    
+    def get_full_name(self):
+        return '{} {} / {}'.format(self.nombres, self.apellidos, self.documento)
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['cumpleaños'] = self.cumpleaños.strftime('%Y-%m-%d')
+        return item
+
+    class Meta:
+        verbose_name = 'Lector'
+        verbose_name_plural = 'Lectores'
+        ordering = ['id']
+
+
+    
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=True)
-    beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE, null=True, blank=True)
+    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True, blank=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha')
+    class Estados(models.TextChoices):
+        ENTREGADO='Entregado',('Entregado')
+        RECIBIDO='Recibido',('Ricibido')
+    estados=models.CharField(max_length=25, choices=Estados.choices, default=Estados.ENTREGADO, verbose_name="Estados")
     estado = models.BooleanField(default = True, verbose_name = 'Estado')
 
 
     def toJSON(self):
         item = model_to_dict(self)
-        item['full_nombre'] = '{} / {}'.format(self.beneficiario.nombres, self.beneficiario.apellidos, self.beneficiario.documento )
+        item['full_nombre'] = '{} / {}'.format(self.lector.nombres, self.lector.apellidos, self.lector.documento )
         item['libro'] = self.libro.toJSON()
-        item['beneficiario'] = self.beneficiario.toJSON()
+        item['lector'] = self.lector.toJSON()
         item['fecha9'] = self.fecha9.strftime('%Y-%m-%d')
         item['fecha8'] = self.fecha8.strftime('%Y-%m-%d')
-
+        
         return item
     
 
@@ -265,18 +310,10 @@ def reducir_cantidad_libro(sender,instance,**kwargs):
     if libro.cantidad > 0:
         libro.cantidad = libro.cantidad - 1
         libro.save()
-
-def validar_creacion_reserva(sender,instance,**kwargs):
-    libro = instance.libro
-    if libro.cantidad < 1:
-        raise Exception("No puede realizar esta reserva")
     
 
 post_save.connect(reducir_cantidad_libro,sender = Reserva)
-#pre_save.connect(validar_creacion_reserva,sender = Reserva)
 
 
 
 
-
-    
