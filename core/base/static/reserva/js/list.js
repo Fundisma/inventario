@@ -15,12 +15,27 @@ $(function () {
         columns: [
             {"data": "position"},
             {"data": "libro.titulo"},
-            {"data": "beneficiario.nombres"},
+
+            {"data": "lector.nombres"},
+
             {"data": "fecha9"},
             {"data": "fecha8"},
+            {"data": "estados"},
             {"data": "id"},
         ],
         columnDefs: [
+            {
+                targets: [-2],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    if(data){
+                        return '<span class="badge badge-info ">'+data+'</span>'
+                    }
+                    
+                    
+                }
+            },
             {
                 targets: [-1],
                 class: 'text-center',

@@ -32,15 +32,15 @@
           </form>
         </div>
       </div>
-    </div> -->
-            <div class="col-md-6 "></div>
+    {% comment %} </div> -->
+            {% comment %} <div class="col-md-6 "></div>
                 <div class="col-md-6 search ">
                     <form class="d-flex" method="get" action="{%  url 'base:search' %}">
                         <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" value = "{{ request.GET.buscar }}" name="buscar">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>
-        </div>
+        </div> {% endcomment %} 
         
 
         <div class="container">

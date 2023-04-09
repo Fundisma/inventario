@@ -1,5 +1,5 @@
 from core.base.forms import ReservaForm
-from core.base.models import Reserva
+from core.base.models import Libro, Reserva
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
@@ -8,6 +8,7 @@ from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.base.mixins import ValidatePermissionRequiredMixin
+from core.user.models import User
 
 
 class ReservaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListView):
@@ -58,6 +59,16 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
 
     def post(self, request, *args, **kwargs):
         data = {}
+        if request:
+            libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
+            user = User.objects.filter(id = request.POST.get('user')).first()
+            if libro and user:
+                if libro.cantidad > 0:
+                    nueva_reserva = self.model(
+                        libro = libro,
+                        user = user
+                    )
+                    nueva_reserva.save()
         try:
             action = request.POST['action'] 
             if action == 'add':

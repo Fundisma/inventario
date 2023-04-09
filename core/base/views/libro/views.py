@@ -198,6 +198,9 @@ class RegistrarReserva(CreateView):
     model = Reserva
     success_url = reverse_lazy('base:libros_disponibles')
 
+    def get_queryset(self):
+        return self.model.objects.filter(estado = True,user  = self.request.user)
+
     def post(self,request,*args,**kwargs):
         data = {}
         if request:

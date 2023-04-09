@@ -40,7 +40,7 @@ $(function () {
                 render: function (data, type, row) {
                     var html = '';
                     $.each(row.groups, function (key, value){
-                        html += '<span class="badge badge-success">' + value.name + '</span>';
+                        html += '<span class="badge badge-primary">' + value.name + '</span>';
                     });
                     return html;
                 }

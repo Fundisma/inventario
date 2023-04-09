@@ -1,5 +1,5 @@
 from django.forms import *
-from core.base.models import Categoria, Eventos, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
+from core.base.models import Categoria, Eventos, Lector, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
 from django.core.exceptions import ValidationError
 from datetime import datetime
 
@@ -11,7 +11,7 @@ class ReservaForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('libro','beneficiario','fecha9','fecha8')
+        fields = ('libro','lector','fecha9','fecha8','estados')
         widgets = {
             'libro': Select(
                 attrs={
@@ -19,7 +19,7 @@ class ReservaForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            'beneficiario': Select(
+            'lector': Select(
                 attrs={
                     'class': 'select2', 
                     'style': 'width: 100%'
@@ -45,6 +45,11 @@ class ReservaForm(ModelForm):
                     'id': 'fecha8',
                     'data-target': '#fecha8',
                     'data-toggle': 'datetimepicker',
+                },
+            ),
+            'estados': Select(
+                attrs={
+                    
                 }
             ),
         }
@@ -424,4 +429,85 @@ class SuministroForm(ModelForm):
                 'class': 'form-control',
             }),
         }
-    
+
+class LectorForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombres'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = Lector
+        fields = '__all__'
+        widgets = {
+            'nombres': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus nombres',
+                }
+            ),
+            'apellidos': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese sus apellidos',
+                }
+            ),
+            'tipoDocumento': Select(
+                attrs={
+                    'placeholder': '',
+                }
+            ),
+            'documento': NumberInput(
+                attrs={
+                    'placeholder': 'Ingrese su numero de documento',
+                }
+            ),
+             'cumpleaños': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'cumpleaños',
+                    'data-target': '#cumpleaños',
+                    'data-toggle': 'datetimepicker',
+                }
+            ),
+            'telefono': NumberInput(
+                attrs={
+                    'placeholder': 'Ingrese el número de teléfono',
+                }
+
+            ),
+            'zona': Select(
+                attrs={
+                    'placeholder': 'Ingrese la zona',
+                }
+            ),
+            'direccion': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese su dirección',
+                }
+            ),
+            'barrio': TextInput(
+                attrs={
+                    'placeholder': 'barrio',
+                }
+            ),
+            
+            'gender': Select(
+            attrs={
+                    }
+            ),
+        }
+        exclude = ['user_updated', 'user_creation']
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
