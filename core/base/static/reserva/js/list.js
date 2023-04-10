@@ -15,12 +15,10 @@ $(function () {
         columns: [
             {"data": "position"},
             {"data": "libro.titulo"},
-
             {"data": "lector.nombres"},
-
             {"data": "fecha9"},
             {"data": "fecha8"},
-            {"data": "estados"},
+            {"data": "estado"},
             {"data": "id"},
         ],
         columnDefs: [
@@ -29,11 +27,10 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    if(data){
-                        return '<span class="badge badge-info ">'+data+'</span>'
+                    if(data > 0){
+                        return '<span class="badge badge-success">'+'Entregado'+'</span>'
                     }
-                    
-                    
+                    return '<span class="badge badge-info">'+'Recibido'+'</span>'
                 }
             },
             {

@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from core.base.mixins import ValidatePermissionRequiredMixin
 from core.user.models import User
 
-
 class ReservaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListView):
     model = Reserva
     template_name = 'reserva/listado.html'
@@ -43,50 +42,6 @@ class ReservaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListVi
         context['create_url'] = reverse_lazy('base:reserva_create')
         context['listado_url'] = reverse_lazy('base:reserva_listado')
         context['entidad'] = 'Reserva'
-        return context
-
-class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,CreateView):
-    model = Reserva
-    form_class = ReservaForm
-    template_name = 'reserva/create.html'
-    success_url = reverse_lazy('base:reserva_listado')
-    permission_required = 'add_reserva'
-    url_redirect = success_url
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        if request:
-            libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
-            user = User.objects.filter(id = request.POST.get('user')).first()
-            if libro and user:
-                if libro.cantidad > 0:
-                    nueva_reserva = self.model(
-                        libro = libro,
-                        user = user
-                    )
-                    nueva_reserva.save()
-        try:
-            action = request.POST['action'] 
-            if action == 'add':
-                form = self.get_form()
-                data = form.save()
-            else:
-                data['error'] = 'No ha ingresado a ninguna opción'
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data)
-
-        
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de Reserva '
-        context['entidad'] = 'Reserva'
-        context['listado_url'] = self.success_url
-        context['action'] = 'add'
         return context
 
 class ReservaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,UpdateView):
@@ -151,3 +106,46 @@ class ReservaDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Dele
             context['entidad'] = 'Reserva'
             context['listado_url'] = self.success_url
             return context
+
+class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,CreateView):
+    model = Reserva
+    form_class = ReservaForm
+    template_name = 'reserva/create.html'
+    success_url = reverse_lazy('base:reserva_listado')
+    permission_required = 'add_reserva'
+    url_redirect = success_url
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        if request:
+            libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
+            user = User.objects.filter(id = request.POST.get('user')).first()
+            if libro and user:
+                if libro.cantidad > 0:
+                    nueva_reserva = self.model(
+                        libro = libro,
+                        user = user
+                    )
+                    nueva_reserva.save()
+        try:
+            action = request.POST['action'] 
+            if action == 'add':
+                form = self.get_form()
+                data = form.save()
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data)   
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Creación de Reserva '
+        context['entidad'] = 'Reserva'
+        context['listado_url'] = self.success_url
+        context['action'] = 'add'
+        return context

@@ -47,7 +47,7 @@ class SuministroListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Lis
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Registro de Donaciones y Prestamos'
+        context['title'] = 'Registro de Donaciones'
         context['create_url'] = reverse_lazy('base:suministro_create')
         context['listado_url'] = reverse_lazy('base:suministro_listado')
         context['entidad'] = 'Suministro'

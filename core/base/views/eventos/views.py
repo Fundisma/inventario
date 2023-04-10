@@ -39,7 +39,7 @@ class EventosListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListV
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Eventoss '
+        context['title'] = 'Listado de Eventos '
         context['create_url'] = reverse_lazy('base:eventos_create')
         context['listado_url'] = reverse_lazy('base:eventos_listado')
         context['entidad'] = 'Eventos'

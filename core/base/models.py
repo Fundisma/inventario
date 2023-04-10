@@ -3,6 +3,7 @@ from django.db import models
 from datetime import datetime
 from core.base.choices import gender_choices
 from django.forms import model_to_dict
+from core.user.models import User
 from inventario.settings import MEDIA_URL, STATIC_URL
 from core.base.choices import gender_choices
 from django.db.models.signals import post_save,pre_save
@@ -28,12 +29,11 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
-    class Tipo(models.TextChoices):
-        DONACION='Donación', ('Donación')
-        PRESTAMO='Prestamo', ('Prestamo')
-    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.DONACION, verbose_name="Tipo de Producto")
+    
     stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock')
     pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio")
+    estado = models.BooleanField(default = True, verbose_name = 'Donación(si) Préstamo(No)')
+
 
     def __str__(self):
         return self.nombre
@@ -183,7 +183,7 @@ class Eventos(models.Model):
     ubicacion = models.CharField('Ubicación',max_length = 50,null=True, blank=True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
     imagen = models.ImageField(upload_to='Eventos/',max_length=255, null=True, blank=True, verbose_name='Imagen')
-    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+    estado = models.BooleanField(default = True, verbose_name = 'Activo(Si) Inactivo(No)')
 
 
     def natural_key(self):
@@ -283,15 +283,12 @@ class Lector(models.Model):
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=True)
     lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True, blank=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha')
-    class Estados(models.TextChoices):
-        ENTREGADO='Entregado',('Entregado')
-        RECIBIDO='Recibido',('Ricibido')
-    estados=models.CharField(max_length=25, choices=Estados.choices, default=Estados.ENTREGADO, verbose_name="Estados")
-    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+    estado = models.BooleanField(default = True, verbose_name = ' Entregada(Si) Recibido(No)')
 
 
     def toJSON(self):
@@ -308,9 +305,9 @@ class Reserva(models.Model):
 def reducir_cantidad_libro(sender,instance,**kwargs):
     libro = instance.libro
     if libro.cantidad > 0:
-        libro.cantidad = libro.cantidad - 1
+        libro.cantidad = libro.cantidad - 0
         libro.save()
-    
+
 
 post_save.connect(reducir_cantidad_libro,sender = Reserva)
 

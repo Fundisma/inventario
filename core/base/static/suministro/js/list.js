@@ -46,6 +46,7 @@ $(function () {
                 "defaultContent": ''
             },
             {"data": "beneficiario.nombres"},
+            {"data": "beneficiario.tipo"},
             {"data": "fecha_registro"},
             {"data": "total"},
             {"data": "id"},

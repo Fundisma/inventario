@@ -11,7 +11,7 @@ class ReservaForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('libro','lector','fecha9','fecha8','estados')
+        fields = ('libro','lector','fecha9','fecha8','estado')
         widgets = {
             'libro': Select(
                 attrs={
@@ -47,17 +47,15 @@ class ReservaForm(ModelForm):
                     'data-toggle': 'datetimepicker',
                 },
             ),
-            'estados': Select(
-                attrs={
-                    
-                }
+            'estado': NullBooleanSelect(
+               
             ),
+           
         }
     def clean_libro(self):
         libro = self.cleaned_data['libro']
         if libro.cantidad < 1:
             raise ValidationError('No se puede reservar este libro, deben existir unidades disponibles.')
-
         return libro
 
     def save(self, commit=True):
@@ -112,6 +110,9 @@ class EventosForm(ModelForm):
                     'placeholder': 'Ingrese la ubicación del Evento',
                 }
             ),
+            'estado': NullBooleanSelect(
+               
+            ),
             
         }
 
@@ -135,7 +136,7 @@ class LibroForm(ModelForm):
 
     class Meta:
         model = Libro
-        fields =('titulo','autor','f_publicacion','genero','descripcion','imagen','cantidad')
+        fields =('titulo','autor','f_publicacion','genero','descripcion','imagen','cantidad','estado')
         widgets = {
             'titulo': TextInput(
                 attrs={
@@ -163,6 +164,9 @@ class LibroForm(ModelForm):
                 attrs={
                     'placeholder': 'Ingrese el Genero del Libro',
                 }
+            ),
+            'estado': NullBooleanSelect(
+               
             ),
             
         }
@@ -289,10 +293,9 @@ class ProductosForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            'tipo': Select(
-                attrs={
-                    'placeholder': 'Selecciona el tipo de beneficio',
-                }
+            
+            'estado': NullBooleanSelect(
+               
             ),
             
         }

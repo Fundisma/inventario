@@ -8,8 +8,6 @@
     <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="{% static 'lib/adminlte-3.0.4/plugins/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'libro/js/reservas_vencidas.js' %}"></script>
-    <script src="{% static 'libro/js/libro.js' %}"></script>
 
 {% endblock %}
 
@@ -19,7 +17,7 @@
         <div class="row" style="margin: 30px;">
             <div class="col-md-12  ">
                 <strong class="card-title">
-                    <h2>{{ object }}</h2>
+                    <h2>{{ user }}</h2>
                 </strong>
             </div>
         </div>
@@ -33,7 +31,7 @@
                     
                     </div>
                             <div class="col-md-6 ">
-                                <p class="card-text"><strong>Autor</strong></p>{{ object.autor }}<hr>
+                                <p class="card-text"><strong>Nombre</strong></p>{{ user.first_name }}<hr>
                                 <p class="card-text"><strong>Publicado el:</strong></p> {{ object.f_publicacion }}<hr>
                                   <p class="card-text"><strong>Genero</strong></p>{{ object.genero}}<hr>
                                   <p class="card-text"><strong>Descripcion</strong></p>
