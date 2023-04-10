@@ -31,7 +31,7 @@ class Productos(models.Model):
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
     class Tipo(models.TextChoices):
         DONACION='Donación', ('Donación')
-        PRESTAMO='Prestamo', ('Prestamo')
+        PRESTAMO='Préstamo', ('Préstamo')
     tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.DONACION, verbose_name="Tipo de Producto")
     stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock')
     pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio")
