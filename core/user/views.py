@@ -3,12 +3,11 @@ from django.http import JsonResponse
 from django.contrib.auth import update_session_auth_hash
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import Group
-
+from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView, View
-
 from core.user.forms import UserForm, UserProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from core.user.models import User
@@ -232,3 +231,5 @@ class UserChangeGroup(LoginRequiredMixin,View):
         except:
             pass
         return HttpResponseRedirect(reverse_lazy('base:admin'))
+    
+

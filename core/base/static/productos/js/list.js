@@ -16,16 +16,15 @@ $(function () {
             {"data": "position"},
             {"data": "nombre"},
             {"data": "categoria.nombre"},
-            {"data": "tipo"},
-
             {"data": "imagen"},
             {"data": "stock"},
             {"data": "pvp"},
+            {"data": "estado"},
             {"data": "id"},
         ],
         columnDefs: [
             {
-                targets: [-4],
+                targets: [-5],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
@@ -33,7 +32,7 @@ $(function () {
                 }
             },
             {
-                targets: [-3],
+                targets: [-4],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
@@ -44,11 +43,22 @@ $(function () {
                 }
             },
             {
-                targets: [-2],
+                targets: [-3],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
                     return '$'+parseFloat(data).toFixed(2);
+                }
+            },
+            {
+                targets: [-2],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    if(data > 0){
+                        return '<span class="badge badge-success">'+'Donación'+'</span>'
+                    }
+                    return '<span class="badge badge-info">'+'Préstamo'+'</span>'
                 }
             },
             {
