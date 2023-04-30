@@ -117,7 +117,7 @@ class SuministroCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,C
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de un Servicio'
+        context['title'] = 'Creación de una Donacion'
         context['entidad'] = 'Servicio'
         context['listado_url'] = self.success_url
         context['action'] = 'add'
@@ -146,7 +146,7 @@ class SuministroUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,U
                 producto = Productos.objects.filter(stock__gt=0)
                 if len(term):
                     producto = producto.filter(nombre__icontains=term)
-                for i in producto.exclude(id__in=ids_exclude)[0:10]:
+                for i in producto.exclude(id__in=ids_exclude)[0:5]:
                     item = i.toJSON()
                     item['text'] = i.nombre
                     data.append(item)
@@ -225,7 +225,7 @@ class SuministroDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin,D
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de una Servicio'
+        context['title'] = 'Eliminación de la Donación'
         context['entidad'] = 'Servicio'
         context['listado_url'] = self.success_url
         return context

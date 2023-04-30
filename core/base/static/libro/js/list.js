@@ -16,9 +16,9 @@ $(function () {
             {"data": "position"},
             {"data": "titulo"},
             {"data": "autor.nombres"},
-            
+            {"data": "categoriaLibro.nombre"},
             {"data": "cantidad"},
-            {"data": "imagen"},
+            {"data": "estado"},
             {"data": "id"},
         ],
         columnDefs: [
@@ -38,9 +38,13 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '<img src="'+data+'" class="img-fluid d-block mx-auto" style="width: 40px; height: 40px;">';
+                    if(data > 0){
+                        return '<span class="badge badge-primary"><i class="fas fa-eye"></i></span>'
+                    }
+                    return '<span class="badge badge-danger"><i class="fas fa-eye-slash"></i></span>'
                 }
             },
+            
             {
                 targets: [-1],
                 class: 'text-center',

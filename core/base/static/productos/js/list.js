@@ -47,7 +47,7 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    return '$'+parseFloat(data).toFixed(2);
+                    return '$'+parseFloat(data).toFixed(3);
                 }
             },
             {
@@ -58,7 +58,7 @@ $(function () {
                     if(data > 0){
                         return '<span class="badge badge-success">'+'Donación'+'</span>'
                     }
-                    return '<span class="badge badge-info">'+'Préstamo'+'</span>'
+                    return '<span class="badge badge-info">'+'Inventario'+'</span>'
                 }
             },
             {
