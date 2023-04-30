@@ -155,11 +155,4 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
         context['action'] = 'add'
         return context
     
-def reducir_cantidad_libro(sender,instance,**kwargs):
-    libro = instance.libro
-    if libro.cantidad > 1:
-        libro.cantidad = libro.cantidad - 1
-        libro.save()
-
-post_save.connect(reducir_cantidad_libro,sender = Reserva)
-
+    
