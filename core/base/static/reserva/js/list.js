@@ -26,11 +26,15 @@ $(function () {
                 targets: [-2],
                 class: 'text-center',
                 orderable: false,
+                
                 render: function (data, type, row) {
                     if(data > 0){
-                        return '<span class="badge badge-success">'+'Entregado'+'</span>'
+                       // return '<select name="lenguajes" id="lang"><option value="true">Si</option><option value="False">No</option></select>'
+                        //return '<span class="badge badge-success">'+'Entregado'+'</span>'
                     }
-                    return '<span class="badge badge-info">'+'Recibido'+'</span>'
+                    return '<select  id="estadoReserva"><option value="1">Si</option><option value="0">No</option></select>'
+
+                    //return '<span class="badge badge-info">'+'Recibido'+'</span>'
                 }
             },
             {
@@ -45,7 +49,13 @@ $(function () {
             },
         ],
         initComplete: function (settings, json) {
-
+            const input=document.getElementById("estadoReserva");
+    input.addEventListener("change",(event)=>{
+        console.log("eventoAqui",event.target.value)
+        console.log(typeof(event.target.value))
+        
+    })
         }
     });
+    
 });

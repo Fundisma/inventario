@@ -5,7 +5,9 @@ from core.base.views.eventos.views import *
 from core.base.views.libro.views import *
 from core.base.views.autor.views import *
 from core.base.views.categoria.views import *
+from core.base.views.categoriaLibro.views import *
 from core.base.views.productos.views import *
+from core.base.views.inventario.views import *
 from core.base.views.lector.views import *
 from core.base.views.beneficiario.views import *
 from core.base.views.suministro.views import *
@@ -33,7 +35,6 @@ urlpatterns = [
     path('libro/add/', LibroCreateView.as_view(), name='libro_create'),
     path('libro/edit/<int:pk>/', LibroUpdateView.as_view(), name='libro_editar'),
     path('libro/delete/<int:pk>/', LibroDeleteView.as_view(), name='libro_eliminar'),
-    path('libros-disponibles/',  ListadoLibrosDisponibles.as_view(), name='libros_disponibles'),
     path('detalle-libro/pdf/<int:pk>/',  DetalleLibroDisponible.as_view(), name='detalle_libro'),
 
     #Autor
@@ -48,11 +49,23 @@ urlpatterns = [
     path('categoria/edit/<int:pk>/', CategoriaUpdateView.as_view(), name='categoria_editar'),
     path('categoria/delete/<int:pk>/', CategoriaDeleteView.as_view(), name='categoria_eliminar'),
 
+    #categoriaLibro
+    path('categoriaLibro/listado/',  CategoriaLibroListView.as_view(), name='categoriaLibro_listado'),
+    path('categoriaLibro/add/', CategoriaLibroCreateView.as_view(), name='categoriaLibro_create'),
+    path('categoriaLibro/edit/<int:pk>/', CategoriaLibroUpdateView.as_view(), name='categoriaLibro_editar'),
+    path('categoriaLibro/delete/<int:pk>/', CategoriaLibroDeleteView.as_view(), name='categoriaLibro_eliminar'),
+
     #productos
     path('productos/listado/', ProductosListView.as_view(), name='productos_listado'),
     path('productos/add/', ProductosCreateView.as_view(), name='productos_create'),
     path('productos/edit/<int:pk>/', ProductosUpdateView.as_view(), name='productos_editar'),
     path('productos/delete/<int:pk>/', ProductosDeleteView.as_view(), name='productos_eliminar'),
+
+    #inventario
+    path('inventario/listado/', InventarioListView.as_view(), name='inventario_listado'),
+    path('inventario/add/', InventarioCreateView.as_view(), name='inventario_create'),
+    path('inventario/edit/<int:pk>/', InventarioUpdateView.as_view(), name='inventario_editar'),
+    path('inventario/delete/<int:pk>/', InventarioDeleteView.as_view(), name='inventario_eliminar'),
 
     #Beneficiarios
     path('beneficiario/listado/', BeneficiarioListView.as_view(), name='beneficiario_listado'),

@@ -1,9 +1,10 @@
 from core.base.forms import ReservaForm
-from core.base.models import Libro, Reserva
+from core.base.models import Lector, Libro, Reserva
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from properties.p import Property
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -56,7 +57,7 @@ class ReservaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Upda
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
-
+    
     def post(self, request, *args, **kwargs):
         data = {}
         try:
@@ -71,6 +72,8 @@ class ReservaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Upda
             data['error'] = str(e)
         return JsonResponse(data)
 
+    
+    
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['title'] = 'Edición de Reserva '
@@ -123,11 +126,13 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
         data = {}
         if request:
             libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
+            lector = Lector.objects.filter(id = request.POST.get('lector')).first()
             user = User.objects.filter(id = request.POST.get('user')).first()
             if libro and user:
-                if libro.cantidad > 0:
+                if libro.cantidad > 1:
                     nueva_reserva = self.model(
                         libro = libro,
+                        lector = lector,
                         user = user
                     )
                     nueva_reserva.save()
@@ -149,3 +154,5 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
         context['listado_url'] = self.success_url
         context['action'] = 'add'
         return context
+    
+    

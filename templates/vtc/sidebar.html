@@ -78,6 +78,7 @@
                             <p>Autores</p>
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="{% url 'base:libro_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
@@ -105,7 +106,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-edit"></i>
                     <p>
-                        Inventario
+                        Productos
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -119,7 +120,13 @@
                     <li class="nav-item">
                         <a href="{% url 'base:productos_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-boxes"></i>
-                            <p>Productos</p>
+                            <p>Donaciones</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'base:inventario_listado' %}" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>Inventario</p>
                         </a>
                     </li>
                     </a>
@@ -144,7 +151,7 @@
                     <li class="nav-item">
                         <a href="{% url 'base:suministro_listado' %}" class="nav-link">
                             <i class="nav-icon fas fa-list"></i>
-                            <p>Registro de Suministros</p>
+                            <p>Registro de Donaciones</p>
                         </a>
                     </li>
                     <li class="nav-item">

@@ -1,5 +1,5 @@
 from django.forms import *
-from core.base.models import Categoria, Eventos, Lector, Productos, Beneficiario, Reserva, Suministro, Libro, Autor
+from core.base.models import Categoria, Eventos, Lector, Productos, Beneficiario, Reserva, Suministro, Libro, Autor, categoriaLibro, inventario
 from django.core.exceptions import ValidationError
 from datetime import datetime
 
@@ -8,7 +8,7 @@ class ReservaForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['libro'].widget.attrs['autofocus'] = True
-
+        
     class Meta:
         model = Reserva
         fields = ('libro','lector','fecha9','fecha8','estado')
@@ -16,13 +16,18 @@ class ReservaForm(ModelForm):
             'libro': Select(
                 attrs={
                     'class': 'select2', 
-                    'style': 'width: 100%'
+                    'style': 'width: 100%',
+
                 }
             ),
             'lector': Select(
+            
                 attrs={
                     'class': 'select2', 
-                    'style': 'width: 100%'
+                    'style': 'width: 100%',
+                    
+                    
+
                 }
             ),
             'fecha9': DateInput(
@@ -34,6 +39,9 @@ class ReservaForm(ModelForm):
                     'id': 'fecha9',
                     'data-target': '#fecha9',
                     'data-toggle': 'datetimepicker',
+                    
+            
+
                 }
             ),
              'fecha8': DateInput(
@@ -45,6 +53,8 @@ class ReservaForm(ModelForm):
                     'id': 'fecha8',
                     'data-target': '#fecha8',
                     'data-toggle': 'datetimepicker',
+                   
+
                 },
             ),
             'estado': NullBooleanSelect(
@@ -82,11 +92,13 @@ class EventosForm(ModelForm):
             'nombre': TextInput(
                 attrs={
                     'placeholder': 'Ingrese el nombre del Evento',
+                    'style':'text-transform: capitalize;'
                 }
             ),
             'tipoEvento': TextInput(
                 attrs={
                     'placeholder': 'Ingrese el tipo de Evento',
+                    'style':'text-transform: capitalize;'
                 }
             ),
              'fecha': DateTimeInput(
@@ -108,6 +120,7 @@ class EventosForm(ModelForm):
             'ubicacion': TextInput(
                 attrs={
                     'placeholder': 'Ingrese la ubicación del Evento',
+                    'style':'text-transform: capitalize;'
                 }
             ),
             'estado': NullBooleanSelect(
@@ -136,14 +149,21 @@ class LibroForm(ModelForm):
 
     class Meta:
         model = Libro
-        fields =('titulo','autor','f_publicacion','genero','descripcion','imagen','cantidad','estado')
+        fields =('titulo','autor','categoriaLibro','f_publicacion','genero','descripcion','imagen','cantidad','estado')
         widgets = {
             'titulo': TextInput(
                 attrs={
                     'placeholder': 'Ingrese el titulo del Libro',
+                    'style':'text-transform: capitalize;'
                 }
             ),
             'autor': Select(
+                attrs={
+                    'class': 'select2', 
+                    'style': 'width: 100%'
+                }
+            ),
+            'categoriaLibro': Select(
                 attrs={
                     'class': 'select2', 
                     'style': 'width: 100%'
@@ -163,6 +183,7 @@ class LibroForm(ModelForm):
             'genero': TextInput(
                 attrs={
                     'placeholder': 'Ingrese el Genero del Libro',
+                    'style':'text-transform: capitalize;'
                 }
             ),
             'estado': NullBooleanSelect(
@@ -199,11 +220,14 @@ class AutorForm(ModelForm):
             'nombres': TextInput(
                 attrs={
                     'placeholder': 'Ingrese los nombres y apellidos',
+                'style':'text-transform: capitalize;'
                 }
             ),
             'nacionalidad': TextInput(
                 attrs={
                     'placeholder': 'Ingrese la nacionalidad',
+
+                'style':'text-transform: capitalize;'
                 }
             ),
             'descripcion': Textarea(
@@ -243,6 +267,8 @@ class CategoriaForm(ModelForm):
             'nombre': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus nombres',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'descripcion': Textarea(
@@ -250,6 +276,45 @@ class CategoriaForm(ModelForm):
                     'placeholder': 'Ingrese su descripción',
                 }
             ),
+            
+        }
+        exclude = ['user_updated', 'user_creation']
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+    
+class CategoriaLibroForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['codigo'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = categoriaLibro
+        fields = '__all__'
+        widgets = {
+            'codigo': NumberInput(
+                attrs={
+                    'placeholder': '000',
+
+                }
+            ),
+            'nombre': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese la Categoría del Libro',
+                    'style':'text-transform: capitalize;'
+
+                }
+            ),
+            
             
         }
         exclude = ['user_updated', 'user_creation']
@@ -280,11 +345,13 @@ class ProductosForm(ModelForm):
 
     class Meta:
         model = Productos
-        fields = '__all__'
+        fields = ('nombre', 'categoria', 'imagen','stock','pvp')
         widgets = {
             'nombre': TextInput(
                 attrs={
                     'placeholder': 'Ingrese un nombre',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'categoria': Select(
@@ -294,9 +361,45 @@ class ProductosForm(ModelForm):
                 }
             ),
             
-            'estado': NullBooleanSelect(
-               
+            
+        }
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
+class InventarioForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['autofocus'] = True
+
+    class Meta:
+        model = inventario
+        fields = '__all__'
+        widgets = {
+            'nombre': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                'style':'text-transform: capitalize;'
+
+                }
             ),
+            'categoria': Select(
+                attrs={
+                    'class': 'select2', 
+                    'style': 'width: 100%'
+                }
+            ),
+            
+            
             
         }
 
@@ -324,16 +427,22 @@ class BeneficiarioForm(ModelForm):
             'nombres': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus nombres',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'apellidos': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus apellidos',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'tipoDocumento': Select(
                 attrs={
                     'placeholder': '',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'documento': NumberInput(
@@ -360,26 +469,35 @@ class BeneficiarioForm(ModelForm):
             'tipo': Select(
                 attrs={
                     'placeholder': 'Selecciona el tipo de beneficio',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'zona': Select(
                 attrs={
                     'placeholder': 'Ingrese la zona',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'direccion': TextInput(
                 attrs={
                     'placeholder': 'Ingrese su dirección',
+
                 }
             ),
             'barrio': TextInput(
                 attrs={
                     'placeholder': 'barrio',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             
             'gender': Select(
             attrs={
+                'style':'text-transform: capitalize;'
+            
                     }
             ),
         }
@@ -445,16 +563,22 @@ class LectorForm(ModelForm):
             'nombres': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus nombres',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'apellidos': TextInput(
                 attrs={
                     'placeholder': 'Ingrese sus apellidos',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'tipoDocumento': Select(
                 attrs={
                     'placeholder': '',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'documento': NumberInput(
@@ -482,6 +606,8 @@ class LectorForm(ModelForm):
             'zona': Select(
                 attrs={
                     'placeholder': 'Ingrese la zona',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             'direccion': TextInput(
@@ -492,6 +618,8 @@ class LectorForm(ModelForm):
             'barrio': TextInput(
                 attrs={
                     'placeholder': 'barrio',
+                'style':'text-transform: capitalize;'
+
                 }
             ),
             
