@@ -57,7 +57,7 @@ class ReservaForm(ModelForm):
 
                 },
             ),
-            'estado': Select(
+            'estado': NullBooleanSelect(
                
             ),
            
@@ -80,7 +80,78 @@ class ReservaForm(ModelForm):
             data['error'] = str(e)
         return data
 
+class ReservaUpdate(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['libro'].widget.attrs['autofocus'] = True
+        
+    class Meta:
+        model = Reserva
+        fields = ('libro','lector','fecha9','fecha8','estado')
+        widgets = {
+            'libro': Select(
+                attrs={
+                    'readonly':'True',
+                    'class': 'select2', 
+                    'style': 'width: 100%',
 
+                }
+            ),
+            'lector': Select(
+            
+                attrs={
+                    'class': 'select2', 
+                    'style': 'width: 100%',
+                    'readonly':'True',
+                }
+            ),
+            'fecha9': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha9',
+                    'data-target': '#fecha9',
+                    'data-toggle': 'datetimepicker',
+                    'readonly':'True',
+                }
+            ),
+             'fecha8': DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'value': datetime.now().strftime('%Y-%m-%d'),
+                    'autocomplete': 'off',
+                    'class': 'form-control datetimepicker-input',
+                    'id': 'fecha8',
+                    'data-target': '#fecha8',
+                    'data-toggle': 'datetimepicker',
+                    'readonly':'True',
+                },
+            ),
+            'estado': NullBooleanSelect(
+               
+            ),
+           
+        }
+    def clean_libro(self):
+        libro = self.cleaned_data['libro']
+        if libro.cantidad < 1:
+            raise ValidationError('No se puede reservar este libro, deben existir unidades disponibles.')
+        return libro
+
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+    
 
 
 class EventosForm(ModelForm):

@@ -28,10 +28,11 @@ $(function () {
                 orderable: false,
                 
                 render: function (data, type, row) {
-                    if(data > 1){
+                    if(data > 0){
                         return '<span class="badge badge-success">'+'Entregado'+'</span>'
                     }
-                    return '<span class="badge badge-info">'+data+'</span>'
+                    return '<span class="badge badge-primary">'+'Recibido'+'</span>'
+
                 }
             },
             {
