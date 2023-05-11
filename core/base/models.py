@@ -329,7 +329,7 @@ class Lector(models.Model):
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha Entrega')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha Devolución')
@@ -345,11 +345,10 @@ class Reserva(models.Model):
         
         return item
     
-
-def reducir_cantidad_libro(sender,instance,**kwargs):
-    libro = instance.libro
-    if libro.cantidad > 0:
-        libro.cantidad = libro.cantidad - 1
+def entregar_libro(sender, instance, **kwargs):
+    if instance.estado is True:
+        libro = instance.libro
+        libro.cantidad -= 1
         libro.save()
 
 def devolver_libro(sender, instance, **kwargs):
@@ -358,7 +357,9 @@ def devolver_libro(sender, instance, **kwargs):
         libro.cantidad += 1
         libro.save()
 
-post_save.connect(reducir_cantidad_libro,sender = Reserva)
+
+
+post_save.connect(entregar_libro,sender = Reserva)
 post_save.connect(devolver_libro,sender = Reserva)
 
 

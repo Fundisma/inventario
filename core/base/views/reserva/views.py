@@ -128,7 +128,7 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
             libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
             lector = Lector.objects.filter(id = request.POST.get('lector')).first()
             if libro and lector:
-                if libro.cantidad == 1:
+                if libro.cantidad == 0:
                     nueva_reserva = self.model(
                         estado = True,
                         libro = libro,
