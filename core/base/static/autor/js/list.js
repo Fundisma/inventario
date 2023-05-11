@@ -16,7 +16,6 @@ $(function () {
             {"data": "position"},
             {"data": "nombres"},
             {"data": "nacionalidad"},
-            {"data": "descripcion"},
             {"data": "id"},
         ],
         columnDefs: [

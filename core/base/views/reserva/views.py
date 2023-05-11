@@ -134,6 +134,7 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
                         libro = libro,
                         lector = lector,
                         user = user
+                
                     )
                     nueva_reserva.save()
         try:

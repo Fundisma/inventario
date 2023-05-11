@@ -49,7 +49,7 @@
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="course-item">
-              <img src="{% static 'img/libros/grey.jpg' %}" class="img-fluid" alt="...">
+              <img src="{% static 'img/libros/grey.jpg' %}"  style="width: 1000px; height: 448px;"class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h4>El Retrato de Dorian Gray</h4>
@@ -112,6 +112,8 @@ La vorágine es una novela insigne de la literatura colombiana e hispanoamerican
 
         </div>
 
+      </div >
+      <div class="container-fluid text-center pt-4">  <button class="btn btn" style="background:#2799adfa; "><a href="{% url 'principal:libros' %}" class="btn-get-started scrollto"style="color:white;">Seguir Leyendo</a></button>
       </div>
     </section><!-- End Popular Courses Section -->
 
@@ -145,228 +147,148 @@ La vorágine es una novela insigne de la literatura colombiana e hispanoamerican
 
       </div>
     </section><!-- End Counts Section --> {% endcomment %}
+ <!-- ======= Why Us Section ======= -->
+ <section id="why-us" class="why-us">
+  <div class="container" data-aos="fade-up">
 
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="content">
-                
-                <h3>¿Que nos enseña la biblioteca?</h3>
-              <p>
-Las bibliotecas públicas son lugares para descubrir información e intereses que no hubieran llegado a uno de cualquier otra manera. Además, son espacios en los que no solamente prima el consumo, sino que también la creación de nuevo conocimiento.</div>
-          </div>
-          <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-boxes d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-receipt"></i>
-                    <h4></h4>
-                    <p>Amplía el conocimiento y la comprensión del mundo: La lectura permite a las personas adquirir nuevos conocimientos y perspectivas sobre diferentes temas, desde la historia hasta la ciencia, pasando por la literatura y la filosofía. Además, a través de la lectura se pueden entender mejor las experiencias y puntos de vista de otras personas, lo que ayuda a desarrollar la empatía y la comprensión del mundo.</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-cube-alt"></i>
-                    <h4>Género Narrativo</h4>
-                    <p>Se utiliza para presentar historias realizadas por personajes que pueden intervenir mediante el diálogo.</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-images"></i>
-                    <h4>Género Dramático</h4>
-                    <p>Es aquel destinado a ser presentado ante unos espectadores.</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
-        </div>
-
+    <div class="row">
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="content">
+            
+            <h3>Nuestra Biblioteca</h3>
+          <p>Una biblioteca puede definirse, desde un punto de vista estrictamente etimológico, como el lugar donde se guardan libros.</div>
       </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title pt-3">
-          <h2>libros</h2>
-          <p>el mundo de los libros</p>
-        </div>
-        <h6 class="fst-italic  pt-3 pb-3">
-
-          <em> Aprender a leer es encender un fuego 
-            y cada sílaba que se deletrea es una chispa de magia cuya duración es la vida misma. </em> <strong>Visitanos</strong></h5>
-          </h6>
-        
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-          
-          <div class="col-lg-3 col-md-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ffbb2c;"></i>
-              <h3><a >Comedía</a></h3>
+      <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon-boxes d-flex flex-column justify-content-center">
+          <div class="row">
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-book"></i>
+                <h4>Conoceras diferentes culturas a travez de los libros.</h4>
+              
+              </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bxs-face-mask"></i>
+                <h4>Mejora tú ortografía y descubre palabras nuevas. </h4>
+                    </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-book-bookmark"></i>
+                <h4>No conoceras el aburrimiento con nuestros libros.</h4>
+              </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #5578ff;"></i>
-              <h3><a >Acción</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #e80368;"></i>
-              <h3><a >Suspenso</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #e361ff;"></i>
-              <h3><a >Amor</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #47aeff;"></i>
-              <h3><a >Magia</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-              <h3><a >Fantasía</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #11dbcf;"></i>
-              <h3><a >Diversión</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #4233ff;"></i>
-              <h3><a >Conocimiento</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #b2904f;"></i>
-              <h3><a >Aventura</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #b20969;"></i>
-              <h3><a >Drama</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ff5828;"></i>
-              <h3><a >Emoción</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #29cc61;"></i>
-              <h3><a >Pasión</a></h3>
-            </div>
-          </div>
-        </div>
-
+        </div><!-- End .content-->
       </div>
-    </section><!-- End Features Section -->
+    </div>
 
-    <!-- ======= Trainers Section ======= -->
-    <section id="trainers" class="trainers">
-      <div class="container" data-aos="fade-up">
+  </div>
+</section><!-- End Why Us Section -->
+<!-- ======= Subscrbe Section ======= -->
+<section id="imagencor">
+<div class="container" data-aos="fade-up">
+<div class="row">
+  <div class="col-md-8">
+    <h3 class="imagencor-title">El Mundo de los Libros</h3>
+    <p class="imagencor-text"> <em> Aprender a leer es encender un fuego 
+        y cada sílaba que se deletrea es una chispa de magia cuya duración es la vida misma. </em></p>
+  </div>
+  
+</div>
+</div>
+</section><!-- End Subscrbe Section -->
 
-        <div class="section-title">
-          <h2>Eventos</h2>
-          <p>Eventos del Mes</p>
+
+
+
+ <!-- ======= Trainers Section ======= -->
+ <section id="trainers" class="trainers">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Eventos</h2>
+      <p>Eventos del Mes</p>
+    </div>
+    <div class="row" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="member">
+          <img src="{% static 'img/libros/Conoce_a_los_Gillman.png' %}"  style="width: 500px; height:448px;" class="img-fluid" alt="">
+          <div class="member-content">
+            <h4>Cine</h4>
+            <span>krakens y sirenas</span>
+            <p>
+             La película sigue a la dulce Ruby Gillian de 16 años, quien está desesperada por encajar en Oceanside High, pero pronto descubrirá que está destinada a sobresalir y a heredar el trono de su abuela, la Reina Guerrera de los Siete Mares.
+            </p>
+            
+          </div>
         </div>
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="{% static 'img/libros/Conoce_a_los_Gillman.png' %}"  class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>Cine</h4>
-                <span>krakens y sirenas</span>
-                <p>
-                 La película sigue a la dulce Ruby Gillian de 16 años, quien está desesperada por encajar en Oceanside High, pero pronto descubrirá que está destinada a sobresalir y a heredar el trono de su abuela, la Reina Guerrera de los Siete Mares.
-                </p>
-                
-              </div>
-            </div>
-          </div>
+      </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="{% static 'img/libros/descarga12.jpg' %}" style="width: 500px; height:448px;" class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>Arte</h4>
-                <span>Pintura en Lienzo</span>
-                <p>
-                  Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-                </p>
-                
-              </div>
-            </div>
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="member">
+          <img src="{% static 'img/libros/descarga12.jpg' %}" style="width: 500px; height:448px;" class="img-fluid" alt="">
+          <div class="member-content">
+            <h4>Arte</h4>
+            <span>Pintura en Lienzo</span>
+            <p>
+              Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
+            </p>
+            
           </div>
+        </div>
+      </div>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="{% static 'img\libros\el-juego-de-ajedrez-y-los-ninos-lg.jpg' %}" style="width: 500px; height:448px;"class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>Ajedrez</h4>
-                <span>Juego de ajedrez</span>
-                <p>
-                ¿Cuál es la edad ideal para aprender ajedrez?
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+        <div class="member">
+          <img src="{% static 'img\libros\el-juego-de-ajedrez-y-los-ninos-lg.jpg' %}" style="width: 500px; height:448px;"class="img-fluid" alt="">
+          <div class="member-content">
+            <h4>Ajedrez</h4>
+            <span>Juego de ajedrez</span>
+            <p>
+            ¿Cuál es la edad ideal para aprender ajedrez?
 La edad recomendada para empezar son los cinco años. Requiere constancia y práctica diaria, y poco a poco se consigue rapidez en los movimientos y fortaleza mental. Quienes lo practican dicen sentirse muy bien.
-                </p>
-                
-              </div>
-            </div>
+            </p>
+            
           </div>
-
         </div>
-
       </div>
-    </section><!-- End Trainers Section -->
 
-    <!-- ======= clients2 Section ======= -->
-    <section id="clients2" class="clients2">
-      <div class="container">
+    </div>
 
-        <div class="section-title">
-          <h2>Asociados</h2>
-          <p>Asociados Políticos</p>
-        </div>
+  </div>
+  <div class="container-fluid text-center pt-4">  <button class="btn btn" style="background:#2799adfa; "><a href="{% url 'principal:eventos' %}" class="btn-get-started scrollto"style="color:white;">Seguir Leyendo</a></button>
+  </div>
+</section><!-- End Trainers Section -->
+<!-- ======= clients2 Section ======= -->
+<section id="clients2" class="clients2">
+  <div class="container">
 
-        <div class="clients2-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="{% static 'img/descarga (2).jpg' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/36926.png' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/36936.png' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/descarga.png' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/39850.png' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/coofisam.png' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/hobo.jpg' %}" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="{% static 'img/gobernacion.jpg' %}" class="img-fluid" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
+    <div class="section-title">
+      <h2>Asociados</h2>
+      <p>Asociados Políticos</p>
+    </div>
 
+    <div class="clients2-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        <div class="swiper-slide"><img src="{% static 'img/descarga (2).jpg' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/36926.png' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/36936.png' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/descarga.png' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/39850.png' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/coofisam.png' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/hobo.jpg' %}" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="{% static 'img/gobernacion.jpg' %}" class="img-fluid" alt=""></div>
       </div>
-    </section><!-- End clients2 Section -->
+      <div class="swiper-pagination"></div>
+    </div>
 
-  </main><!-- End #main -->
+  </div>
+</section><!-- End clients2 Section -->
+
+</main><!-- End #main -->
 
 
 {% endblock contenido %}

@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView, DeleteView
 from django.shortcuts import render, redirect
-from core.base.models import Eventos, Libro
+from core.base.models import Eventos, Libro, Productos
 from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -15,6 +15,19 @@ class IndexView(TemplateView):
         queryset = self.model.objects.filter(estado = True)
         return queryset
     
+class DonacionView(ListView):
+    
+    model = Productos
+    paginate_by = 20
+    template_name = 'donacion.html'
+    
+    def get_queryset(self):
+        queryset = self.model.objects.filter(estado = True)
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            return context
 # class BibliotecaView(ListView):
 
 #     model = Libro
@@ -71,7 +84,8 @@ def libros(request):
     if queryset:
         Libros = Libro.objects.filter(
             Q(titulo__icontains = queryset) |
-            Q(descripcion__icontains = queryset)
+            Q(descripcion__icontains = queryset) |
+            Q(genero__icontains = queryset) 
         ).distinct()
 
     paginator = Paginator(Libros,9)

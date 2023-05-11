@@ -28,13 +28,10 @@ $(function () {
                 orderable: false,
                 
                 render: function (data, type, row) {
-                    if(data > 0){
-                       // return '<select name="lenguajes" id="lang"><option value="true">Si</option><option value="False">No</option></select>'
-                        //return '<span class="badge badge-success">'+'Entregado'+'</span>'
+                    if(data > 1){
+                        return '<span class="badge badge-success">'+'Entregado'+'</span>'
                     }
-                    return '<select  id="estadoReserva"><option value="1">Si</option><option value="0">No</option></select>'
-
-                    //return '<span class="badge badge-info">'+'Recibido'+'</span>'
+                    return '<span class="badge badge-info">'+data+'</span>'
                 }
             },
             {

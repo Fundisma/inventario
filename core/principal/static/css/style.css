@@ -1928,19 +1928,19 @@ section {
 
 #header2 h2 {
   color: #eee;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   font-size: 22px;
 }
 
 #header2 .countdown {
-  margin-bottom: 80px;
+  margin-bottom: 5px;
 }
 
 #header2 .countdown div {
   text-align: center;
   margin: 10px;
   width: 100px;
-  padding: 15px 0;
+  padding: 10px 0;
   background: rgba(255, 255, 255, 0.12);
   border-top: 5px solid #2799adfa;
 }
@@ -2141,4 +2141,351 @@ section {
     color: #fff;
     background: #2799adfa;
   }
+}
+
+/* imagencor Section
+--------------------------------*/
+#imagencor {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/Cl47Ny1XEAAiuTv.jpg) fixed center center;
+  background-size: cover;
+  padding: 80px 0;
+}
+
+#imagencor .imagencor-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+#imagencor .imagencor-text {
+  color: #fff;
+}
+
+#imagencor .imagencor-btn-container {
+  text-align: center;
+  padding-top: 20px;
+}
+
+#imagencor .imagencor-btn {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#imagencor .imagencor-btn:hover {
+  background: #03C4EB;
+  border: 2px solid #03C4EB;
+}
+/* imagenhobo Section
+--------------------------------*/
+
+/*--------------------------------------------------------------
+# F.A.Q
+--------------------------------------------------------------*/
+.faq {
+  background: #fff;
+}
+
+.faq .section-title h2 {
+  background: #fff;
+}
+
+.faq .faq-list {
+  padding: 0 100px;
+}
+
+.faq .faq-list ul {
+  padding: 0;
+  list-style: none;
+}
+
+.faq .faq-list li+li {
+  margin-top: 15px;
+}
+
+.faq .faq-list li {
+  padding: 20px;
+  background:  #e3f3f56e;
+  border-radius: 4px;
+  position: relative;
+}
+
+.faq .faq-list a {
+  display: block;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  padding: 0 30px;
+  outline: none;
+  cursor: pointer;
+}
+
+.faq .faq-list .icon-help {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  left: 20px;
+  color: #ffffff;
+}
+
+.faq .faq-list .icon-show,
+.faq .faq-list .icon-close {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.faq .faq-list p {
+  margin-bottom: 0;
+  padding: 10px 0 0 0;
+}
+
+.faq .faq-list .icon-show {
+  display: none;
+}
+
+.faq .faq-list a.collapsed {
+  color: #343a40;
+}
+
+.faq .faq-list a.collapsed:hover {
+  color: #03a5b1;
+}
+
+.faq .faq-list a.collapsed .icon-show {
+  display: inline-block;
+}
+
+.faq .faq-list a.collapsed .icon-close {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .faq .faq-list {
+    padding: 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# Welcome
+--------------------------------------------------------------*/
+#heross {
+  display: table;
+  width: 100%;
+  height: 30vh;
+}
+
+@media (min-width: 1024px) {
+  #heross {
+    background-attachment: fixed;
+  }
+}
+
+
+#heross .heross-container {
+  background: rgba(0, 0, 0, 0.8);
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#heross h1 {
+  margin: 30px 0 10px 0;
+  font-weight: 700;
+  line-height: 48px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  #heross h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+#heross h2 {
+  color: #ccc;
+  margin-bottom: 50px;
+}
+
+#heross h2 span {
+  color: #fff;
+  transition: 0.3s;
+  border-bottom: 2px solid #03C4EB;
+}
+
+@media (max-width: 768px) {
+  #heross h2 {
+    font-size: 24px;
+    line-height: 26px;
+    margin-bottom: 30px;
+  }
+
+  #heross h2 .rotating {
+    display: block;
+  }
+}
+
+#heross .rotating>.animated {
+  display: inline-block;
+}
+
+#heross .actions a {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px;
+}
+
+#heross .btn-get-started {
+  background: #03C4EB;
+  border: 2px solid #03C4EB;
+  color: #fff;
+}
+
+#heross .btn-get-started:hover {
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#heross .btn-services {
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+#heross .btn-services:hover {
+  background: #03C4EB;
+  border: 2px solid #03C4EB;
+}
+
+/* testigo Section
+--------------------------------*/
+#testigo {
+  background: #fff;
+  padding: 80px 0;
+}
+
+#testigo .profile {
+  text-align: center;
+}
+
+#testigo .profile .pic {
+  border-radius: 50%;
+  border: 6px solid #fff;
+  margin-bottom: 15px;
+  overflow: hidden;
+  height: 260px;
+  width: 260px;
+}
+
+#testigo .profile .pic img {
+  max-width: 100%;
+}
+
+#testigo .profile h4 {
+  font-weight: 700;
+  color: #389eb8;
+  margin-bottom: 5px;
+}
+
+#testigo .profile span {
+  color: #333333;
+}
+
+#testigo .quote {
+  position: relative;
+  background:  #e3f3f56e;;
+  padding: 60px;
+  margin-top: 40px;
+  font-size: 16px;
+  font-style: italic;
+  border-radius: 5px;
+}
+
+#testigo .quote b {
+  display: inline-block;
+  font-size: 22px;
+  left: -9px;
+  position: relative;
+  top: -8px;
+}
+
+#testimonials .quote small {
+  display: inline-block;
+  right: -9px;
+  position: relative;
+  top: 4px;
+}
+
+
+/* temass Section
+--------------------------------*/
+#temass {
+  background: #fff;
+  padding: 30px 0 20px 0;
+}
+
+#temass .member {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#temass .member .pic {
+  margin-bottom: 15px;
+  overflow: hidden;
+  height: 260px;
+}
+
+#temass .member .pic img {
+  max-width: 100%;
+}
+
+#temass .member h4 {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+#temass .member span {
+  font-style: italic;
+  display: block;
+  font-size: 13px;
+}
+
+#temass .member .social {
+  margin-top: 5px;
+}
+
+#temass .member .social a {
+  color: #b3b3b3;
+}
+
+#temass .member .social a:hover {
+  color: #03C4EB;
+}
+
+#temass .member .social i {
+  font-size: 18px;
+  margin: 0 2px;
 }
