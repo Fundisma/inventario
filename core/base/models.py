@@ -329,21 +329,15 @@ class Lector(models.Model):
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=False)
-    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True, blank=True)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True)
+    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha Entrega')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha Devolución')
-    state = models.BooleanField(default = True, verbose_name = 'Estado')
-    class Estado(models.TextChoices):
-        ENTREGADO='Entregado',('Entregado')
-        RECIBIDO='Recibido',('Recibido')
-    estado=models.CharField(max_length=25, choices=Estado.choices, default=Estado.ENTREGADO, verbose_name="Estado")
+    estado = models.BooleanField(default = True, verbose_name = 'Estado')
     
 
     def toJSON(self):
         item = model_to_dict(self)
-        item['user'] = self.user.toJSON()
         item['libro'] = self.libro.toJSON()
         item['lector'] = self.lector.toJSON()
         item['fecha9'] = self.fecha9.strftime('%Y-%m-%d')
@@ -358,8 +352,13 @@ def reducir_cantidad_libro(sender,instance,**kwargs):
         libro.cantidad = libro.cantidad - 1
         libro.save()
 
+def devolver_libro(sender, instance, **kwargs):
+    if instance.estado is False:
+        libro = instance.libro
+        libro.cantidad += 1
+        libro.save()
+
 post_save.connect(reducir_cantidad_libro,sender = Reserva)
-
-
+post_save.connect(devolver_libro,sender = Reserva)
 
 

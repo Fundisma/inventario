@@ -1,4 +1,4 @@
-from core.base.forms import ReservaForm
+from core.base.forms import ReservaForm, ReservaUpdate
 from core.base.models import Lector, Libro, Reserva
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
@@ -47,7 +47,7 @@ class ReservaListView(LoginRequiredMixin, ValidatePermissionRequiredMixin,ListVi
 
 class ReservaUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,UpdateView):
     model = Reserva
-    form_class = ReservaForm
+    form_class = ReservaUpdate
     template_name = 'reserva/create.html'
     success_url = reverse_lazy('base:reserva_listado')
     permission_required = 'change_reserva'
@@ -127,16 +127,14 @@ class ReservaCreateView(LoginRequiredMixin, ValidatePermissionRequiredMixin,Crea
         if request:
             libro = Libro.objects.filter(cantidad__gte = 1,id = request.POST.get('libro')).first()
             lector = Lector.objects.filter(id = request.POST.get('lector')).first()
-            user = User.objects.filter(id = request.POST.get('user')).first()
-            if libro and user:
-                if libro.cantidad > 1:
+            if libro and lector:
+                if libro.cantidad == 1:
                     nueva_reserva = self.model(
+                        estado = True,
                         libro = libro,
-                        lector = lector,
-                        user = user
-                
+                        lector = lector
                     )
-                    nueva_reserva.save()
+                    nueva_reserva.save()        
         try:
             action = request.POST['action'] 
             if action == 'add':

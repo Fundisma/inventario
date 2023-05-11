@@ -11,35 +11,16 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{% url 'index' %}" class="nav-link">Sitio Web</a>
         </li>
-        {% if request.user.groups.all %}
-       
-            {% if request.user.groups.all.count > 1 %}
-                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
-                    style="left: 0px; right: inherit;">
-                    
-                    {% for g in request.user.groups.all %}
-                        {% if g.id != request.session.group.id %}
-                        
-                            <li><a href="{% url 'user:user_change_group' g.id %}"
-                                   class="dropdown-item">{{ g.name }} </a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-        {% endif %}
+
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" >
-                <i class="fas fa-users-cog"></i>{{ request.user.username }} 
+                <i class="fas fa-users-cog"></i>   {{ request.user.username }} 
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right text-left">
                     <span class="dropdown-header" style="font-size: 12px;"> 
                         Sú último acceso fue {{ request.user.last_login }}
                     </span>
-                    <div class="dropdown-divider"></div>
-                        <a id="dropdownSubMenu1"  data-toggle="dropdown"style="color:black" aria-haspopup="true" aria-expanded="false"
-                           class="nav-link{% if request.user.groups.all.count > 1 %} dropdown-toggle{% endif %}"><i class="fas fa-user mr-2"></i>{{ request.session.group }}</a>
-                <div class="dropdown-divider"></div>
+                    
                 <a href="{% url 'user:user_profile' %}" class="dropdown-item">
                     <i class="fas fa-edit mr-2"></i> Editar perfil
                 </a>
@@ -57,7 +38,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
-                <i class="fas fa-power-off" aria-hidden="true"></i>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                <i class="fas fa-power-off" aria-hidden="true"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             </a>
         </li>
     </ul>
