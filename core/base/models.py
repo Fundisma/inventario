@@ -44,7 +44,7 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría")
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
-    stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock')
+    stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad')
     pvp = models.DecimalField(default=0.000, max_digits=9, decimal_places=0, verbose_name="Precio")
     estado = models.BooleanField(default = True, verbose_name = 'Donación(si) Préstamo(No)')
 
@@ -334,14 +334,16 @@ class Reserva(models.Model):
     lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True, blank=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha Entrega')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha Devolución')
-    fecha_creacion = models.DateField(default=datetime.now)
-    estado = models.BooleanField(default = True, verbose_name = ' Entregada(Si) Devolución(No)')
-
+    state = models.BooleanField(default = True, verbose_name = 'Estado')
+    class Estado(models.TextChoices):
+        ENTREGADO='Entregado',('Entregado')
+        RECIBIDO='Recibido',('Recibido')
+    estado=models.CharField(max_length=25, choices=Estado.choices, default=Estado.ENTREGADO, verbose_name="Estado")
+    
 
     def toJSON(self):
         item = model_to_dict(self)
-        item['full_name'] = '{} / {}'.format(self.lector.nombres, self.lector.apellidos, self.lector.documento )
-        item['user'] = self.libro.toJSON()
+        item['user'] = self.user.toJSON()
         item['libro'] = self.libro.toJSON()
         item['lector'] = self.lector.toJSON()
         item['fecha9'] = self.fecha9.strftime('%Y-%m-%d')
@@ -352,7 +354,7 @@ class Reserva(models.Model):
 
 def reducir_cantidad_libro(sender,instance,**kwargs):
     libro = instance.libro
-    if libro.cantidad > 1:
+    if libro.cantidad > 0:
         libro.cantidad = libro.cantidad - 1
         libro.save()
 

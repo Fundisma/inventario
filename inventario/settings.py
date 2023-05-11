@@ -154,11 +154,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 #Email
 
 EMAIL_HOST = 'smtp.gmail.com'
-
 EMAIL_PORT = 587
-
-EMAIL_HOST_USER = 'kevscaicedo@misena.edu.co'
-
-EMAIL_HOST_PASSWORD = 'Kevinsalazar1014'
-
+EMAIL_HOST_USER = 'asmontealegre7@misena.edu.co'
+EMAIL_HOST_PASSWORD = 'MONTEALEGRE.17'
 DOMAIN = ''

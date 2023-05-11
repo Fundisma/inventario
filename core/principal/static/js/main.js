@@ -85,7 +85,9 @@
       preloader.remove()
     });
   }
+  
 
+  
   /**
    * Testimonials slider
    */
@@ -161,7 +163,8 @@ new Swiper('.clients2-slider', {
       mirror: false
     })
   });
-
+  
+  
   /**
    * Initiate Pure Counter 
    */

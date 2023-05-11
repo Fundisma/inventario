@@ -57,7 +57,7 @@ class ReservaForm(ModelForm):
 
                 },
             ),
-            'estado': NullBooleanSelect(
+            'estado': Select(
                
             ),
            
@@ -79,7 +79,10 @@ class ReservaForm(ModelForm):
         except Exception as e:
             data['error'] = str(e)
         return data
-    
+
+
+
+
 class EventosForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -215,7 +218,7 @@ class AutorForm(ModelForm):
 
     class Meta:
         model=Autor
-        fields = ('nombres', 'nacionalidad', 'descripcion')
+        fields = ('nombres', 'nacionalidad')
         widgets = {
             'nombres': TextInput(
                 attrs={
@@ -230,11 +233,7 @@ class AutorForm(ModelForm):
                 'style':'text-transform: capitalize;'
                 }
             ),
-            'descripcion': Textarea(
-                attrs={
-                    'placeholder': 'Ingrese una breve descripción.',
-                }
-            ),
+            
         }
     def save(self, commit=True):
         data = {}

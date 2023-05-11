@@ -1,9 +1,9 @@
 {% load static %}
 <aside class="main-sidebar sidebar-light-primary elevation-4">
-    <a href="#" class="brand-link">
-        <img src="{% static 'img/logo1.png' %}" alt="" class="brand-image img-circle " style="opacity: .8">
+    <a  class="brand-link">
+       
     <i class="fas fa-book-open-reader"></i>
-        <span class="brand-text font-weight-light">Biblioteca Municipal </span>
+        <span class="brand-text font-weight-light"> &nbsp &nbsp &nbsp Biblioteca Municipal </span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -11,7 +11,7 @@
                 <img src="{{ request.user.get_image }}" class="img-circle" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                <a class="d-block">{{ request.user.first_name }} {{ request.user.last_name }}</a>
             </div>
         </div>
         <nav class="mt-2">
@@ -87,7 +87,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'base:lector_listado' %}" class="nav-link">
-                            <i class="nav-icon fas fa-book"></i>
+                            <i class="nav-icon fas fa-users"></i>
                             <p>Lectores</p>
                         </a>
                     </li>
@@ -166,4 +166,3 @@
         </nav>
     </div>
 </aside>
->

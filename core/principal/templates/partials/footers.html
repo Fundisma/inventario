@@ -21,20 +21,20 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Enlaces</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Inicio</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Biblioteca</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Historia</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Eventos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index'%}">Inicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:libros'%}">Biblioteca</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:historia'%}">Historia</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:eventos'%}">Eventos</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Servicios</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Donaciones</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Aprendizaje</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Entretenimiento</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Prestamo de Libros</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:donaciones'%}">Donaciones</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:historia'%}">Aprendizaje</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:eventos'%}">Entretenimiento</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'principal:libros'%}">Prestamo de Libros</a></li>
             </ul>
           </div>
 
