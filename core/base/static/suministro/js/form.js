@@ -289,7 +289,7 @@ $(function(){
     }).on('select2:select', function (e) {
         var data = e.params.data;
         data.cantidad = 1;
-        data.subtotal = 0.00;
+        data.subtotal = 0.000;
         suministro.add(data);
         $(this).val('').trigger('change.select2');
     });

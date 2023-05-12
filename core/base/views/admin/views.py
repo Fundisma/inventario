@@ -7,6 +7,7 @@ from core.base.models import Suministro
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import  csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 class AyudaView(TemplateView):
     template_name = 'ayuda.html'
@@ -38,3 +39,6 @@ class AdminView(TemplateView):
         context['panel'] = 'Panel de administrador'
         context['graph_sales_year_month'] = self.get_graph_sales_year_month()
         return context
+
+def page_not_found404(request, exception):
+    return render(request, '404.html') 
