@@ -79,8 +79,8 @@
         
         <br>
         <div class="row pb-3">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-left">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 ">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-left ">
               {% if Libros.has_previous %}
                    <div class="clearfix">
                      <a href="?page={{ Libros.previous_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" style="background:#5fcfc6; color:white;"class="btn btn float-left more-btn"><i class="bx bx-chevron-left"></i>Anterior</a>
@@ -88,8 +88,8 @@
               {% endif %}
             </div>
           </div>
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6  float-right">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 " style="padding-left: 445px;">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12  float-right">
               {% if Libros.has_next %}
                    <div class="clearfix">
                      <a href="?page={{ Libros.next_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}"style="background:#5fcfc6; color:white;" class="btn btn float-right more-btn">Siguiente<i class="bx bx-chevron-right"></i></a>
@@ -123,26 +123,26 @@
 
         </div>
         
-        <div class="row">
-     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-       <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-left">
-         {% if Libros.has_previous %}
-              <div class="clearfix">
-                <a href="?page={{ Libros.previous_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" style="background:#5fcfc6; color:white;"class="btn btn float-left more-btn"><i class="bx bx-chevron-left"></i>Anterior</a>
-              </div>
-         {% endif %}
-       </div>
-     </div>
-     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-       <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6  float-right">
-         {% if Libros.has_next %}
-              <div class="clearfix">
-                <a href="?page={{ Libros.next_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}"style="background:#5fcfc6; color:white;" class="btn btn float-right more-btn">Siguiente<i class="bx bx-chevron-right"></i></a>
-              </div>
-         {% endif %}
-       </div>
-     </div>
-   </div>
+        <div class="row pb-3">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 ">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-left ">
+              {% if Libros.has_previous %}
+                   <div class="clearfix">
+                     <a href="?page={{ Libros.previous_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" style="background:#5fcfc6; color:white;"class="btn btn float-left more-btn"><i class="bx bx-chevron-left"></i>Anterior</a>
+                   </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 " style="padding-left: 445px;">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12  float-right">
+              {% if Libros.has_next %}
+                   <div class="clearfix">
+                     <a href="?page={{ Libros.next_page_number }}{% if request.GET.search %}&q={{ request.GET.search }}{% endif %}"style="background:#5fcfc6; color:white;" class="btn btn float-right more-btn">Siguiente<i class="bx bx-chevron-right"></i></a>
+                   </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
        
     </section><!-- End portfolio2 Section -->
 </main>

@@ -32,7 +32,6 @@ class ReporteSuministroView(TemplateView):
                     search = search.filter(fecha_registro__range=[start_date, end_date])
                 for s in search:
                     data.append([
-                        s.id,
                         s.beneficiario.nombres,
                         s.beneficiario.apellidos,
                         s.beneficiario.documento,
@@ -40,7 +39,7 @@ class ReporteSuministroView(TemplateView):
                         s.beneficiario.direccion,
                         s.beneficiario.barrio,
                         s.fecha_registro.strftime('%Y-%m-%d'),
-                        format(s.total, '.2f'),
+                        format(s.total, '.3f'),
                     ])
                 total = search.aggregate(r=Coalesce(Sum('total'),0,output_field=DecimalField())).get('r')
                 data.append([
@@ -51,8 +50,7 @@ class ReporteSuministroView(TemplateView):
                     '---',
                     '---',
                     '---',
-                    '---',
-                    format(total, '.2f'),
+                    format(total, '.3f'),
                 ])
             else: 
                 data['error'] = 'Ha ocurrido un error'

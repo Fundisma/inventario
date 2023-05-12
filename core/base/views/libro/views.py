@@ -189,10 +189,7 @@ class DetalleLibroDisponible(DeleteView):
     def get(self,request,*args,**kwargs):
         if self.get_object().cantidad > 0:
             return render(request,self.template_name,{'object':self.get_object()})
-        return redirect('base:')
-
-
-
+        return redirect('base:libros_disponibles')
 
 class RegistrarReserva(CreateView):
     model = Reserva

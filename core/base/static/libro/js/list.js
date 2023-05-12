@@ -18,12 +18,11 @@ $(function () {
             {"data": "autor.nombres"},
             {"data": "categoriaLibro.nombre"},
             {"data": "cantidad"},
-            {"data": "estado"},
             {"data": "id"},
         ],
         columnDefs: [
             {
-                targets: [-3],
+                targets: [-2],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
@@ -33,17 +32,7 @@ $(function () {
                     return '<span class="badge badge-danger">'+data+'</span>'
                 }
             },
-            {
-                targets: [-2],
-                class: 'text-center',
-                orderable: false,
-                render: function (data, type, row) {
-                    if(data > 0){
-                        return '<span class="badge badge-primary"><i class="fas fa-eye"></i></span>'
-                    }
-                    return '<span class="badge badge-danger"><i class="fas fa-eye-slash"></i></span>'
-                }
-            },
+            
             
             {
                 targets: [-1],
