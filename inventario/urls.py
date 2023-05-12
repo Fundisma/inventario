@@ -20,6 +20,9 @@ from core.principal.views import IndexView
 from django.conf import settings
 from django.conf.urls.static import static
 from core.login.views import LoginFormView
+from django.conf.urls import handler404
+from core.base.views.admin.views import page_not_found404
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +36,7 @@ urlpatterns = [
 
 
 ]
+handler404 = page_not_found404
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
