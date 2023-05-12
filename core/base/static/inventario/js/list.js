@@ -57,9 +57,9 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     if(data > 0){
-                        return '<span class="badge badge-success">'+'Donación'+'</span>'
+                        return '<span class="badge badge-success">'+'Completo'+'</span>'
                     }
-                    return '<span class="badge badge-info">'+'Inventario'+'</span>'
+                    return '<span class="badge badge-info">'+'Incompleto'+'</span>'
                 }
             },
             {

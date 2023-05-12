@@ -40,6 +40,7 @@ class ReservaForm(ModelForm):
                     'id': 'fecha9',
                     'data-target': '#fecha9',
                     'data-toggle': 'datetimepicker',
+                    'readonly': 'True' 
                     
             
 
@@ -179,7 +180,7 @@ class LibroForm(ModelForm):
 
     class Meta:
         model = Libro
-        fields =('titulo','autor','categoriaLibro','f_publicacion','genero','descripcion','imagen','cantidad','estado')
+        fields =('titulo','autor','categoriaLibro','f_publicacion','genero','descripcion','imagen','cantidad',)
         widgets = {
             'titulo': TextInput(
                 attrs={
@@ -190,7 +191,7 @@ class LibroForm(ModelForm):
             'autor': Select(
                 attrs={
                     'class': 'select2', 
-                    'style': 'width: 100%'
+                    'style': 'width: 100%',
                 }
             ),
             'categoriaLibro': Select(
@@ -216,9 +217,7 @@ class LibroForm(ModelForm):
                     'style':'text-transform: capitalize;'
                 }
             ),
-            'estado': NullBooleanSelect(
-               
-            ),
+          
             
         }
 
@@ -371,7 +370,7 @@ class ProductosForm(ModelForm):
 
     class Meta:
         model = Productos
-        fields = ('nombre', 'categoria', 'imagen','stock','pvp')
+        fields = ('nombre', 'categoria', 'imagen','stock','pvp','estado')
         widgets = {
             'nombre': TextInput(
                 attrs={
@@ -386,7 +385,10 @@ class ProductosForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            
+           
+            'estado': NullBooleanSelect(
+               
+            ),
             
         }
 
@@ -424,7 +426,9 @@ class InventarioForm(ModelForm):
                     'style': 'width: 100%'
                 }
             ),
-            
+            'estado': NullBooleanSelect(
+               
+            ),
             
             
         }

@@ -3,7 +3,7 @@ var suministro = {
     items : {
         beneficiario: '',
         fecha_registro: '',
-        total: 0.00,
+        total: 0.000,
         producto:[]
     },
     get_ids: function () {
@@ -14,7 +14,7 @@ var suministro = {
         return ids;
     },
     calculate_invoice: function(){
-        var subtotal = 0.00;
+        var subtotal = 0.000;
         $.each(this.items.producto, function (pos, dict) {
             dict.pos = pos;
             dict.subtotal = dict.cantidad * parseFloat(dict.pvp);
@@ -23,8 +23,8 @@ var suministro = {
         this.items.subtotal = subtotal;
         this.items.total = this.items.subtotal;
 
-        $('input[name="subtotal"]').val(this.items.subtotal.toFixed(2));
-        $('input[name="total"]').val(this.items.total.toFixed(2));
+        $('input[name="subtotal"]').val(this.items.subtotal.toFixed(3));
+        $('input[name="total"]').val(this.items.total.toFixed(3));
 
     },
     add: function(item){
@@ -74,7 +74,7 @@ var suministro = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '$'+parseFloat(data).toFixed(2);
+                        return '$'+parseFloat(data).toFixed(3);
                     }
                 },
                 {
@@ -90,7 +90,7 @@ var suministro = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '$'+parseFloat(data).toFixed(2);
+                        return '$'+parseFloat(data).toFixed(3);
                     }
                 },
             ],
@@ -125,7 +125,6 @@ function formatRepo(repo) {
         '<p style="margin-bottom: 0;">' +
         '<b>Nombre:</b> ' + repo.full_name + '<br>' +
         '<b>Cantidad o Stock:</b> ' + repo.stock + '<br>' +
-        '<b>Precio:</b> <span class="badge badge-warning">$' + repo.pvp + '</span>' +
         '</p>' +
         '</div>' +
         '</div>' +
@@ -233,7 +232,7 @@ $(function(){
         var tr = tblProducto.cell($(this).closest('td, li')).index();
         suministro.items.producto[tr.row].cantidad = cantidad;
         suministro.calculate_invoice();
-        $('td:eq(5)', tblProducto.row(tr.row).node()).html('$' +suministro.items.producto[tr.row].subtotal.toFixed(2));
+        $('td:eq(5)', tblProducto.row(tr.row).node()).html('$' +suministro.items.producto[tr.row].subtotal.toFixed(3));
         
     });
     //suministro guardar

@@ -43,12 +43,6 @@ class DonacionView(ListView):
 #             context = super().get_context_data(**kwargs)
 #             return context
     
-# def search(request):
-#         template_name = "biblioteca.html"
-#         buscar = request.GET["buscar"]
-#         queryset = Libro.objects.filter(titulo__icontains=buscar)
-#         context = {'queryset':queryset}
-#         return render(request, template_name, context)
 
 class DetalleLibro(DeleteView):
     model = Libro
@@ -57,7 +51,7 @@ class DetalleLibro(DeleteView):
     def get(self,request,*args,**kwargs):
         if self.get_object().cantidad > 0:
             return render(request,self.template_name,{'object':self.get_object()})
-        return redirect('principal:biblioteca')
+        return redirect('principal:libro')
     
 class EventosView(ListView):
 
@@ -79,8 +73,9 @@ class HistoriaView(TemplateView):
 
 
 def libros(request):
+
     queryset = request.GET.get("buscar")
-    Libros = Libro.objects.filter(estado = True)
+    Libros = Libro.objects.filter(estado = True, cantidad__gte = 1)
     if queryset:
         Libros = Libro.objects.filter(
             Q(titulo__icontains = queryset) |

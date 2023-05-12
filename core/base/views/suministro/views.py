@@ -265,7 +265,7 @@ class SuministroPdfView(View):
             context = {
                 'suministro': Suministro.objects.get(pk=self.kwargs['pk']),
                 'comp': {'nombre': 'Biblioteca Pública Municipal de Hobo', 'dirección': 'Carrera 9° N° 5 - 41'},
-                'icon': '{}{}'.format(settings.MEDIA_URL, 'logo.jpg')
+                'icon': '{}{}'.format(settings.MEDIA_URL, 'ho.jpg')
             }        
             html = template.render(context)
             response = HttpResponse(content_type='application/pdf')

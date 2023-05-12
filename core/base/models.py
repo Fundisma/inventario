@@ -46,7 +46,7 @@ class Productos(models.Model):
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
     stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad')
     pvp = models.DecimalField(default=0.000, max_digits=9, decimal_places=0, verbose_name="Precio")
-    estado = models.BooleanField(default = True, verbose_name = 'Donación(si) Préstamo(No)')
+    estado = models.BooleanField(default = True, verbose_name = 'Visible(Si) Oculto(No)')
 
 
     def __str__(self):
@@ -76,8 +76,9 @@ class inventario(models.Model):
     nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True, null=True, blank=True,)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name="Categoría",null=True, blank=True,)
     imagen = models.ImageField(upload_to='productos/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen')
-    stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad o Stock',null=True, blank=True,)
-    pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=0, verbose_name="Precio",null=True, blank=True,)
+    stock = models.PositiveIntegerField(default=1, verbose_name='Cantidad',null=True, blank=True,)
+    pvp = models.DecimalField(default=0.000, max_digits=9, decimal_places=0, verbose_name="Precio",null=True, blank=True,)
+    estado = models.BooleanField(default = True, verbose_name = 'Completo(Sí) Incompleto(No)')
 
 
     def __str__(self):
@@ -88,7 +89,7 @@ class inventario(models.Model):
         item['full_name'] = '{} / {}'.format(self.nombre, self.categoria.nombre)
         item['categoria'] = self.categoria.toJSON()
         item['imagen'] = self.get_imagen()
-        item['pvp'] = format(self.pvp, '.2f')
+        item['pvp'] = format(self.pvp, '.3f')
         return item
 
     
@@ -151,16 +152,16 @@ class Beneficiario(models.Model):
 class Suministro(models.Model):
     beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE)
     fecha_registro = models.DateField(default=datetime.now)
-    subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
-    total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    subtotal = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
+    total = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
 
     def __str__(self):
         return self.beneficiario.nombres
     def toJSON(self):
         item = model_to_dict(self)
         item['beneficiario'] = self.beneficiario.toJSON()
-        item['subtotal'] = format(self.subtotal, '.2f')
-        item['total'] = format(self.total, '.2f')
+        item['subtotal'] = format(self.subtotal, '.3f')
+        item['total'] = format(self.total, '.3f')
         item['fecha_registro'] = self.fecha_registro.strftime('%Y-%m-%d')
         item['det'] = [i.toJSON() for i in self.detallesuministro_set.all()]
         return item
@@ -179,9 +180,9 @@ class Suministro(models.Model):
 class DetalleSuministro(models.Model):
     suministro = models.ForeignKey(Suministro, on_delete=models.CASCADE)
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE)
-    precio = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    precio = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
     cantidad = models.IntegerField(default=0)
-    subtotal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    subtotal = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
 
 
     def __str__(self):
@@ -190,8 +191,8 @@ class DetalleSuministro(models.Model):
     def toJSON(self):
         item = model_to_dict(self, exclude=['suministro'])
         item['producto'] = self.producto.toJSON()
-        item['precio'] = format(self.precio, '.2f')
-        item['subtotal'] = format(self.subtotal, '.2f')
+        item['precio'] = format(self.precio, '.3f')
+        item['subtotal'] = format(self.subtotal, '.3f')
         return item
     class Meta:
         verbose_name = 'Detalle de Suministro'
@@ -249,14 +250,14 @@ class Eventos(models.Model):
 
     
 class Libro(models.Model):
-    titulo = models.CharField(max_length = 45, blank = False, null = False)
+    titulo = models.CharField(max_length = 100, blank = False, null = False)
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
     categoriaLibro = models.ForeignKey(categoriaLibro, verbose_name="Categoría del Libro", on_delete=models.CASCADE, null=True)
     f_publicacion = models.DateField(default=datetime.now, verbose_name='Fecha de Publicación')
     genero = models.CharField(max_length = 45, blank = True, null = True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
     cantidad = models.PositiveIntegerField('Cantidad',default = 1)
-    imagen = models.ImageField(upload_to='libros/',max_length=255, null=True, blank=True, verbose_name='Imagen')
+    imagen = models.ImageField(upload_to='libros/',max_length=255, null=False, blank=False, verbose_name='Imagen')
     estado = models.BooleanField(default = True, verbose_name = 'Visible(Sí) No Visible(No)')
 
     def natural_key(self):
@@ -277,6 +278,7 @@ class Libro(models.Model):
         if self.imagen:
             return  '{}{}'.format(MEDIA_URL, self.imagen)
         return '{}{}'.format(STATIC_URL, 'img/empty.png')
+    
     class Meta:
         verbose_name = 'Libro'
         verbose_name_plural = 'Libros'
@@ -333,7 +335,7 @@ class Reserva(models.Model):
     lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True)
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha Entrega')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha Devolución')
-    estado = models.BooleanField(default = True, verbose_name = 'Estado')
+    estado = models.BooleanField(default = True, verbose_name = 'Entregado(Sí) Recibido(No)')
     
 
     def toJSON(self):

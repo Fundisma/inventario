@@ -170,7 +170,7 @@ new Swiper('.clients2-slider', {
    */
   new PureCounter();
   /**
-   * Countdown timer
+   * Countdown timer- header2
    */
   let countdown = select('.countdown');
   const output = countdown.innerHTML;
