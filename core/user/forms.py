@@ -29,7 +29,7 @@ class UserForm(ModelForm):
             ),
             'documento': NumberInput(
                 attrs={
-                    'placeholder': 'Ingrese su numero de documento',
+                    'placeholder': 'Ingrese su número de documento',
                 }
             ),
             'email': TextInput(
@@ -97,7 +97,7 @@ class UserProfileForm(ModelForm):
             ),
             'documento': NumberInput(
                 attrs={
-                    'placeholder': 'Ingrese su numero de documento',
+                    'placeholder': 'Ingrese su número de documento',
                 }
             ),
             'email': TextInput(
