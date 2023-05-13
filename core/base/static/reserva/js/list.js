@@ -29,9 +29,9 @@ $(function () {
                 
                 render: function (data, type, row) {
                     if(data > 0){
-                        return '<span class="badge badge-success">'+'Entregado'+'</span>'
+                        return '<span class="badge badge-danger">'+'Reservado'+'</span>'
                     }
-                    return '<span class="badge badge-primary">'+'Recibido'+'</span>'
+                    return '<span class="badge badge-success">'+'Biblioteca'+'</span>'
 
                 }
             },

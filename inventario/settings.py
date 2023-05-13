@@ -144,7 +144,7 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/base/admin/'
 LOGOUT_REDIRECT_URL = '/login/'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login/login/'
 
 AUTH_USER_MODEL = 'user.User'
 
