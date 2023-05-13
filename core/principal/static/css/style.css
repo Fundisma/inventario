@@ -803,7 +803,7 @@ section {
 # Trainers
 --------------------------------------------------------------*/
 .trainers .member {
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
   background: #fff;
   border: 1px solid #eef0ef;

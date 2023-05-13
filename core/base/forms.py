@@ -122,13 +122,13 @@ class EventosForm(ModelForm):
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese el nombre del Evento',
+                    'placeholder': 'Ingrese el nombre del evento',
                     'style':'text-transform: capitalize;'
                 }
             ),
             'tipoEvento': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese el tipo de Evento',
+                    'placeholder': 'Ingrese el tipo de evento',
                     'style':'text-transform: capitalize;'
                 }
             ),
@@ -145,12 +145,12 @@ class EventosForm(ModelForm):
              ),
             'descripcion': Textarea(
                 attrs={
-                    'placeholder': 'Ingrese la descripción del Evento',
+                    'placeholder': 'Ingrese la descripción del evento',
                 }
             ),
             'ubicacion': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese la ubicación del Evento',
+                    'placeholder': 'Ingrese la ubicación del evento',
                     'style':'text-transform: capitalize;'
                 }
             ),
@@ -184,7 +184,7 @@ class LibroForm(ModelForm):
         widgets = {
             'titulo': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese el titulo del Libro',
+                    'placeholder': 'Ingrese el titulo del libro',
                     'style':'text-transform: capitalize;'
                 }
             ),
@@ -213,7 +213,7 @@ class LibroForm(ModelForm):
             ),
             'genero': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese el Genero del Libro',
+                    'placeholder': 'Ingrese el género del Libro',
                     'style':'text-transform: capitalize;'
                 }
             ),
@@ -291,14 +291,14 @@ class CategoriaForm(ModelForm):
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese sus nombres',
+                    'placeholder': 'Ingrese la categoía',
                 'style':'text-transform: capitalize;'
 
                 }
             ),
             'descripcion': Textarea(
                 attrs={
-                    'placeholder': 'Ingrese su descripción',
+                    'placeholder': 'Ingrese la descripción',
                 }
             ),
             
@@ -334,7 +334,7 @@ class CategoriaLibroForm(ModelForm):
             ),
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese la Categoría del Libro',
+                    'placeholder': 'Ingrese la categoría del libro',
                     'style':'text-transform: capitalize;'
 
                 }
@@ -374,7 +374,7 @@ class ProductosForm(ModelForm):
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
+                    'placeholder': 'Ingrese un producto',
                 'style':'text-transform: capitalize;'
 
                 }
@@ -415,7 +415,7 @@ class InventarioForm(ModelForm):
         widgets = {
             'nombre': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese un nombre',
+                    'placeholder': 'Ingrese un producto',
                 'style':'text-transform: capitalize;'
 
                 }
@@ -456,14 +456,14 @@ class BeneficiarioForm(ModelForm):
         widgets = {
             'nombres': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese sus nombres',
+                    'placeholder': 'Ingrese los nombres',
                 'style':'text-transform: capitalize;'
 
                 }
             ),
             'apellidos': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese sus apellidos',
+                    'placeholder': 'Ingrese los apellidos',
                 'style':'text-transform: capitalize;'
 
                 }
@@ -477,7 +477,7 @@ class BeneficiarioForm(ModelForm):
             ),
             'documento': NumberInput(
                 attrs={
-                    'placeholder': 'Ingrese su numero de documento',
+                    'placeholder': 'Ingrese el número de documento',
                 }
             ),
              'cumpleaños': DateInput(
@@ -496,13 +496,8 @@ class BeneficiarioForm(ModelForm):
                     'placeholder': 'Ingrese el número de teléfono',
                 }
             ),
-            'tipo': Select(
-                attrs={
-                    'placeholder': 'Selecciona el tipo de beneficio',
-                'style':'text-transform: capitalize;'
-
-                }
-            ),
+            
+            
             'zona': Select(
                 attrs={
                     'placeholder': 'Ingrese la zona',
@@ -518,7 +513,7 @@ class BeneficiarioForm(ModelForm):
             ),
             'barrio': TextInput(
                 attrs={
-                    'placeholder': 'barrio',
+                    'placeholder': 'Barrio',
                 'style':'text-transform: capitalize;'
 
                 }
@@ -592,14 +587,14 @@ class LectorForm(ModelForm):
         widgets = {
             'nombres': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese sus nombres',
+                    'placeholder': 'Ingrese los nombres',
                 'style':'text-transform: capitalize;'
 
                 }
             ),
             'apellidos': TextInput(
                 attrs={
-                    'placeholder': 'Ingrese sus apellidos',
+                    'placeholder': 'Ingrese los apellidos',
                 'style':'text-transform: capitalize;'
 
                 }
@@ -613,7 +608,7 @@ class LectorForm(ModelForm):
             ),
             'documento': NumberInput(
                 attrs={
-                    'placeholder': 'Ingrese su numero de documento',
+                    'placeholder': 'Ingrese el número de documento',
                 }
             ),
              'cumpleaños': DateInput(
@@ -647,7 +642,7 @@ class LectorForm(ModelForm):
             ),
             'barrio': TextInput(
                 attrs={
-                    'placeholder': 'barrio',
+                    'placeholder': 'Barrio',
                 'style':'text-transform: capitalize;'
 
                 }

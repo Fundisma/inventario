@@ -10,7 +10,7 @@ from django.db.models.signals import post_save,pre_save
 
 class categoriaLibro(models.Model):
     codigo = models.CharField(max_length=3, verbose_name='Código', unique=True, null=True)
-    nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+    nombre = models.CharField(max_length=150, verbose_name='Categoría', unique=True)
 
     def __str__(self):
         return self.nombre
@@ -25,7 +25,7 @@ class categoriaLibro(models.Model):
         ordering = ['id']
 
 class Categoria(models.Model):
-    nombre = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+    nombre = models.CharField(max_length=150, verbose_name='Categoría', unique=True)
     descripcion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Descripción') 
 
     def __str__(self):
@@ -112,25 +112,25 @@ class Beneficiario(models.Model):
         TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
         CC='Cédula de Ciudadanía', ('Cédula de Ciudadanía')
         CE='Cédula de Extrajería', ('Cédula de Extrajería')
-        CR='Contraseña Registraduría', ('Contraseña Registraduria')
+        CR='Contraseña Registraduría', ('Contraseña Registraduría')
     tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
-    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
-    cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
+    documento = models.IntegerField( unique=True, verbose_name='Número de Documento',null=True,blank=True,)
+    cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de Nacimiento')
     telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
     class Tipo(models.TextChoices):
         LECTOR='Beneficiario', ('Beneficiario')
-    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.LECTOR, verbose_name="Tipo")
+    tipo=models.CharField(max_length=25, choices=Tipo.choices, default=Tipo.LECTOR, verbose_name="Población")
     
     class Zona(models.TextChoices):
         URBANA='Urbana',('Urbana')
         RURAL='Rural',('Rural')
     zona=models.CharField(max_length=25, choices=Zona.choices, default=Zona.URBANA, verbose_name="Zona")
-    direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
+    direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
     barrio = models.CharField(max_length=150, verbose_name='Barrio',null=True,blank=True)
     class Gender(models.TextChoices):
         FEMENINO='Femenino',('Femenino')
         MASCULINO='Masculino',('Masculino')
-    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Genero")
+    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Género")
     
     def __str__(self):
         return self.nombres
@@ -150,10 +150,10 @@ class Beneficiario(models.Model):
 
 
 class Suministro(models.Model):
-    beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE)
-    fecha_registro = models.DateField(default=datetime.now)
-    subtotal = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
-    total = models.DecimalField(default=0.000, max_digits=9, decimal_places=3)
+    beneficiario = models.ForeignKey(Beneficiario, on_delete=models.CASCADE,verbose_name='Usuario')
+    fecha_registro = models.DateField(default=datetime.now,verbose_name='Fecha de Registro')
+    subtotal = models.DecimalField(default=0.000, max_digits=9, decimal_places=3,verbose_name='Subtotal')
+    total = models.DecimalField(default=0.000, max_digits=9, decimal_places=3,verbose_name='Total')
 
     def __str__(self):
         return self.beneficiario.nombres
@@ -222,8 +222,8 @@ class Autor(models.Model):
 
 class Eventos(models.Model):
     id = models.AutoField(primary_key = True)
-    nombre =models.CharField(max_length = 50, blank = False, null = False)
-    tipoEvento =models.CharField(max_length = 50, blank = False, null = False)
+    nombre =models.CharField(max_length = 50, blank = False, null = False,verbose_name='Nombre')
+    tipoEvento =models.CharField(max_length = 50, blank = False, null = False,verbose_name='Tipo de Evento')
     fecha = models.DateTimeField(default=datetime.now, verbose_name='Fecha y Hora')
     ubicacion = models.CharField('Ubicación',max_length = 50,null=True, blank=True)
     descripcion = models.TextField('Descripción',null=True, blank=True)
@@ -250,15 +250,15 @@ class Eventos(models.Model):
 
     
 class Libro(models.Model):
-    titulo = models.CharField(max_length = 100, blank = False, null = False)
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length = 100, blank = False, null = False,verbose_name='Titulo')
+    autor = models.ForeignKey(Autor, on_delete=models.CASCADE,verbose_name='Autor')
     categoriaLibro = models.ForeignKey(categoriaLibro, verbose_name="Categoría del Libro", on_delete=models.CASCADE, null=True)
     f_publicacion = models.DateField(default=datetime.now, verbose_name='Fecha de Publicación')
-    genero = models.CharField(max_length = 45, blank = True, null = True)
+    genero = models.CharField(max_length = 45, blank = True, null = True,verbose_name='Género')
     descripcion = models.TextField('Descripción',null=True, blank=True)
     cantidad = models.PositiveIntegerField('Cantidad',default = 1)
     imagen = models.ImageField(upload_to='libros/',max_length=255, null=False, blank=False, verbose_name='Imagen')
-    estado = models.BooleanField(default = True, verbose_name = 'Visible(Sí) No Visible(No)')
+    estado = models.BooleanField(default = True, verbose_name = 'Visible(Sí) Oculto(No)')
 
     def natural_key(self):
         return self.titulo
@@ -294,21 +294,21 @@ class Lector(models.Model):
         TI='Tarjeta de Identidad', ('Tarjeta de Identidad')
         CC='Cédula de Ciudadanía', ('Cédula de Ciudadanía')
         CE='Cédula de Extrajería', ('Cédula de Extrajería')
-        CR='Contraseña Registraduría', ('Contraseña Registraduria')
+        CR='Contraseña Registraduría', ('Contraseña Registraduría')
     tipoDocumento=models.CharField(max_length=25, choices=TipoDocumento.choices, default=TipoDocumento.RC, verbose_name="Tipo de Documento")
-    documento = models.IntegerField( unique=True, verbose_name='Documento',null=True,blank=True,)
-    cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento')
+    documento = models.IntegerField( unique=True, verbose_name='Número de Documento',null=True,blank=True,)
+    cumpleaños = models.DateField(default=datetime.now, verbose_name='Fecha de Nacimiento')
     telefono=models.IntegerField( verbose_name="Teléfono", null=True,blank=True)
     class Zona(models.TextChoices):
         URBANA='Urbana',('Urbana')
         RURAL='Rural',('Rural')
     zona=models.CharField(max_length=25, choices=Zona.choices, default=Zona.URBANA, verbose_name="Zona")
-    direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Direccion')
+    direccion = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
     barrio = models.CharField(max_length=150, verbose_name='Barrio',null=True,blank=True)
     class Gender(models.TextChoices):
         FEMENINO='Femenino',('Femenino')
         MASCULINO='Masculino',('Masculino')
-    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Genero")
+    gender=models.CharField(max_length=25, choices=Gender.choices, default=Gender.FEMENINO, verbose_name="Género")
     
     def __str__(self):
         return self.nombres
@@ -331,10 +331,10 @@ class Lector(models.Model):
 class Reserva(models.Model):
     
     id = models.AutoField(primary_key = True)
-    libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True)
-    fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha Entrega')
-    fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha Devolución')
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE,verbose_name='Libro')
+    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True,verbose_name='Lector')
+    fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha de Entrega')
+    fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha de Devolución')
     estado = models.BooleanField(default = True, verbose_name = 'Entregado(Sí) Recibido(No)')
     
 
