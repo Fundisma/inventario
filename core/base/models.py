@@ -335,7 +335,7 @@ class Reserva(models.Model):
     lector = models.ForeignKey(Lector, on_delete=models.CASCADE, null=True,verbose_name='Lector')
     fecha9 = models.DateField(default=datetime.now, verbose_name='Fecha de Entrega')
     fecha8 = models.DateField(default=datetime.now, verbose_name='Fecha de Devolución')
-    estado = models.BooleanField(default = True, verbose_name = 'Entregado(Sí) Recibido(No)')
+    estado = models.BooleanField(default = True, verbose_name = 'Reservado(Sí)Biblioteca(No)')
     
 
     def toJSON(self):

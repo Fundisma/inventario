@@ -112,7 +112,7 @@ class ChangePasswordView(FormView):
         token = self.kwargs['token']
         if User.objects.filter(token=token).exists():
             return super().get( request, *args, **kwargs)
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect('/')
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -132,7 +132,7 @@ class ChangePasswordView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Reseteo de Contraseña'
-        context['login_url'] = 'settings.LOGIN_URL'
+        context['login_url'] = settings.LOGIN_URL
         return context
 
 
