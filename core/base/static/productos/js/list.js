@@ -56,9 +56,9 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row) {
                     if(data > 0){
-                        return '<span class="badge badge-primary"><i class="fas fa-eye"></i></span>'
+                        return '<span class="badge badge-primary" title="Visibilidad"><i class="fas fa-eye"></i></span>'
                     }
-                    return '<span class="badge badge-danger"><i class="fas fa-eye-slash"></i></span>'
+                    return '<span class="badge badge-danger" title="Visibilidad"><i class="fas fa-eye-slash"></i></span>'
                 }
             },
             {
@@ -66,8 +66,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/base/productos/edit/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
-                    buttons += '<a href="/base/productos/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
+                    var buttons = '<a href="/base/productos/edit/' + row.id + '/" class="btn btn-warning btn-xs btn-flat" title="Editar"><i class="fas fa-edit" title="Editar"></i></a> ';
+                    buttons += '<a href="/base/productos/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat" title="Eliminar"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },
