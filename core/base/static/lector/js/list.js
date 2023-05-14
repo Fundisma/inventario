@@ -32,8 +32,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/base/Lector/edit/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas fa-edit"></i></a> ';
-                    buttons += '<a href="/base/Lector/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a>';
+                    var buttons = '<a href="/base/Lector/edit/' + row.id + '/" class="btn btn-warning btn-xs btn-flat" title="Editar"><i class="fas fa-edit"></i></a> ';
+                    buttons += '<a href="/base/Lector/delete/' + row.id + '/" type="button" class="btn btn-danger btn-xs btn-flat" title="Eliminar"><i class="fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },

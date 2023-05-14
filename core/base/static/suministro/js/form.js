@@ -55,7 +55,7 @@ var suministro = {
                     class: 'text-center',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '<a rel="remove" class="btn btn-danger btn-xs btn-flat" style="color: white;"><i class="fas fa-trash-alt"></i></a>';
+                        return '<a rel="remove" class="btn btn-danger btn-xs btn-flat" title="Eliminar" style="color: white;"><i class="fas fa-trash-alt"></i></a>';
                     }
                 },
                 {

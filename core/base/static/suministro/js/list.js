@@ -71,8 +71,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/base/suministro/delete/' + row.id + '/" class="btn btn-danger btn-xs btn-flat"><i class="fas fa-trash-alt"></i></a> ';
-                    buttons += '<a href="/base/suministro/pdf/' + row.id + '/" target="_black" class="btn btn-info btn-xs btn-flat"><i class="fas fa-file-pdf"></i></a> ';
+                    var buttons = '<a href="/base/suministro/delete/' + row.id + '/" class="btn btn-danger btn-xs btn-flat" title="Eliminar"><i class="fas fa-trash-alt"></i></a> ';
+                    buttons += '<a href="/base/suministro/pdf/' + row.id + '/" target="_black" class="btn btn-info btn-xs btn-flat" title="PDF"><i class="fas fa-file-pdf"></i></a> ';
                     return buttons;
                 }
             },
